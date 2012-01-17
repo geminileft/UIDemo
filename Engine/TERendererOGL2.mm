@@ -29,7 +29,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer) {
     
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &mWidth);
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &mHeight);
-        
+    
     if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
     }
     
@@ -41,7 +41,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer) {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-
+    
     int program;
     String vertexSource;
     String fragmentSource;
@@ -56,7 +56,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer) {
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
     program = TERendererOGL2::createProgram("basic", vertexSource, fragmentSource);
     addProgramAttribute(program, "aVertices");
-
+    
     UIImage* image = [UIImage imageNamed:@"table_background.png"];
     CGImage* cImage = [image CGImage];
     mTexture = TEManagerTexture::GLUtexImage2D(cImage);
@@ -71,37 +71,40 @@ void TERendererOGL2::render() {
 }
 
 void TERendererOGL2::renderBasic() {
-    uint program = switchProgram("basic");
-
+    String programName = "basic";
+    uint program = switchProgram(programName);
+    
     const float totalSize = 160.0f;
     const float sideSize = totalSize / 2.0f;
-
+    
     const GLfloat squareVertices[] = {
         -sideSize, -sideSize,//lb
         sideSize,  -sideSize,//rb
         -sideSize,  sideSize,//lt
         sideSize,   sideSize,//rt
     };
-
+    
     uint m_a_positionHandle = TERendererOGL2::getAttributeLocation(program, "aVertices");
     glVertexAttribPointer(m_a_positionHandle, 2, GL_FLOAT, GL_FALSE, 0, squareVertices);
     
     uint colorHandle = TERendererOGL2::getUniformLocation(program, "aColor");
-    glUniform4f(colorHandle, 1.0f, 0.0f, 1.0f, 1.0f);
-
+    glUniform4f(colorHandle, 1.0f, 0.0f, 0.0f, 1.0f);
+    
     uint posHandle = TERendererOGL2::getAttributeLocation(program, "aPosition");
-    glVertexAttrib2f(posHandle, -sideSize, 0.0f);
-
+    glVertexAttrib2f(posHandle, 0.0f, 0.0f);
+    
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    stopProgram(programName);
 }
 
 void TERendererOGL2::renderTexture() {
-    uint simpleProgram = switchProgram("texture");
+    String programName = "texture";
+    uint simpleProgram = switchProgram(programName);
     
     uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
     uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
     uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
-
+    
     TERenderPrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
     TEUtilTexture* texture;
@@ -115,6 +118,7 @@ void TERendererOGL2::renderTexture() {
         glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
+    stopProgram(programName);
 }
 
 int TERendererOGL2::createProgram(String programName, String vertexSource, String fragmentSource) {
@@ -187,6 +191,20 @@ uint TERendererOGL2::switchProgram(String programName) {
     glUniformMatrix4fv(mProjHandle, 1, GL_FALSE, &proj[0]);
     glUniformMatrix4fv(mViewHandle, 1, GL_FALSE, &view[0]);
     return program;
+}
+
+void TERendererOGL2::stopProgram(String programName) {
+    uint program = mPrograms[programName];
+    
+    if (mProgramAttributes.count(program) > 0) {
+        std::list<String> list = mProgramAttributes[program];
+        std::list<String>::iterator iterator;
+        for (iterator = list.begin();iterator != list.end();++iterator) {
+            uint handle = getAttributeLocation(program, (*iterator));
+            glDisableVertexAttribArray(handle);
+            checkGlError("glDisableVertexAttribArray");
+        }
+    }
 }
 
 void TERendererOGL2::checkGlError(String op) {

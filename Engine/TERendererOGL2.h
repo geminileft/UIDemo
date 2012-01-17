@@ -22,6 +22,7 @@ private:
     
     void addProgramAttribute(uint program, String attribute);
     uint switchProgram(String programName);
+    void stopProgram(String programName);
     static void checkGlError(String op);
     
     void renderBasic();
