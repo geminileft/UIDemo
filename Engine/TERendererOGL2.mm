@@ -91,7 +91,7 @@ void TERendererOGL2::renderBasic() {
     glUniform4f(colorHandle, 1.0f, 0.0f, 0.0f, 1.0f);
     
     uint posHandle = TERendererOGL2::getAttributeLocation(program, "aPosition");
-    glVertexAttrib2f(posHandle, 0.0f, 0.0f);
+    glVertexAttrib2f(posHandle, 80.0f, 240.0f);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     stopProgram(programName);
