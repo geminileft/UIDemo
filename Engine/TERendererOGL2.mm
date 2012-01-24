@@ -5,7 +5,6 @@
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 #include "TEManagerFile.h"
-#include "TEManagerGraphics.h"
 #include "TEManagerTexture.h"
 #include "TEUtilTexture.h"
 #include "TEUtilMatrix.h"

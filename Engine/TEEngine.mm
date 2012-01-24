@@ -4,7 +4,6 @@
 #include "TEManagerRender.h"
 #include "TEManagerTouch.h"
 #include "TEManagerSound.h"
-#include "TEManagerGraphics.h"
 #include "TEComponentRender.h"
 #include "TEComponentTouch.h"
 #include "TEComponentSound.h"

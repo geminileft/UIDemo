@@ -1,6 +1,5 @@
 #include "TEComponentRender.h"
 #include "TEManagerRender.h"
-#include "TEManagerGraphics.h"
 
 #import <QuartzCore/QuartzCore.h>
 #import <OpenGLES/ES1/gl.h>

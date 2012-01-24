@@ -19,7 +19,6 @@
 		D7092E0714ACFCB200E1D6EE /* TEManagerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7092E0514ACFCB200E1D6EE /* TEManagerComponent.cpp */; };
 		D7092E0D14ACFD6100E1D6EE /* TERunnable.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7092E0C14ACFD6100E1D6EE /* TERunnable.mm */; };
 		D7092E1014ACFD7C00E1D6EE /* TEManagerRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7092E0F14ACFD7C00E1D6EE /* TEManagerRender.mm */; };
-		D7092E1414ACFDAC00E1D6EE /* TEManagerGraphics.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7092E1314ACFDAC00E1D6EE /* TEManagerGraphics.mm */; };
 		D7092E1714ACFDC800E1D6EE /* TEManagerTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7092E1514ACFDC800E1D6EE /* TEManagerTouch.cpp */; };
 		D7092E1A14ACFDE600E1D6EE /* TEComponentTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7092E1814ACFDE600E1D6EE /* TEComponentTouch.cpp */; };
 		D7092E1D14ACFE0400E1D6EE /* TEManagerInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7092E1B14ACFE0400E1D6EE /* TEManagerInput.cpp */; };
@@ -73,8 +72,6 @@
 		D7092E0E14ACFD7C00E1D6EE /* TEManagerRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEManagerRender.h; sourceTree = "<group>"; };
 		D7092E0F14ACFD7C00E1D6EE /* TEManagerRender.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TEManagerRender.mm; sourceTree = "<group>"; };
 		D7092E1114ACFD9A00E1D6EE /* TEComponentRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEComponentRender.h; sourceTree = "<group>"; };
-		D7092E1214ACFDAC00E1D6EE /* TEManagerGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEManagerGraphics.h; sourceTree = "<group>"; };
-		D7092E1314ACFDAC00E1D6EE /* TEManagerGraphics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TEManagerGraphics.mm; sourceTree = "<group>"; };
 		D7092E1514ACFDC800E1D6EE /* TEManagerTouch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEManagerTouch.cpp; sourceTree = "<group>"; };
 		D7092E1614ACFDC800E1D6EE /* TEManagerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEManagerTouch.h; sourceTree = "<group>"; };
 		D7092E1814ACFDE600E1D6EE /* TEComponentTouch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEComponentTouch.cpp; sourceTree = "<group>"; };
@@ -215,8 +212,6 @@
 				D7092E0614ACFCB200E1D6EE /* TEManagerComponent.h */,
 				D7092E3F14ACFF5300E1D6EE /* TEManagerFile.h */,
 				D7092E4014ACFF5300E1D6EE /* TEManagerFile.mm */,
-				D7092E1214ACFDAC00E1D6EE /* TEManagerGraphics.h */,
-				D7092E1314ACFDAC00E1D6EE /* TEManagerGraphics.mm */,
 				D7092E1B14ACFE0400E1D6EE /* TEManagerInput.cpp */,
 				D7092E1C14ACFE0400E1D6EE /* TEManagerInput.h */,
 				D7092E0E14ACFD7C00E1D6EE /* TEManagerRender.h */,
@@ -341,7 +336,6 @@
 				D7092E0714ACFCB200E1D6EE /* TEManagerComponent.cpp in Sources */,
 				D7092E0D14ACFD6100E1D6EE /* TERunnable.mm in Sources */,
 				D7092E1014ACFD7C00E1D6EE /* TEManagerRender.mm in Sources */,
-				D7092E1414ACFDAC00E1D6EE /* TEManagerGraphics.mm in Sources */,
 				D7092E1714ACFDC800E1D6EE /* TEManagerTouch.cpp in Sources */,
 				D7092E1A14ACFDE600E1D6EE /* TEComponentTouch.cpp in Sources */,
 				D7092E1D14ACFE0400E1D6EE /* TEManagerInput.cpp in Sources */,
