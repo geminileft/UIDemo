@@ -2,19 +2,11 @@
 #define TouchEngine_TERenderer_h
 
 #include "TETypes.h"
+#include "TERenderPrimatives.h"
 
 class TEUtilTexture;
 
 #define MAX_RENDER_PRIMATIVES   1000
-
-struct TERenderTexturePrimative {
-    TEUtilTexture* texture;
-    TEVec3 position;
-    float* vertexBuffer;
-    float* textureBuffer;
-};
-
-typedef TERenderTexturePrimative TERenderTexturePrimative;
 
 class TERenderer {
 private:

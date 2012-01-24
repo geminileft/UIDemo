@@ -113,6 +113,7 @@
 		D70D44A714AD90AA00FDBB5F /* colorbox.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = colorbox.vs; sourceTree = "<group>"; };
 		D70D44A814AD90AA00FDBB5F /* texture.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.fs; sourceTree = "<group>"; };
 		D70D44A914AD90AA00FDBB5F /* texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
+		D7474F7614CE5F0E0017D591 /* TERenderPrimatives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TERenderPrimatives.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,7 +193,6 @@
 		D7092DF614ACF3F700E1D6EE /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				D7092E4714AD00B400E1D6EE /* TEEventListener.h */,
 				D7092E3914ACFF2700E1D6EE /* EAGLView.h */,
 				D7092E3A14ACFF2800E1D6EE /* EAGLView.mm */,
 				D7092E4514AD008E00E1D6EE /* TEComponent.cpp */,
@@ -204,6 +204,7 @@
 				D7092E1914ACFDE600E1D6EE /* TEComponentTouch.h */,
 				D7092DFE14ACFC1800E1D6EE /* TEEngine.h */,
 				D7092DFF14ACFC1800E1D6EE /* TEEngine.mm */,
+				D7092E4714AD00B400E1D6EE /* TEEventListener.h */,
 				D7092E0914ACFD0800E1D6EE /* TEEventListenerBase.h */,
 				D7092E0214ACFC8A00E1D6EE /* TEGameObject.cpp */,
 				D7092E0314ACFC8A00E1D6EE /* TEGameObject.h */,
@@ -232,6 +233,7 @@
 				D7092E2E14ACFEAB00E1D6EE /* TERendererOGL1.mm */,
 				D7092E3614ACFEF700E1D6EE /* TERendererOGL2.h */,
 				D7092E3714ACFEF700E1D6EE /* TERendererOGL2.mm */,
+				D7474F7614CE5F0E0017D591 /* TERenderPrimatives.h */,
 				D7092E0B14ACFD6100E1D6EE /* TERunnable.h */,
 				D7092E0C14ACFD6100E1D6EE /* TERunnable.mm */,
 				D7092E0114ACFC4C00E1D6EE /* TETypes.h */,
