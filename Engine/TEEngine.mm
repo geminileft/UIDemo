@@ -26,11 +26,13 @@ TEEngine::TEEngine(int width, int height) {
 }
 
 void TEEngine::run() {
+    //mRenderer->reset();
     TEManagerGraphics::resetRenderer();
     int managerCount = mManagers.size();
     for (int count = 0;count < managerCount; ++count) {
         mManagers[count]->update();
     }
+    //mRenderer->render();
     TEManagerGraphics::render();
 
 }
@@ -69,7 +71,10 @@ void TEEngine::initialize() {
     UIViewController* vc = [[UIViewController alloc] init];
     vc.view = view;
     mWindow.rootViewController = vc;
-
+/*
+    //mRenderer = new TERendererOGL1(layer);
+    mRenderer = new TERendererOGL2(layer);
+*/
     TEManagerGraphics::initialize(view.layer, mWidth, mHeight);
     this->start();
     mRunnable = [[TERunnable alloc] initWithGame:this];

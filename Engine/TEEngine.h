@@ -6,6 +6,7 @@
 
 class TEManager;
 class TEGameObject;
+class TERenderer;
 
 @class TERunnable;
 
@@ -16,6 +17,7 @@ private:
     std::vector<TEGameObject*> mGameObjects;
     TERunnable* mRunnable;
     UIWindow* mWindow;
+    TERenderer* mRenderer;
 
 public:
 	int mHeight;
