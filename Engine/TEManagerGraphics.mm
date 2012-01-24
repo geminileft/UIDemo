@@ -27,8 +27,3 @@ void initRenderer(CALayer* layer) {
 void TEManagerGraphics::resetRenderer() {
     mRenderer->reset();
 }
-
-TERenderer* TEManagerGraphics::getRenderer() {
-    return mRenderer;
-}
-

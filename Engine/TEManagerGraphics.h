@@ -12,7 +12,6 @@ public:
     static void render();
     static void resetRenderer();
     static void addPrimative();
-    static TERenderer* getRenderer();
 };
 
 #endif
