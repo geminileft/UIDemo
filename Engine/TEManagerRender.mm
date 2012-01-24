@@ -13,7 +13,6 @@ static TEManagerRender* mSharedInstance = NULL;
 void TEManagerRender::update() {
     TEComponentContainer components = getComponents();
     TEComponentContainer::iterator iterator;
-    TEManagerGraphics::resetRenderer();
     for (iterator = components.begin(); iterator != components.end();iterator++) {
         TEComponentRender* component = (TEComponentRender*)(*iterator);
         component->update();

@@ -26,6 +26,7 @@ TEEngine::TEEngine(int width, int height) {
 }
 
 void TEEngine::run() {
+    TEManagerGraphics::resetRenderer();
     int managerCount = mManagers.size();
     for (int count = 0;count < managerCount; ++count) {
         mManagers[count]->update();
