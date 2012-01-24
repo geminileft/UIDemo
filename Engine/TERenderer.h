@@ -7,26 +7,26 @@ class TEUtilTexture;
 
 #define MAX_RENDER_PRIMATIVES   1000
 
-struct TERenderPrimative {
+struct TERenderTexturePrimative {
     TEUtilTexture* texture;
     TEVec3 position;
     float* vertexBuffer;
     float* textureBuffer;
 };
 
-typedef TERenderPrimative TERenderPrimative;
+typedef TERenderTexturePrimative TERenderTexturePrimative;
 
 class TERenderer {
 private:
     uint mTop;
-    TERenderPrimative mPrimatives[MAX_RENDER_PRIMATIVES];
+    TERenderTexturePrimative mTexturePrimatives[MAX_RENDER_PRIMATIVES];
     
 public:
     TERenderer();
     virtual void render() = 0;
     void addTexture(TEUtilTexture* texture, float* vertexBuffer, float* textureBuffer, TEVec3 position);
     void reset();
-    TERenderPrimative* getRenderPrimatives();
+    TERenderTexturePrimative* getRenderPrimatives();
     uint getPrimativeCount() const;
 };
 

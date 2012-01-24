@@ -62,7 +62,7 @@ TERendererOGL1::TERendererOGL1(CALayer* layer) {
 }
 
 void TERendererOGL1::render() {
-    TERenderPrimative* primatives = getRenderPrimatives();
+    TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
     TEUtilTexture* texture;
     TEVec3 vec;

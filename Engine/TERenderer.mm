@@ -3,12 +3,12 @@
 TERenderer::TERenderer() : mTop(0) {}
 
 void TERenderer::addTexture(TEUtilTexture* texture, float* vertexBuffer, float* textureBuffer, TEVec3 position) {
-    TERenderPrimative rp;
+    TERenderTexturePrimative rp;
     rp.texture = texture;
     rp.position = position;
     rp.vertexBuffer = vertexBuffer;
     rp.textureBuffer = textureBuffer;
-    mPrimatives[mTop] = rp;
+    mTexturePrimatives[mTop] = rp;
     ++mTop;
 }
 
@@ -17,8 +17,8 @@ void TERenderer::reset() {
     mTop = 0;
 }
 
-TERenderPrimative* TERenderer::getRenderPrimatives() {
-    return mPrimatives;
+TERenderTexturePrimative* TERenderer::getRenderPrimatives() {
+    return mTexturePrimatives;
 }
 
 uint TERenderer::getPrimativeCount() const {

@@ -11,6 +11,7 @@ public:
     static void initialize(CALayer* layer, float width, float height);
     static void render();
     static void resetRenderer();
+    static void addPrimative();
     static TERenderer* getRenderer();
 };
 

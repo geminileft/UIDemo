@@ -105,7 +105,7 @@ void TERendererOGL2::renderTexture() {
     uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
     uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
     
-    TERenderPrimative* primatives = getRenderPrimatives();
+    TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
     TEUtilTexture* texture;
     TEVec3 vec;
