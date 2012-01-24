@@ -7,21 +7,15 @@ static TERenderer* mRenderer;
 static float mWidth;
 static float mHeight;
 
-static void initRenderer(CALayer* layer);
-
 void TEManagerGraphics::initialize(CALayer* layer, float width, float height) {
     mWidth = width;
     mHeight = height;
-    initRenderer(layer);
+    //mRenderer = new TERendererOGL1(layer);
+    mRenderer = new TERendererOGL2(layer);
 }
 
 void TEManagerGraphics::render() {
     mRenderer->render();
-}
-
-void initRenderer(CALayer* layer) {
-    //mRenderer = new TERendererOGL1(layer);
-    mRenderer = new TERendererOGL2(layer);
 }
 
 void TEManagerGraphics::resetRenderer() {
