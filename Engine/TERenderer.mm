@@ -22,7 +22,6 @@ void TERenderer::addPolygon(float* vertexBuffer, TEVec3 position, TEColor4 color
 }
 
 void TERenderer::reset() {
-    glClear(GL_COLOR_BUFFER_BIT);
     mTextureTop = 0;
     mPolygonTop = 0;
 }

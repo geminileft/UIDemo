@@ -83,7 +83,17 @@ void TERendererOGL2::renderBasic() {
 
     for (int i = 0;i < count;++i) {
         p = primatives[i];
-        glVertexAttribPointer(m_a_positionHandle, 2, GL_FLOAT, GL_FALSE, 0, p.vertexBuffer);
+        const float totalSize = 160.0f;
+        const float sideSize = totalSize / 2.0f;
+        
+        float squareVertices[] = {
+            -sideSize, -sideSize,//lb
+            sideSize,  -sideSize,//rb
+            -sideSize,  sideSize,//lt
+            sideSize,   sideSize,//rt
+        };
+
+        glVertexAttribPointer(m_a_positionHandle, 2, GL_FLOAT, GL_FALSE, 0, squareVertices);
         glUniform4f(colorHandle, p.color.r, p.color.g, p.color.b, p.color.a);
         glVertexAttrib2f(posHandle, p.position.x, p.position.y);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);        
