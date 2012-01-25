@@ -108,7 +108,7 @@ inline TEColor4 TEColor4Make(float r, float g, float b, float a) {
 }
 
 struct TERenderTexturePrimative {
-    TEUtilTexture* texture;
+    uint textureName;
     TEVec3 position;
     float* vertexBuffer;
     float* textureBuffer;

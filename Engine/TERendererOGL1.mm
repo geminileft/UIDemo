@@ -64,12 +64,10 @@ TERendererOGL1::TERendererOGL1(CALayer* layer) {
 void TERendererOGL1::render() {
     TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
-    TEUtilTexture* texture;
     TEVec3 vec;
     for (int i = 0;i < count;++i) {
-        texture = primatives[i].texture;
         vec = primatives[i].position;
-        glBindTexture(GL_TEXTURE_2D, texture->mTextureName);	
+        glBindTexture(GL_TEXTURE_2D, primatives[i].textureName);	
         glPushMatrix();
         glTranslatef(vec.x, vec.y, vec.z);
         glTexCoordPointer(2, GL_FLOAT, 0, primatives[i].textureBuffer);

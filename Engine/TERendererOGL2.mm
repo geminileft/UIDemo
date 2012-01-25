@@ -55,10 +55,6 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer) {
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
     program = TERendererOGL2::createProgram("basic", vertexSource, fragmentSource);
     addProgramAttribute(program, "aVertices");
-    
-    UIImage* image = [UIImage imageNamed:@"table_background.png"];
-    CGImage* cImage = [image CGImage];
-    mTexture = TEManagerTexture::GLUtexImage2D(cImage);
 }
 
 void TERendererOGL2::render() {
@@ -103,12 +99,10 @@ void TERendererOGL2::renderTexture() {
     
     TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
-    TEUtilTexture* texture;
     TEVec3 vec;
     for (int i = 0;i < count;++i) {
-        texture = primatives[i].texture;
         vec = primatives[i].position;
-        glBindTexture(GL_TEXTURE_2D, texture->mTextureName);	
+        glBindTexture(GL_TEXTURE_2D, primatives[i].textureName);
         glVertexAttrib2f(coordsHandle, vec.x, vec.y);
         glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
         glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);

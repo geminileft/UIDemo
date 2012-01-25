@@ -4,7 +4,7 @@
 #include "TEGameObject.h"
 #include "TEEventListener.h"
 
-RenderBox::RenderBox(TEPoint position, TESize size, TEColor4 color) : mX(position.x), mY(position.y), 
+RenderBox::RenderBox(TESize size, TEColor4 color) :
     mWidth(size.width), mHeight(size.height), mR(color.r), mG(color.g), mB(color.b), mA(color.a) {}
 
 void RenderBox::update() {
@@ -25,8 +25,8 @@ void RenderBox::update() {
     color.a = mA;
     
     TEVec3 position;
-    position.x = mX;
-    position.y = mY;
+    position.x = mParent->position.x;
+    position.y = mParent->position.y;
     position.z = 0.0f;
     
     sharedRenderer()->addPolygon(squareVertices, position, color);

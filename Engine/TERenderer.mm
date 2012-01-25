@@ -2,9 +2,9 @@
 
 TERenderer::TERenderer() : mTextureTop(0), mPolygonTop(0) {}
 
-void TERenderer::addTexture(TEUtilTexture* texture, float* vertexBuffer, float* textureBuffer, TEVec3 position) {
+void TERenderer::addTexture(uint textureName, float* vertexBuffer, float* textureBuffer, TEVec3 position) {
     TERenderTexturePrimative rp;
-    rp.texture = texture;
+    rp.textureName = textureName;
     rp.position = position;
     rp.vertexBuffer = vertexBuffer;
     rp.textureBuffer = textureBuffer;

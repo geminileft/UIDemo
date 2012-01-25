@@ -42,6 +42,9 @@
 		D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A714AD90AA00FDBB5F /* colorbox.vs */; };
 		D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A814AD90AA00FDBB5F /* texture.fs */; };
 		D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A914AD90AA00FDBB5F /* texture.vs */; };
+		D74F3C0B14D079E500871B6D /* RenderImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = D74F3C0A14D079E500871B6D /* RenderImage.mm */; };
+		D74F3C0E14D07C2300871B6D /* table_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0D14D07C2300871B6D /* table_background.png */; };
+		D74F3C1014D0828D00871B6D /* spade_ace.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0F14D0828D00871B6D /* spade_ace.png */; };
 		D7C5BA0814CF984F0012DF62 /* RenderBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0714CF984F0012DF62 /* RenderBox.mm */; };
 		D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */; };
 /* End PBXBuildFile section */
@@ -112,6 +115,10 @@
 		D70D44A714AD90AA00FDBB5F /* colorbox.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = colorbox.vs; sourceTree = "<group>"; };
 		D70D44A814AD90AA00FDBB5F /* texture.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.fs; sourceTree = "<group>"; };
 		D70D44A914AD90AA00FDBB5F /* texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
+		D74F3C0914D079E500871B6D /* RenderImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderImage.h; sourceTree = "<group>"; };
+		D74F3C0A14D079E500871B6D /* RenderImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderImage.mm; sourceTree = "<group>"; };
+		D74F3C0D14D07C2300871B6D /* table_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_background.png; sourceTree = "<group>"; };
+		D74F3C0F14D0828D00871B6D /* spade_ace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spade_ace.png; sourceTree = "<group>"; };
 		D7C5BA0614CF983C0012DF62 /* RenderBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderBox.h; sourceTree = "<group>"; };
 		D7C5BA0714CF984F0012DF62 /* RenderBox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderBox.mm; sourceTree = "<group>"; };
 		D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEComponentRender.cpp; sourceTree = "<group>"; };
@@ -183,6 +190,7 @@
 		D7092DE614ACF2CE00E1D6EE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D74F3C0C14D07B3200871B6D /* Images */,
 				D7092DE714ACF2CE00E1D6EE /* UIDemo-Info.plist */,
 				D7092DE814ACF2CE00E1D6EE /* InfoPlist.strings */,
 				D7092DED14ACF2CE00E1D6EE /* UIDemo-Prefix.pch */,
@@ -198,8 +206,8 @@
 				D7092E3A14ACFF2800E1D6EE /* EAGLView.mm */,
 				D7092E4514AD008E00E1D6EE /* TEComponent.cpp */,
 				D7092E0A14ACFD1C00E1D6EE /* TEComponent.h */,
-				D7092E1114ACFD9A00E1D6EE /* TEComponentRender.h */,
 				D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */,
+				D7092E1114ACFD9A00E1D6EE /* TEComponentRender.h */,
 				D7092E3014ACFECE00E1D6EE /* TEComponentSound.h */,
 				D7092E3114ACFECE00E1D6EE /* TEComponentSound.mm */,
 				D7092E1814ACFDE600E1D6EE /* TEComponentTouch.cpp */,
@@ -248,10 +256,12 @@
 		D7092DF714ACFA8400E1D6EE /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				D7092DFB14ACFB6600E1D6EE /* UIDemo.h */,
-				D7092DFC14ACFB7000E1D6EE /* UIDemo.mm */,
 				D7C5BA0614CF983C0012DF62 /* RenderBox.h */,
 				D7C5BA0714CF984F0012DF62 /* RenderBox.mm */,
+				D74F3C0914D079E500871B6D /* RenderImage.h */,
+				D74F3C0A14D079E500871B6D /* RenderImage.mm */,
+				D7092DFB14ACFB6600E1D6EE /* UIDemo.h */,
+				D7092DFC14ACFB7000E1D6EE /* UIDemo.mm */,
 			);
 			name = Game;
 			path = ../Game;
@@ -268,6 +278,16 @@
 			name = Shaders;
 			path = ../Shaders;
 			sourceTree = "<group>";
+		};
+		D74F3C0C14D07B3200871B6D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D74F3C0F14D0828D00871B6D /* spade_ace.png */,
+				D74F3C0D14D07C2300871B6D /* table_background.png */,
+			);
+			name = Images;
+			path = /Users/dev/Projects/UIDemo/UIDemo/Images;
+			sourceTree = "<absolute>";
 		};
 /* End PBXGroup section */
 
@@ -324,6 +344,8 @@
 				D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */,
 				D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */,
 				D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */,
+				D74F3C0E14D07C2300871B6D /* table_background.png in Resources */,
+				D74F3C1014D0828D00871B6D /* spade_ace.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +381,7 @@
 				D7092E4614AD008E00E1D6EE /* TEComponent.cpp in Sources */,
 				D7C5BA0814CF984F0012DF62 /* RenderBox.mm in Sources */,
 				D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */,
+				D74F3C0B14D079E500871B6D /* RenderImage.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
