@@ -1,14 +1,13 @@
-#include "RenderFirst.h"
+#include "RenderBox.h"
 #include "TERenderer.h"
 #include "TEUtilTexture.h"
 #include "TEGameObject.h"
 #include "TEEventListener.h"
 
-RenderFirst::RenderFirst(NSString* resourceName, TEPoint position, TESize size) {    
-    mTexture = new TEUtilTexture(resourceName, position, size);
+RenderBox::RenderBox(TEPoint position, TESize size) {    
 }
 
-void RenderFirst::update() {
+void RenderBox::update() {
     const float sideSize = 80.0f;
     
     float squareVertices[] = {
@@ -32,16 +31,9 @@ void RenderFirst::update() {
     sharedRenderer()->addPolygon(squareVertices, position, color);
 }
 
-void RenderFirst::draw() {
+void RenderBox::draw() {
 }
 
-void RenderFirst::moveToTopListener() {
+void RenderBox::moveToTopListener() {
 	getManager()->moveComponentToTop(this);
 };
-
-TESize RenderFirst::getSize() {
-	TESize size;
-	size.width = mWidth;
-	size.height = mHeight;
-	return size;
-}

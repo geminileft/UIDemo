@@ -42,7 +42,7 @@
 		D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A714AD90AA00FDBB5F /* colorbox.vs */; };
 		D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A814AD90AA00FDBB5F /* texture.fs */; };
 		D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A914AD90AA00FDBB5F /* texture.vs */; };
-		D7C5BA0814CF984F0012DF62 /* RenderFirst.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0714CF984F0012DF62 /* RenderFirst.mm */; };
+		D7C5BA0814CF984F0012DF62 /* RenderBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0714CF984F0012DF62 /* RenderBox.mm */; };
 		D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */; };
 /* End PBXBuildFile section */
 
@@ -112,8 +112,8 @@
 		D70D44A714AD90AA00FDBB5F /* colorbox.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = colorbox.vs; sourceTree = "<group>"; };
 		D70D44A814AD90AA00FDBB5F /* texture.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.fs; sourceTree = "<group>"; };
 		D70D44A914AD90AA00FDBB5F /* texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
-		D7C5BA0614CF983C0012DF62 /* RenderFirst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderFirst.h; sourceTree = "<group>"; };
-		D7C5BA0714CF984F0012DF62 /* RenderFirst.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderFirst.mm; sourceTree = "<group>"; };
+		D7C5BA0614CF983C0012DF62 /* RenderBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderBox.h; sourceTree = "<group>"; };
+		D7C5BA0714CF984F0012DF62 /* RenderBox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderBox.mm; sourceTree = "<group>"; };
 		D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEComponentRender.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,8 +250,8 @@
 			children = (
 				D7092DFB14ACFB6600E1D6EE /* UIDemo.h */,
 				D7092DFC14ACFB7000E1D6EE /* UIDemo.mm */,
-				D7C5BA0614CF983C0012DF62 /* RenderFirst.h */,
-				D7C5BA0714CF984F0012DF62 /* RenderFirst.mm */,
+				D7C5BA0614CF983C0012DF62 /* RenderBox.h */,
+				D7C5BA0714CF984F0012DF62 /* RenderBox.mm */,
 			);
 			name = Game;
 			path = ../Game;
@@ -357,7 +357,7 @@
 				D7092E4114ACFF5400E1D6EE /* TEManagerFile.mm in Sources */,
 				D7092E4414ACFF7700E1D6EE /* TEUtilMatrix.cpp in Sources */,
 				D7092E4614AD008E00E1D6EE /* TEComponent.cpp in Sources */,
-				D7C5BA0814CF984F0012DF62 /* RenderFirst.mm in Sources */,
+				D7C5BA0814CF984F0012DF62 /* RenderBox.mm in Sources */,
 				D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
