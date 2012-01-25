@@ -32,6 +32,29 @@ void TEEngine::run() {
     for (int count = 0;count < managerCount; ++count) {
         mManagers[count]->update();
     }
+
+    const float totalSize = 160.0f;
+    const float sideSize = totalSize / 2.0f;
+    
+    float squareVertices[] = {
+        -sideSize, -sideSize,//lb
+        sideSize,  -sideSize,//rb
+        -sideSize,  sideSize,//lt
+        sideSize,   sideSize,//rt
+    };
+    
+    TEColor4 color;
+    color.r = 0.0f;
+    color.g = 1.0f;
+    color.b = 0.0f;
+    color.a = 1.0f;
+    
+    TEVec3 position;
+    position.x = 80.0f;
+    position.y = 240.0f;
+    position.z = 0.0f;
+    
+    mRenderer->addPolygon(squareVertices, position, color);
     mRenderer->render();
 }
 

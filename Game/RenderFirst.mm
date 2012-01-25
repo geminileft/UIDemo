@@ -20,13 +20,13 @@ void RenderFirst::update() {
     };
     
     TEColor4 color;
-    color.r = 1.0f;
+    color.r = 0.0f;
     color.g = 0.0f;
-    color.b = 0.0f;
+    color.b = 1.0f;
     color.a = 1.0f;
     
     TEVec3 position;
-    position.x = 80.0f;
+    position.x = 240.0f;
     position.y = 240.0f;
     position.z = 0.0f;
     
