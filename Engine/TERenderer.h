@@ -2,7 +2,6 @@
 #define TouchEngine_TERenderer_h
 
 #include "TETypes.h"
-#include "TERenderPrimatives.h"
 
 class TEUtilTexture;
 
@@ -10,13 +9,17 @@ class TEUtilTexture;
 
 class TERenderer {
 private:
-    uint mTop;
+    uint mTextureTop;
+    uint mPolygonTop;
+    
     TERenderTexturePrimative mTexturePrimatives[MAX_RENDER_PRIMATIVES];
+    TERenderPolygonPrimative mPolygonPrimatives[MAX_RENDER_PRIMATIVES];
     
 public:
     TERenderer();
     virtual void render() = 0;
     void addTexture(TEUtilTexture* texture, float* vertexBuffer, float* textureBuffer, TEVec3 position);
+    void addPolygon(float* vertexBuffer, TEVec3 position, TEColor4 color);
     void reset();
     TERenderTexturePrimative* getRenderPrimatives();
     uint getPrimativeCount() const;

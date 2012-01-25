@@ -110,7 +110,6 @@
 		D70D44A714AD90AA00FDBB5F /* colorbox.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = colorbox.vs; sourceTree = "<group>"; };
 		D70D44A814AD90AA00FDBB5F /* texture.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.fs; sourceTree = "<group>"; };
 		D70D44A914AD90AA00FDBB5F /* texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
-		D7474F7614CE5F0E0017D591 /* TERenderPrimatives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TERenderPrimatives.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,7 +227,6 @@
 				D7092E2E14ACFEAB00E1D6EE /* TERendererOGL1.mm */,
 				D7092E3614ACFEF700E1D6EE /* TERendererOGL2.h */,
 				D7092E3714ACFEF700E1D6EE /* TERendererOGL2.mm */,
-				D7474F7614CE5F0E0017D591 /* TERenderPrimatives.h */,
 				D7092E0B14ACFD6100E1D6EE /* TERunnable.h */,
 				D7092E0C14ACFD6100E1D6EE /* TERunnable.mm */,
 				D7092E0114ACFC4C00E1D6EE /* TETypes.h */,

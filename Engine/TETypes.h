@@ -5,6 +5,7 @@
 #include <string>
 
 class TEComponent;
+class TEUtilTexture;
 
 typedef std::string String;
 
@@ -88,5 +89,30 @@ struct TEVec3 {
 
 typedef struct TEVec3 TEVec3;
 
+struct TEColor4 {
+    float r;
+    float g;
+    float b;
+    float a;
+};
+
+typedef struct TEColor4 TEColor4;
+
+struct TERenderTexturePrimative {
+    TEUtilTexture* texture;
+    TEVec3 position;
+    float* vertexBuffer;
+    float* textureBuffer;
+};
+
+typedef TERenderTexturePrimative TERenderTexturePrimative;
+
+struct TERenderPolygonPrimative {
+    float* vertexBuffer;
+    TEVec3 position;
+    TEColor4 color;
+};
+
+typedef TERenderPolygonPrimative TERenderPolygonPrimative;
 
 #endif
