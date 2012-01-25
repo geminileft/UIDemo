@@ -3,9 +3,36 @@
 #include "TEUtilTexture.h"
 #include "TEGameObject.h"
 #include "TEEventListener.h"
+#include "TEManagerTexture.h"
 
-RenderImage::RenderImage(NSString* resourceName, TEPoint position, TESize size) {    
+RenderImage::RenderImage(NSString* resourceName, TEPoint position, TESize size) {
+    UIImage* image = [UIImage imageNamed:resourceName];
+    mTextureName = TEManagerTexture::GLUtexImage2D([image CGImage]);
     mTexture = new TEUtilTexture(resourceName, position, size);
+    
+    const float leftX = -(float)size.width / 2;
+	const float rightX = leftX + size.width;
+	const float bottomY = -(float)size.height / 2;
+	const float topY = bottomY + size.height;
+
+    mVertexBuffer[0] = leftX;
+	mVertexBuffer[1] = bottomY;
+	mVertexBuffer[2] = rightX;
+	mVertexBuffer[3] = bottomY;
+	mVertexBuffer[4] = rightX;
+	mVertexBuffer[5] = topY;
+	mVertexBuffer[6] = leftX;
+	mVertexBuffer[7] = topY;
+    
+    mTextureBuffer[0] = 0.0f;//left
+	mTextureBuffer[1] = 1.0f;//top
+	mTextureBuffer[2] = 1.0f;//right
+	mTextureBuffer[3] = 1.0f;//top
+	mTextureBuffer[4] = 1.0f;//right
+	mTextureBuffer[5] = 0.0f;//bottom
+	mTextureBuffer[6] = 0.0f;//left
+	mTextureBuffer[7] = 0.0f;//bottom
+
 }
 
 void RenderImage::update() {
@@ -14,15 +41,7 @@ void RenderImage::update() {
     vec3.y = mParent->position.y;
     vec3.z = 0;
         
-    /*
-    UIImage* image = [UIImage imageNamed:resourceName];
-    CGImage* cImage = [image CGImage];
-    float width = CGImageGetWidth(cImage);
-    float height = CGImageGetHeight(cImage);
-    mTextureName = TEManagerTexture::GLUtexImage2D(cImage);
-     */
-    
-    sharedRenderer()->addTexture(mTexture->mTextureName, mTexture->mVertexBuffer, mTexture->mTextureBuffer, vec3);
+    sharedRenderer()->addTexture(mTextureName, mVertexBuffer, mTextureBuffer, vec3);
 }
 
 void RenderImage::draw() {

@@ -9,14 +9,11 @@ class TEUtilTexture;
 class RenderImage : public TEComponentRender {
 private:
 	TEUtilTexture* mTexture;
-	int mCrop[4];
 	int mWidth;
 	int mHeight;
-    uint mProgram;
-    uint mCoordsHandle;
-    uint maPositionHandle;
-    uint maTextureHandle;
-
+    uint mTextureName;
+    float mVertexBuffer[8];
+    float mTextureBuffer[8];
 
 public:
     RenderImage(NSString* resourceName, TEPoint position, TESize size);

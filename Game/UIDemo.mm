@@ -19,7 +19,7 @@ void UIDemo::start() {
     position.x = 0.0f;
     position.y = 0.0f;
     go = new TEGameObject();
-    RenderImage* ri = new RenderImage(@"spade_ace.png", position, size);
+    RenderImage* ri = new RenderImage(@"table_background.png", position, size);
     go->position.x = 240.0f;
     go->position.y = 240.0f;
     go->addComponent(ri);
