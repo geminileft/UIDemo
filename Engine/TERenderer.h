@@ -22,7 +22,10 @@ public:
     void addPolygon(float* vertexBuffer, TEVec3 position, TEColor4 color);
     void reset();
     TERenderTexturePrimative* getRenderPrimatives();
+    TERenderPolygonPrimative* getPolygonPrimatives();
+    
     uint getPrimativeCount() const;
+    uint getPolygonCount() const;
 };
 
 #endif

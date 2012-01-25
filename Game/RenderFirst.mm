@@ -9,11 +9,29 @@ RenderFirst::RenderFirst(NSString* resourceName, TEPoint position, TESize size) 
 }
 
 void RenderFirst::update() {
-    TEVec3 vec3;
-    vec3.x = mParent->position.x;
-    vec3.y = mParent->position.y;
-    vec3.z = 0;
-    sharedRenderer()->addTexture(mTexture, mTexture->mVertexBuffer, mTexture->mTextureBuffer, vec3);
+    //sharedRenderer()->addTexture(mTexture, mTexture->mVertexBuffer, mTexture->mTextureBuffer, vec3);
+    const float totalSize = 160.0f;
+    const float sideSize = totalSize / 2.0f;
+
+    float squareVertices[] = {
+        -sideSize, -sideSize,//lb
+        sideSize,  -sideSize,//rb
+        -sideSize,  sideSize,//lt
+        sideSize,   sideSize,//rt
+    };
+    
+    TEColor4 color;
+    color.r = 1.0f;
+    color.g = 0.0f;
+    color.b = 0.0f;
+    color.a = 1.0f;
+
+    TEVec3 position;
+    position.x = 80.0f;
+    position.y = 240.0f;
+    position.z = 0.0f;
+    
+    sharedRenderer()->addPolygon(squareVertices, position, color);
 }
 
 void RenderFirst::draw() {

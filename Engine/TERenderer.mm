@@ -1,6 +1,6 @@
 #include "TERenderer.h"
 
-TERenderer::TERenderer() : mTextureTop(0) {}
+TERenderer::TERenderer() : mTextureTop(0), mPolygonTop(0) {}
 
 void TERenderer::addTexture(TEUtilTexture* texture, float* vertexBuffer, float* textureBuffer, TEVec3 position) {
     TERenderTexturePrimative rp;
@@ -12,22 +12,33 @@ void TERenderer::addTexture(TEUtilTexture* texture, float* vertexBuffer, float* 
     ++mTextureTop;
 }
 
+void TERenderer::addPolygon(float* vertexBuffer, TEVec3 position, TEColor4 color) {
+    TERenderPolygonPrimative pp;
+    pp.vertexBuffer = vertexBuffer;
+    pp.position = position;
+    pp.color = color;
+    mPolygonPrimatives[mPolygonTop] = pp;
+    ++mPolygonTop;
+}
+
 void TERenderer::reset() {
     glClear(GL_COLOR_BUFFER_BIT);
     mTextureTop = 0;
+    mPolygonTop = 0;
 }
 
 TERenderTexturePrimative* TERenderer::getRenderPrimatives() {
     return mTexturePrimatives;
 }
 
+TERenderPolygonPrimative* TERenderer::getPolygonPrimatives() {
+    return mPolygonPrimatives;
+}
+
 uint TERenderer::getPrimativeCount() const {
     return mTextureTop;
 }
 
-void TERenderer::addPolygon(float* vertexBuffer, TEVec3 position, TEColor4 color) {
-    TERenderPolygonPrimative pp;
-    pp.vertexBuffer = vertexBuffer;
-    pp.position = position;
-    pp.color = color;
+uint TERenderer::getPolygonCount() const {
+    return mPolygonTop;
 }
