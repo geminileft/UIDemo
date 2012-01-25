@@ -28,11 +28,12 @@ TEEngine::TEEngine(int width, int height) {
 
 void TEEngine::run() {
     mRenderer->reset();
-    //TEManagerGraphics::resetRenderer();
     int managerCount = mManagers.size();
     for (int count = 0;count < managerCount; ++count) {
         mManagers[count]->update();
     }
+
+/*
     const float totalSize = 160.0f;
     const float sideSize = totalSize / 2.0f;
     
@@ -55,10 +56,8 @@ void TEEngine::run() {
     position.z = 0.0f;
     
     mRenderer->addPolygon(squareVertices, position, color);
-
+*/
     mRenderer->render();
-    //TEManagerGraphics::render();
-
 }
 
 void TEEngine::addGameObject(TEGameObject* gameObject) {
@@ -98,7 +97,6 @@ void TEEngine::initialize() {
     //mRenderer = new TERendererOGL1(layer);
     mRenderer = new TERendererOGL2(view.layer);
     TEComponentRender::setSharedRenderer(mRenderer);
-    //TEManagerGraphics::initialize(view.layer, mWidth, mHeight);
     this->start();
     mRunnable = [[TERunnable alloc] initWithGame:this];
     [mWindow makeKeyAndVisible];
