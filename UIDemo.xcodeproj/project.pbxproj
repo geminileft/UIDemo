@@ -42,6 +42,8 @@
 		D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A714AD90AA00FDBB5F /* colorbox.vs */; };
 		D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A814AD90AA00FDBB5F /* texture.fs */; };
 		D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A914AD90AA00FDBB5F /* texture.vs */; };
+		D72D7BC114D0B5C400C020A1 /* TouchDrag.mm in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC014D0B5C400C020A1 /* TouchDrag.mm */; };
+		D72D7BC514D0B60300C020A1 /* TEManagerTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC314D0B60200C020A1 /* TEManagerTime.cpp */; };
 		D74F3C0B14D079E500871B6D /* RenderImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = D74F3C0A14D079E500871B6D /* RenderImage.mm */; };
 		D74F3C0E14D07C2300871B6D /* table_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0D14D07C2300871B6D /* table_background.png */; };
 		D74F3C1014D0828D00871B6D /* spade_ace.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0F14D0828D00871B6D /* spade_ace.png */; };
@@ -115,6 +117,10 @@
 		D70D44A714AD90AA00FDBB5F /* colorbox.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = colorbox.vs; sourceTree = "<group>"; };
 		D70D44A814AD90AA00FDBB5F /* texture.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.fs; sourceTree = "<group>"; };
 		D70D44A914AD90AA00FDBB5F /* texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
+		D72D7BBF14D0B5C400C020A1 /* TouchDrag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchDrag.h; sourceTree = "<group>"; };
+		D72D7BC014D0B5C400C020A1 /* TouchDrag.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchDrag.mm; sourceTree = "<group>"; };
+		D72D7BC314D0B60200C020A1 /* TEManagerTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEManagerTime.cpp; sourceTree = "<group>"; };
+		D72D7BC414D0B60300C020A1 /* TEManagerTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEManagerTime.h; sourceTree = "<group>"; };
 		D74F3C0914D079E500871B6D /* RenderImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderImage.h; sourceTree = "<group>"; };
 		D74F3C0A14D079E500871B6D /* RenderImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderImage.mm; sourceTree = "<group>"; };
 		D74F3C0D14D07C2300871B6D /* table_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_background.png; sourceTree = "<group>"; };
@@ -233,6 +239,8 @@
 				D7092E2514ACFE6500E1D6EE /* TEManagerSound.mm */,
 				D7092E3C14ACFF4000E1D6EE /* TEManagerTexture.h */,
 				D7092E3D14ACFF4000E1D6EE /* TEManagerTexture.mm */,
+				D72D7BC314D0B60200C020A1 /* TEManagerTime.cpp */,
+				D72D7BC414D0B60300C020A1 /* TEManagerTime.h */,
 				D7092E1514ACFDC800E1D6EE /* TEManagerTouch.cpp */,
 				D7092E1614ACFDC800E1D6EE /* TEManagerTouch.h */,
 				D7092E2A14ACFE9500E1D6EE /* TERenderer.h */,
@@ -260,6 +268,8 @@
 				D7C5BA0714CF984F0012DF62 /* RenderBox.mm */,
 				D74F3C0914D079E500871B6D /* RenderImage.h */,
 				D74F3C0A14D079E500871B6D /* RenderImage.mm */,
+				D72D7BBF14D0B5C400C020A1 /* TouchDrag.h */,
+				D72D7BC014D0B5C400C020A1 /* TouchDrag.mm */,
 				D7092DFB14ACFB6600E1D6EE /* UIDemo.h */,
 				D7092DFC14ACFB7000E1D6EE /* UIDemo.mm */,
 			);
@@ -382,6 +392,8 @@
 				D7C5BA0814CF984F0012DF62 /* RenderBox.mm in Sources */,
 				D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */,
 				D74F3C0B14D079E500871B6D /* RenderImage.mm in Sources */,
+				D72D7BC114D0B5C400C020A1 /* TouchDrag.mm in Sources */,
+				D72D7BC514D0B60300C020A1 /* TEManagerTime.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,7 +32,6 @@ RenderImage::RenderImage(NSString* resourceName, TEPoint position, TESize size) 
 	mTextureBuffer[5] = 0.0f;//bottom
 	mTextureBuffer[6] = 0.0f;//left
 	mTextureBuffer[7] = 0.0f;//bottom
-
 }
 
 void RenderImage::update() {
