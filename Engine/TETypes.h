@@ -98,6 +98,15 @@ struct TEColor4 {
 
 typedef struct TEColor4 TEColor4;
 
+inline TEColor4 TEColor4Make(float r, float g, float b, float a) {
+    TEColor4 color;
+    color.r = r;
+    color.g = g;
+    color.b = b;
+    color.a = a;
+    return color;
+}
+
 struct TERenderTexturePrimative {
     TEUtilTexture* texture;
     TEVec3 position;

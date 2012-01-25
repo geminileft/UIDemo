@@ -4,28 +4,29 @@
 #include "TEGameObject.h"
 #include "TEEventListener.h"
 
-RenderBox::RenderBox(TEPoint position, TESize size) {    
-}
+RenderBox::RenderBox(TEPoint position, TESize size, TEColor4 color) : mX(position.x), mY(position.y), 
+    mWidth(size.width), mHeight(size.height), mR(color.r), mG(color.g), mB(color.b), mA(color.a) {}
 
 void RenderBox::update() {
-    const float sideSize = 80.0f;
+    const float halfHeight = (float)mHeight / 2;
+    const float halfWidth = (float)mWidth / 2;
     
     float squareVertices[] = {
-        -sideSize, -sideSize,//lb
-        sideSize,  -sideSize,//rb
-        -sideSize,  sideSize,//lt
-        sideSize,   sideSize,//rt
+        -halfWidth, -halfHeight,//lb
+        halfWidth,  -halfHeight,//rb
+        -halfWidth,  halfHeight,//lt
+        halfWidth,   halfHeight,//rt
     };
     
     TEColor4 color;
-    color.r = 0.0f;
-    color.g = 1.0f;
-    color.b = 1.0f;
-    color.a = 1.0f;
+    color.r = mR;
+    color.g = mG;
+    color.b = mB;
+    color.a = mA;
     
     TEVec3 position;
-    position.x = 80.0f;
-    position.y = 240.0f;
+    position.x = mX;
+    position.y = mY;
     position.z = 0.0f;
     
     sharedRenderer()->addPolygon(squareVertices, position, color);

@@ -8,11 +8,17 @@ class TEUtilTexture;
 
 class RenderBox : public TEComponentRender {
 private:
-	int mWidth;
-	int mHeight;    
+	float mWidth;
+	float mHeight;
+    float mX;
+    float mY;
+    float mR;
+    float mG;
+    float mB;
+    float mA;
     
 public:
-    RenderBox(TEPoint position, TESize size);
+    RenderBox(TEPoint position, TESize size, TEColor4 color);
     virtual void update();
     virtual void draw();
 	void moveToTopListener();
