@@ -13,7 +13,6 @@ private:
 	std::map<TEComponentEvent, std::vector<TEEventListenerBase*> > mEventSubscribers; 
 
 public:
-	TESize size;
 	TEPoint position;
 	
     virtual void update();

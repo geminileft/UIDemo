@@ -2,10 +2,13 @@
 #include "TEGameObject.h"
 #include "TEInputTouch.h"
 
+TEComponentTouch::TEComponentTouch(TESize size) {
+    mSize = size;
+}
 bool TEComponentTouch::containsPoint(TEPoint point) {
     bool returnValue = false;
     TEPoint position = mParent->position;
-    TESize size  = mParent->size;
+    TESize size  = getSize();
     float left = (float)position.x - ((float)size.width / 2);
     float right = (float)position.x + ((float)size.width / 2);
     float bottom = (float)position.y - ((float)size.height / 2);
@@ -14,4 +17,8 @@ bool TEComponentTouch::containsPoint(TEPoint point) {
         returnValue = true;
     }
     return returnValue;
+}
+
+const TESize TEComponentTouch::getSize() const {
+    return mSize;
 }

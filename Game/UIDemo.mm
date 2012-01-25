@@ -3,6 +3,7 @@
 #include "RenderBox.h"
 #include "RenderImage.h"
 #include "TEEventListener.h"
+#include "TouchSingle.h"
 
 UIDemo::UIDemo(int width, int height) : TEEngine(width, height){}
 
@@ -14,6 +15,7 @@ void UIDemo::start() {
     go->position.x = 80.0f;
     go->position.y = 240.0f;
     go->addComponent(rf);
+    go->addComponent(new TouchSingle(size));
     addGameObject(go);
     
     go = new TEGameObject();
