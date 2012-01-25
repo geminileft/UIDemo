@@ -9,8 +9,7 @@ RenderFirst::RenderFirst(NSString* resourceName, TEPoint position, TESize size) 
 }
 
 void RenderFirst::update() {
-    const float totalSize = 160.0f;
-    const float sideSize = totalSize / 2.0f;
+    const float sideSize = 80.0f;
     
     float squareVertices[] = {
         -sideSize, -sideSize,//lb
@@ -21,12 +20,12 @@ void RenderFirst::update() {
     
     TEColor4 color;
     color.r = 0.0f;
-    color.g = 0.0f;
+    color.g = 1.0f;
     color.b = 1.0f;
     color.a = 1.0f;
     
     TEVec3 position;
-    position.x = 240.0f;
+    position.x = 80.0f;
     position.y = 240.0f;
     position.z = 0.0f;
     
