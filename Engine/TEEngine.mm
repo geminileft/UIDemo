@@ -74,6 +74,7 @@ void TEEngine::initialize() {
     mWindow.rootViewController = vc;
     //mRenderer = new TERendererOGL1(layer);
     mRenderer = new TERendererOGL2(view.layer);
+    TEComponentRender::setSharedRenderer(mRenderer);
     //TEManagerGraphics::initialize(view.layer, mWidth, mHeight);
     this->start();
     mRunnable = [[TERunnable alloc] initWithGame:this];

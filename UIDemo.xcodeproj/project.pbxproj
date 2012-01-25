@@ -42,6 +42,8 @@
 		D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A714AD90AA00FDBB5F /* colorbox.vs */; };
 		D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A814AD90AA00FDBB5F /* texture.fs */; };
 		D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A914AD90AA00FDBB5F /* texture.vs */; };
+		D7C5BA0814CF984F0012DF62 /* RenderFirst.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0714CF984F0012DF62 /* RenderFirst.mm */; };
+		D7C5BA0E14CF9B3F0012DF62 /* TEComponentRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0D14CF9B3F0012DF62 /* TEComponentRenderer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +112,9 @@
 		D70D44A714AD90AA00FDBB5F /* colorbox.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = colorbox.vs; sourceTree = "<group>"; };
 		D70D44A814AD90AA00FDBB5F /* texture.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.fs; sourceTree = "<group>"; };
 		D70D44A914AD90AA00FDBB5F /* texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
+		D7C5BA0614CF983C0012DF62 /* RenderFirst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderFirst.h; sourceTree = "<group>"; };
+		D7C5BA0714CF984F0012DF62 /* RenderFirst.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderFirst.mm; sourceTree = "<group>"; };
+		D7C5BA0D14CF9B3F0012DF62 /* TEComponentRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEComponentRenderer.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +199,7 @@
 				D7092E4514AD008E00E1D6EE /* TEComponent.cpp */,
 				D7092E0A14ACFD1C00E1D6EE /* TEComponent.h */,
 				D7092E1114ACFD9A00E1D6EE /* TEComponentRender.h */,
+				D7C5BA0D14CF9B3F0012DF62 /* TEComponentRenderer.cpp */,
 				D7092E3014ACFECE00E1D6EE /* TEComponentSound.h */,
 				D7092E3114ACFECE00E1D6EE /* TEComponentSound.mm */,
 				D7092E1814ACFDE600E1D6EE /* TEComponentTouch.cpp */,
@@ -244,6 +250,8 @@
 			children = (
 				D7092DFB14ACFB6600E1D6EE /* UIDemo.h */,
 				D7092DFC14ACFB7000E1D6EE /* UIDemo.mm */,
+				D7C5BA0614CF983C0012DF62 /* RenderFirst.h */,
+				D7C5BA0714CF984F0012DF62 /* RenderFirst.mm */,
 			);
 			name = Game;
 			path = ../Game;
@@ -349,6 +357,8 @@
 				D7092E4114ACFF5400E1D6EE /* TEManagerFile.mm in Sources */,
 				D7092E4414ACFF7700E1D6EE /* TEUtilMatrix.cpp in Sources */,
 				D7092E4614AD008E00E1D6EE /* TEComponent.cpp in Sources */,
+				D7C5BA0814CF984F0012DF62 /* RenderFirst.mm in Sources */,
+				D7C5BA0E14CF9B3F0012DF62 /* TEComponentRenderer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
