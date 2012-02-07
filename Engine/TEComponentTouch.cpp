@@ -5,6 +5,7 @@
 TEComponentTouch::TEComponentTouch(TESize size) {
     mSize = size;
 }
+
 bool TEComponentTouch::containsPoint(TEPoint point) {
     bool returnValue = false;
     TEPoint position = mParent->position;

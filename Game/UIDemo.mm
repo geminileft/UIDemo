@@ -26,7 +26,7 @@ void UIDemo::start() {
     go->position.y = 80.0f;
     go->addComponent(rf);
     addGameObject(go);
-        
+    
     go = new TEGameObject();
     TEPoint position;
     position.x = 0.0f;
