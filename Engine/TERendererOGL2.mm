@@ -26,8 +26,9 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     [mContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:(CAEAGLLayer*)eaglLayer];
     glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, mRenderBuffer);
     
-    //glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &mWidth);
-    //glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &mHeight);
+    int screenWidth, screenHeight;
+    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &screenWidth);
+    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &screenHeight);
     mWidth = width;
     mHeight = height;
     
@@ -37,7 +38,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
     [EAGLContext setCurrentContext:mContext];
     
-    glViewport(0, 0, mWidth, mHeight);
+    glViewport(0, 0, width, height);
     
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -175,6 +176,7 @@ uint TERendererOGL2::switchProgram(String programName) {
     float view[16];
     float rotate[16];
     float zDepth = (float)mHeight / 2;
+    //float zDepth = (float)mHeight;
     const float ratio = (float)mWidth/(float)mHeight;
     //todo: figure out why zDepth doesn't quite work with frustum and translate being same
     TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -ratio, ratio, -1, 1, 1.0f, 1000.0f);
