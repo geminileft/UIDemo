@@ -29,6 +29,10 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     int screenWidth, screenHeight;
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &screenWidth);
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &screenHeight);
+    
+    if (screenHeight > screenWidth) {
+        
+    }
     mWidth = width;
     mHeight = height;
     
