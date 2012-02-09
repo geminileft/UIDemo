@@ -18,10 +18,10 @@ private:
     TERunnable* mRunnable;
     UIWindow* mWindow;
     TERenderer* mRenderer;
+    float mGameWidth;
+    float mGameHeight;
 
 public:
-	int mHeight;
-	int mWidth;
 
     TEEngine(int width, int height);
     virtual void start() = 0;

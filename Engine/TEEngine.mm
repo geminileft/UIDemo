@@ -16,8 +16,8 @@
 #include "TERendererOGL2.h"
     
 TEEngine::TEEngine(int width, int height) {
-	mWidth = width;
-	mHeight = height;
+	mGameWidth = width;
+	mGameHeight = height;
     TEManagerTouch* touchManager = TEManagerTouch::sharedManager();
     TEManagerSound* soundManager = TEManagerSound::sharedManager();
     TEManagerRender* renderManager = TEManagerRender::sharedManager();
@@ -57,8 +57,8 @@ void TEEngine::addGameObject(TEGameObject* gameObject) {
 
 TESize TEEngine::getScreenSize() const {
 	TESize size;
-	size.width = mWidth;
-	size.height = mHeight;
+	size.width = mGameWidth;
+	size.height = mGameHeight;
 	return size;
 }
 
@@ -70,7 +70,7 @@ void TEEngine::initialize() {
     vc.view = view;
     mWindow.rootViewController = vc;
     //mRenderer = new TERendererOGL1(layer);
-    mRenderer = new TERendererOGL2(view.layer, mWidth, mHeight);
+    mRenderer = new TERendererOGL2(view.layer, mGameWidth, mGameHeight);
     TEComponentRender::setSharedRenderer(mRenderer);
     this->start();
     mRunnable = [[TERunnable alloc] initWithGame:this];
