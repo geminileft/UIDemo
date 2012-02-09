@@ -13,6 +13,9 @@
 static std::map<String, uint> mPrograms;
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
+    mWidth = width;
+    mHeight = height;
+
     // Make sure this is the right version!
     mContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     if (!mContext || ![EAGLContext setCurrentContext:mContext]) {
@@ -30,11 +33,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &screenWidth);
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &screenHeight);
     
-    if (screenHeight > screenWidth) {
-        
-    }
-    mWidth = width;
-    mHeight = height;
+    setScreenAdjustment(screenWidth, screenHeight);
     
     if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
     }
@@ -179,18 +178,18 @@ uint TERendererOGL2::switchProgram(String programName) {
     float trans[16];
     float view[16];
     float rotate[16];
-    float zDepth = (float)mHeight / 2;
+    float zDepth = (float)(mHeight * mScreenRatio) / 2;
     //float zDepth = (float)mHeight;
     const float ratio = (float)mWidth/(float)mHeight;
     //todo: figure out why zDepth doesn't quite work with frustum and translate being same
     TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -ratio, ratio, -1, 1, 1.0f, 1000.0f);
     TEUtilMatrix::setTranslate(&trans[0], ColumnMajor, 0.0f, 0.0f, -zDepth);
-    TEUtilMatrix::setRotateZ(&rotate[0], ColumnMajor, deg2rad(-90.0f));
-    TEUtilMatrix::multiply(&view[0], ColumnMajor, rotate, trans);
+    //TEUtilMatrix::setRotateZ(&rotate[0], ColumnMajor, deg2rad(-90.0f));
+    //TEUtilMatrix::multiply(&view[0], ColumnMajor, rotate, trans);
     uint mProjHandle  = TERendererOGL2::getUniformLocation(program, "uProjectionMatrix");
     uint mViewHandle = TERendererOGL2::getUniformLocation(program, "uViewMatrix");
     glUniformMatrix4fv(mProjHandle, 1, GL_FALSE, &proj[0]);
-    glUniformMatrix4fv(mViewHandle, 1, GL_FALSE, &view[0]);
+    glUniformMatrix4fv(mViewHandle, 1, GL_FALSE, &trans[0]);
     return program;
 }
 
@@ -226,3 +225,21 @@ uint TERendererOGL2::getUniformLocation(uint program, String uniform) {
     return glGetUniformLocation(program, uniform.c_str());
 }
 
+void TERendererOGL2::setScreenAdjustment(int width, int height) {
+    mRotate = false;
+    if (mWidth > mHeight) {
+        //game in landscape
+        if (width > height) {
+            //device in landscape
+        } else {
+        }
+    } else {
+        //game in portrait
+        if (width > height) {
+            //device in landscape
+        } else {
+            mScreenRatio = (float)mWidth / (float)width;
+            NSLog(@"ratio %.2f", mScreenRatio);
+        }
+    }
+}

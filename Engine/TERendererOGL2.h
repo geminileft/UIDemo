@@ -19,6 +19,8 @@ private:
     int mHeight;
     uint mTexture;
     std::map<uint, std::list<String> > mProgramAttributes;
+    float mScreenRatio;
+    bool mRotate;
     
     void addProgramAttribute(uint program, String attribute);
     uint switchProgram(String programName);
@@ -27,6 +29,7 @@ private:
     
     void renderBasic();
     void renderTexture();
+    void setScreenAdjustment(int width, int height);
     
 public:
     TERendererOGL2(CALayer* eaglLayer, uint width, uint height);
