@@ -12,7 +12,7 @@
 
 static std::map<String, uint> mPrograms;
 
-TERendererOGL2::TERendererOGL2(CALayer* eaglLayer) {
+TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     // Make sure this is the right version!
     mContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     if (!mContext || ![EAGLContext setCurrentContext:mContext]) {
@@ -26,8 +26,10 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer) {
     [mContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:(CAEAGLLayer*)eaglLayer];
     glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, mRenderBuffer);
     
-    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &mWidth);
-    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &mHeight);
+    //glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &mWidth);
+    //glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &mHeight);
+    mWidth = width;
+    mHeight = height;
     
     if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
     }
@@ -171,18 +173,18 @@ uint TERendererOGL2::switchProgram(String programName) {
     float proj[16];
     float trans[16];
     float view[16];
+    float rotate[16];
     float zDepth = (float)mHeight / 2;
     const float ratio = (float)mWidth/(float)mHeight;
     //todo: figure out why zDepth doesn't quite work with frustum and translate being same
     TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -ratio, ratio, -1, 1, 1.0f, 1000.0f);
-    TEUtilMatrix::setIdentity(&trans[0]);
     TEUtilMatrix::setTranslate(&trans[0], ColumnMajor, -0.0f, -0.0f, -zDepth);
-    float rotate[16];
-    TEUtilMatrix::setRotateZ(&rotate[0], ColumnMajor, deg2rad(45.0f));
+    TEUtilMatrix::setRotateZ(&rotate[0], ColumnMajor, deg2rad(90.0f));
+    TEUtilMatrix::multiply(&view[0], ColumnMajor, rotate, trans);
     uint mProjHandle  = TERendererOGL2::getUniformLocation(program, "uProjectionMatrix");
     uint mViewHandle = TERendererOGL2::getUniformLocation(program, "uViewMatrix");
     glUniformMatrix4fv(mProjHandle, 1, GL_FALSE, &proj[0]);
-    glUniformMatrix4fv(mViewHandle, 1, GL_FALSE, &trans[0]);
+    glUniformMatrix4fv(mViewHandle, 1, GL_FALSE, &view[0]);
     return program;
 }
 

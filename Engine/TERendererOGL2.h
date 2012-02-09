@@ -29,7 +29,7 @@ private:
     void renderTexture();
     
 public:
-    TERendererOGL2(CALayer* eaglLayer);
+    TERendererOGL2(CALayer* eaglLayer, uint width, uint height);
     virtual void render();
     static uint loadShader(uint shaderType, String source);
     static int createProgram(String programName, String vertexSource, String fragmentSource);
