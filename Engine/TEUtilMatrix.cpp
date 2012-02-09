@@ -1,8 +1,17 @@
+//
+//  TEUtilMatrix.cpp
+//  TouchEngine
+//
+//  Created by developer on 11/9/11.
+//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//
+
 #include "TEUtilMatrix.h"
+#include <cmath>
 
 /*
  row major | column major
-
+ 
  row[0] = column[0];
  row[1] = column[4];
  row[2] = column[8];
@@ -22,8 +31,8 @@
  row[13] = column[7];
  row[14] = column[11];
  row[15] = column[15];
-
-*/
+ 
+ */
 
 void TEUtilMatrix::setFrustum(float* matrix, MatrixStorageFormat format, float left, float right, float bottom, float top, float near, float far) {
     matrix[0] = (2.0f * near) / (right - left);
@@ -144,4 +153,43 @@ void TEUtilMatrix::transpose(float* matrix) {
     matrix[15] = transpose[15];
     
 }
+
+void TEUtilMatrix::setRotateZ(float* matrix, MatrixStorageFormat format, float radianAngle) {
+    matrix[0] = cos(radianAngle);
+    matrix[1] = -sin(radianAngle);
+    matrix[2] = 0;
+    matrix[3] = 0;
+    
+    matrix[4] = sin(radianAngle);
+    matrix[5] = cos(radianAngle);
+    matrix[6] = 0;
+    matrix[7] = 0;
+    
+    matrix[8] = 0;
+    matrix[9] = 0;
+    matrix[10] = 1;
+    matrix[11] = 0;
+    
+    matrix[12] = 0;
+    matrix[13] = 0;
+    matrix[14] = 0;
+    matrix[15] = 1;
+    
+    if (format == ColumnMajor)
+        transpose(matrix);
+}
+
+void TEUtilMatrix::multiply(float* matrix, MatrixStorageFormat format, float* a, float* b) {
+	for (int row = 0;row < 4; ++row) {
+		for (int col = 0;col < 4; ++col) {
+			matrix[col * 4 + row] = 0;
+			for (int i = 0;i < 4; ++i) {
+				matrix[col * 4 + row] += a[row * 4 + i] * b[i * 4 + col];
+			}
+		}
+	}
+    if (format == ColumnMajor)
+        transpose(matrix);
+}
+
 

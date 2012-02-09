@@ -124,4 +124,8 @@ struct TERenderPolygonPrimative {
 
 typedef TERenderPolygonPrimative TERenderPolygonPrimative;
 
+inline double deg2rad(double deg) {
+    return (deg * 3.14159265358979323846f / 180.0f);
+}
+
 #endif

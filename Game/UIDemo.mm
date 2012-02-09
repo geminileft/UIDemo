@@ -12,19 +12,10 @@ void UIDemo::start() {
     TESize size = TESizeMake(160.0f, 160.0f);
     TEColor4 color = TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f);
     RenderBox* rf = new RenderBox(size, color);
-    go->position.x = 80.0f;
-    go->position.y = 240.0f;
+    go->position.x = -80.0f;
+    go->position.y = 0.0f;
     go->addComponent(rf);
     go->addComponent(new TouchSingle(size));
-    addGameObject(go);
-    
-    go = new TEGameObject();
-    size = TESizeMake(160.0f, 160.0f);
-    color = TEColor4Make(1.0f, 0.0f, 1.0f, 1.0f);
-    rf = new RenderBox(size, color);
-    go->position.x = 80.0f;
-    go->position.y = 80.0f;
-    go->addComponent(rf);
     addGameObject(go);
     
     go = new TEGameObject();
@@ -32,8 +23,8 @@ void UIDemo::start() {
     position.x = 0.0f;
     position.y = 0.0f;
     RenderImage* ri = new RenderImage(@"table_background.png", position, size);
-    go->position.x = 240.0f;
-    go->position.y = 240.0f;
+    go->position.x = 80.0f;
+    go->position.y = 0.0f;
     go->addComponent(ri);
     addGameObject(go);
 }
