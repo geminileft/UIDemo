@@ -41,7 +41,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
     [EAGLContext setCurrentContext:mContext];
     
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, mWidth, mHeight);
     
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
