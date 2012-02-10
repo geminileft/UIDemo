@@ -179,17 +179,18 @@ uint TERendererOGL2::switchProgram(String programName) {
     float view[16];
     float rotate[16];
     float zDepth = (float)(mHeight * mScreenRatio) / 2;
+    const float angle = (mRotate) ? -90.0f : 0.0f;
     //float zDepth = (float)mHeight;
     const float ratio = (float)mWidth/(float)mHeight;
     //todo: figure out why zDepth doesn't quite work with frustum and translate being same
     TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -ratio, ratio, -1, 1, 1.0f, 1000.0f);
     TEUtilMatrix::setTranslate(&trans[0], ColumnMajor, 0.0f, 0.0f, -zDepth);
-    //TEUtilMatrix::setRotateZ(&rotate[0], ColumnMajor, deg2rad(-90.0f));
-    //TEUtilMatrix::multiply(&view[0], ColumnMajor, rotate, trans);
+    TEUtilMatrix::setRotateZ(&rotate[0], ColumnMajor, deg2rad(angle));
+    TEUtilMatrix::multiply(&view[0], ColumnMajor, rotate, trans);
     uint mProjHandle  = TERendererOGL2::getUniformLocation(program, "uProjectionMatrix");
     uint mViewHandle = TERendererOGL2::getUniformLocation(program, "uViewMatrix");
     glUniformMatrix4fv(mProjHandle, 1, GL_FALSE, &proj[0]);
-    glUniformMatrix4fv(mViewHandle, 1, GL_FALSE, &trans[0]);
+    glUniformMatrix4fv(mViewHandle, 1, GL_FALSE, &view[0]);
     return program;
 }
 
@@ -232,11 +233,14 @@ void TERendererOGL2::setScreenAdjustment(int width, int height) {
         if (width > height) {
             //device in landscape
         } else {
+            mRotate = true;
+            mScreenRatio = (float)mWidth / (float)height;
         }
     } else {
         //game in portrait
         if (width > height) {
             //device in landscape
+            mRotate = true;
         } else {
             mScreenRatio = (float)mWidth / (float)width;
             NSLog(@"ratio %.2f", mScreenRatio);

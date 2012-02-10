@@ -20,7 +20,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 */
-    mGame = new UIDemo(320 * 2.0f, 480 * 2.0f);
+    //mGame = new UIDemo(480, 320);
+    mGame = new UIDemo(320 * 2, 480 * 2);
     mGame->initialize();
 
     return YES;
