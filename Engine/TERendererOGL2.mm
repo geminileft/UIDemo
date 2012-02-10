@@ -184,6 +184,7 @@ uint TERendererOGL2::switchProgram(String programName) {
     const float ratio = (float)mWidth/(float)mHeight;
     //todo: figure out why zDepth doesn't quite work with frustum and translate being same
     TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -ratio, ratio, -1, 1, 1.0f, 1000.0f);
+    //TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -1, 1, -ratio, ratio, 1.0f, 1000.0f);
     TEUtilMatrix::setTranslate(&trans[0], ColumnMajor, 0.0f, 0.0f, -zDepth);
     TEUtilMatrix::setRotateZ(&rotate[0], ColumnMajor, deg2rad(angle));
     TEUtilMatrix::multiply(&view[0], ColumnMajor, rotate, trans);
