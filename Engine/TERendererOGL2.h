@@ -19,7 +19,6 @@ private:
     int mHeight;
     uint mTexture;
     std::map<uint, std::list<String> > mProgramAttributes;
-    float mScreenRatio;
     bool mRotate;
     
     void addProgramAttribute(uint program, String attribute);

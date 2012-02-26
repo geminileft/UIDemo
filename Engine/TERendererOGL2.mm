@@ -182,7 +182,7 @@ uint TERendererOGL2::switchProgram(String programName) {
     float zDepth;
     float ratio;
     
-    zDepth = (float)(mHeight * mScreenRatio) / 2;
+    zDepth = (float)mHeight / 2;
     ratio = (float)mWidth/(float)mHeight;
     if (mRotate) {
         angle = -90.0f;
@@ -242,16 +242,12 @@ void TERendererOGL2::setScreenAdjustment(int width, int height) {
             //device in landscape
         } else {
             mRotate = true;
-            mScreenRatio = (float)mWidth / (float)height;
         }
     } else {
         //game in portrait
         if (width > height) {
             //device in landscape
             mRotate = true;
-        } else {
-            mScreenRatio = (float)mWidth / (float)width;
-            NSLog(@"ratio %.2f", mScreenRatio);
         }
     }
     NSLog(@"done");
