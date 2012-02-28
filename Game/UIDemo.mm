@@ -22,7 +22,7 @@ void UIDemo::start() {
     TEPoint position;
     position.x = 0.0f;
     position.y = 0.0f;
-    RenderImage* ri = new RenderImage(@"bitmap_font_sample_inverted_alpha.png", position, size);
+    RenderImage* ri = new RenderImage(@"characters.png", position, size);
     go->position.x = 80.0f;
     go->position.y = 0.0f;
     go->addComponent(ri);
