@@ -9,6 +9,8 @@
 
 class TERendererOGL2 : public TERenderer {
 private:
+    bool mUseRenderToTexture;
+    
     EAGLContext* mContext;
     uint mRenderBuffer;
     uint mFrameBuffer;

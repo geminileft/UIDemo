@@ -13,6 +13,8 @@
 static std::map<String, uint> mPrograms;
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
+    mUseRenderToTexture = YES;
+    
     mWidth = width;
     mHeight = height;
 
@@ -93,7 +95,6 @@ void TERendererOGL2::render() {
 void TERendererOGL2::renderBasic() {
     String programName = "basic";
     uint program = switchProgram(programName);
-    
     //glBindFramebuffer(GL_FRAMEBUFFER, mTextureFrameBuffer);
     //glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
     //glClear(GL_COLOR_BUFFER_BIT);
@@ -124,21 +125,6 @@ void TERendererOGL2::renderTexture() {
     uint simpleProgram = switchProgram(programName);
     
     glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
-    uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
-    uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
-    uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
-    
-    TERenderTexturePrimative* primatives = getRenderPrimatives();
-    uint count = getPrimativeCount();
-    TEVec3 vec;
-    for (int i = 0;i < count;++i) {
-        vec = primatives[i].position;
-        glBindTexture(GL_TEXTURE_2D, primatives[i].textureName);
-        glVertexAttrib2f(coordsHandle, vec.x, vec.y);
-        glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
-        glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-    }
 
     float textureBuffer[8]; 
     textureBuffer[0] = 0.0f;//left
@@ -164,14 +150,30 @@ void TERendererOGL2::renderTexture() {
 	vertexBuffer[5] = topY;
 	vertexBuffer[6] = leftX;
 	vertexBuffer[7] = topY;
-        
+    
     /*
-    glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
-    glVertexAttrib2f(coordsHandle, 0, 0);
-    glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, textureBuffer);
-    glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, vertexBuffer);
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-    */
+     glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
+     glVertexAttrib2f(coordsHandle, 0, 0);
+     glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, textureBuffer);
+     glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, vertexBuffer);
+     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+     */
+
+    uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
+    uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
+    uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
+    
+    TERenderTexturePrimative* primatives = getRenderPrimatives();
+    uint count = getPrimativeCount();
+    TEVec3 vec;
+    for (int i = 0;i < count;++i) {
+        vec = primatives[i].position;
+        glBindTexture(GL_TEXTURE_2D, primatives[i].textureName);
+        glVertexAttrib2f(coordsHandle, vec.x, vec.y);
+        glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
+        glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    }
     stopProgram(programName);
 }
 
