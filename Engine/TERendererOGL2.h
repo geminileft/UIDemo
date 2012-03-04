@@ -19,6 +19,7 @@ private:
     uint maTextureHandle;
     uint mTextureFrameBuffer;
     uint mTextureFrameBufferHandle;
+    float mTextureLength;
     int mWidth;
     int mHeight;
     uint mTexture;
@@ -26,7 +27,7 @@ private:
     bool mRotate;
     
     void addProgramAttribute(uint program, String attribute);
-    uint switchProgram(String programName);
+    uint switchProgram(String programName, float renderWidth, float renderHeight);
     void stopProgram(String programName);
     static void checkGlError(String op);
     

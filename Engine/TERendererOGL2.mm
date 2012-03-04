@@ -14,7 +14,7 @@ static std::map<String, uint> mPrograms;
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     mUseRenderToTexture = NO;
-    
+    mTextureLength = 256;
     mWidth = width;
     mHeight = height;
 
@@ -31,7 +31,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     *******************************/
     glGenTextures(1, &mTextureFrameBufferHandle);
     glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mTextureLength, mTextureLength, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);    
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -89,20 +89,38 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
 void TERendererOGL2::render() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+    if (mUseRenderToTexture) {
+        glBindFramebuffer(GL_FRAMEBUFFER, mTextureFrameBuffer);
+        glViewport(0, 0, mTextureLength, mTextureLength);
+        glClearColor(0, 1, 0, 0.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+    } else {
+        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
     renderBasic();
+    if (mUseRenderToTexture) {
+        glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
+        glViewport(0, 0, mWidth, mHeight);
+        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
     renderTexture();
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 
 void TERendererOGL2::renderBasic() {
     String programName = "basic";
-    uint program = switchProgram(programName);
+    float width;
+    float height;
     if (mUseRenderToTexture) {
-        glBindFramebuffer(GL_FRAMEBUFFER, mTextureFrameBuffer);
-        glViewport(0, 0, 1024, 1024);
-        glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        width = mTextureLength;
+        height = mTextureLength;
+    } else {
+        width = mWidth;
+        height = mHeight;
     }
+    uint program = switchProgram(programName, width, height);
     uint m_a_positionHandle = TERendererOGL2::getAttributeLocation(program, "aVertices");
     uint colorHandle = TERendererOGL2::getUniformLocation(program, "aColor");
     uint posHandle = TERendererOGL2::getAttributeLocation(program, "aPosition");
@@ -119,16 +137,12 @@ void TERendererOGL2::renderBasic() {
         glVertexAttrib2f(posHandle, p.position.x, p.position.y);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);        
     }
-    
-    glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
-    //glViewport(0, 0, mHeight, mWidth);
-
     stopProgram(programName);
 }
 
 void TERendererOGL2::renderTexture() {
     String programName = "texture";
-    uint simpleProgram = switchProgram(programName);
+    uint simpleProgram = switchProgram(programName, mWidth, mHeight);
     
     glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
     //glViewport(0, 0, mWidth, mHeight);
@@ -144,7 +158,7 @@ void TERendererOGL2::renderTexture() {
     textureBuffer[7] = 0.0f;//bottom
     
     float vertexBuffer[8];
-    const float var = 80;
+    const float var = mTextureLength / 2;
     const float leftX = -var;
     const float bottomY = -var;
     const float rightX = var;
@@ -227,7 +241,7 @@ uint TERendererOGL2::loadShader(uint shaderType, String source) {
     return shader;
 }
 
-uint TERendererOGL2::switchProgram(String programName) {
+uint TERendererOGL2::switchProgram(String programName, float renderWidth, float renderHeight) {
     uint program = mPrograms[programName];
     glUseProgram(program);
     checkGlError("glUseProgram");
@@ -243,15 +257,16 @@ uint TERendererOGL2::switchProgram(String programName) {
     }
     
     float proj[16];
-    float trans[16];
+    //float trans[16];
     float view[16];
-    float rotate[16];
+    //float rotate[16];
     float angle;
     float zDepth;
     float ratio;
     
-    zDepth = (float)mHeight / 2;
-    ratio = (float)mWidth/(float)mHeight;
+    zDepth = (float)renderHeight / 2;
+    //zDepth = mHeight;
+    ratio = (float)renderWidth/(float)renderHeight;
     if (mRotate) {
         angle = -90.0f;
         TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -1, 1, -ratio, ratio, 1.0f, 1000.0f);
@@ -260,9 +275,12 @@ uint TERendererOGL2::switchProgram(String programName) {
         TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -ratio, ratio, -1, 1, 1.0f, 1000.0f);
     }
 
+    /*
     TEUtilMatrix::setTranslate(&trans[0], ColumnMajor, 0.0f, 0.0f, -zDepth);
     TEUtilMatrix::setRotateZ(&rotate[0], ColumnMajor, deg2rad(angle));
     TEUtilMatrix::multiply(&view[0], ColumnMajor, rotate, trans);
+    */
+    TEUtilMatrix::setTranslate(&view[0], ColumnMajor, 0.0f, 0.0f, -zDepth);
     uint mProjHandle  = TERendererOGL2::getUniformLocation(program, "uProjectionMatrix");
     uint mViewHandle = TERendererOGL2::getUniformLocation(program, "uViewMatrix");
     glUniformMatrix4fv(mProjHandle, 1, GL_FALSE, &proj[0]);
