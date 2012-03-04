@@ -12,7 +12,7 @@ void UIDemo::start() {
     TESize size = TESizeMake(160.0f, 160.0f);
     TEColor4 color = TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f);
     RenderBox* rf = new RenderBox(size, color);
-    go->position.x = -80.0f;
+    go->position.x = 0.0f;
     go->position.y = 0.0f;
     go->addComponent(rf);
     go->addComponent(new TouchSingle(size));

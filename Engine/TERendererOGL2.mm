@@ -85,17 +85,6 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
 void TERendererOGL2::render() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    
-    /*
-    glBindFramebufferOES(GL_FRAMEBUFFER_OES, mTextureFrameBuffer);
-    glClearColor(1, 0, 0, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
-    renderBasic();
-
-    glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    */
     renderBasic();
     renderTexture();
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
@@ -104,6 +93,10 @@ void TERendererOGL2::render() {
 void TERendererOGL2::renderBasic() {
     String programName = "basic";
     uint program = switchProgram(programName);
+    
+    //glBindFramebuffer(GL_FRAMEBUFFER, mTextureFrameBuffer);
+    //glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    //glClear(GL_COLOR_BUFFER_BIT);
     
     uint m_a_positionHandle = TERendererOGL2::getAttributeLocation(program, "aVertices");
     uint colorHandle = TERendererOGL2::getUniformLocation(program, "aColor");
@@ -122,6 +115,7 @@ void TERendererOGL2::renderBasic() {
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);        
     }
     
+    
     stopProgram(programName);
 }
 
@@ -129,6 +123,7 @@ void TERendererOGL2::renderTexture() {
     String programName = "texture";
     uint simpleProgram = switchProgram(programName);
     
+    glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
     uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
     uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
     uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
@@ -144,9 +139,7 @@ void TERendererOGL2::renderTexture() {
         glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
-    /*
-    glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
-    glVertexAttrib2f(coordsHandle, 0, 0);
+
     float textureBuffer[8]; 
     textureBuffer[0] = 0.0f;//left
     textureBuffer[1] = 1.0f;//top
@@ -156,12 +149,12 @@ void TERendererOGL2::renderTexture() {
     textureBuffer[5] = 0.0f;//bottom
     textureBuffer[6] = 0.0f;//left
     textureBuffer[7] = 0.0f;//bottom
-
+    
     float vertexBuffer[8];
-    const float leftX = -240.0;
-    const float bottomY = -160.0;
-    const float rightX = 0.0;
-    const float topY = 240.0;
+    const float leftX = -80.0;
+    const float bottomY = -80.0;
+    const float rightX = 80.0;
+    const float topY = 80.0;
     
     vertexBuffer[0] = leftX;
 	vertexBuffer[1] = bottomY;
@@ -171,7 +164,10 @@ void TERendererOGL2::renderTexture() {
 	vertexBuffer[5] = topY;
 	vertexBuffer[6] = leftX;
 	vertexBuffer[7] = topY;
-
+        
+    /*
+    glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
+    glVertexAttrib2f(coordsHandle, 0, 0);
     glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, textureBuffer);
     glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, vertexBuffer);
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
