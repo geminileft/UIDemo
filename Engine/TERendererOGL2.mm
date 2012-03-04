@@ -21,36 +21,41 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     if (!mContext || ![EAGLContext setCurrentContext:mContext]) {
     }
     
-    glGenFramebuffersOES(1, &mFrameBuffer);
-    glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
+    glGenFramebuffers(1, &mFrameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
     
     /******************************
     NEEDED FOR RENDER TO TEXTURE
     *******************************/
-    glGenFramebuffersOES(1, &mTextureFrameBuffer);
-    glBindFramebufferOES(GL_FRAMEBUFFER_OES, mTextureFrameBuffer);
+    glGenFramebuffers(1, &mTextureFrameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER_OES, mTextureFrameBuffer);
     glGenTextures(1, &mTextureFrameBufferHandle);
+    glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 
                  1024, 1024, 0, GL_RGBA, 
                  GL_UNSIGNED_BYTE, NULL);
-    glFramebufferTexture2DOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_TEXTURE_2D, mTextureFrameBufferHandle, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mTextureFrameBufferHandle, 0);
+    GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER); 
+    if(status != GL_FRAMEBUFFER_COMPLETE) {
+        NSLog(@"failed to make complete framebuffer object %x", status);
+    }
     /******************************
      NEEDED FOR RENDER TO TEXTURE
      *******************************/
 
-    glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
     
-    glGenRenderbuffersOES(1, &mRenderBuffer);
-    glBindRenderbufferOES(GL_RENDERBUFFER_OES, mRenderBuffer);
-    [mContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:(CAEAGLLayer*)eaglLayer];
-    glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, mRenderBuffer);    
-    if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
+    glGenRenderbuffers(1, &mRenderBuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, mRenderBuffer);
+    [mContext renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer*)eaglLayer];
+    glFramebufferRenderbufferOES(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, mRenderBuffer);    
+    if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
         NSLog(@"Failed!!");
     }
     
     int screenWidth, screenHeight;
-    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &screenWidth);
-    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &screenHeight);
+    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &screenWidth);
+    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &screenHeight);
     setScreenAdjustment(screenWidth, screenHeight);
     
     //glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
@@ -80,15 +85,20 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
 void TERendererOGL2::render() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-/*
+    
+    /*
     glBindFramebufferOES(GL_FRAMEBUFFER_OES, mTextureFrameBuffer);
     glClearColor(1, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
-*/
+    renderBasic();
+
     glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    */
     renderBasic();
     renderTexture();
-    [mContext presentRenderbuffer:GL_RENDERBUFFER_OES];
+    [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 
 void TERendererOGL2::renderBasic() {
