@@ -24,6 +24,22 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glGenFramebuffersOES(1, &mFrameBuffer);
     glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
     
+    /******************************
+    NEEDED FOR RENDER TO TEXTURE
+    *******************************/
+    glGenFramebuffersOES(1, &mTextureFrameBuffer);
+    glBindFramebufferOES(GL_FRAMEBUFFER_OES, mTextureFrameBuffer);
+    glGenTextures(1, &mTextureFrameBufferHandle);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 
+                 1024, 1024, 0, GL_RGBA, 
+                 GL_UNSIGNED_BYTE, NULL);
+    glFramebufferTexture2DOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_TEXTURE_2D, mTextureFrameBufferHandle, 0);
+    /******************************
+     NEEDED FOR RENDER TO TEXTURE
+     *******************************/
+
+    glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
+    
     glGenRenderbuffersOES(1, &mRenderBuffer);
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, mRenderBuffer);
     [mContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:(CAEAGLLayer*)eaglLayer];
@@ -62,7 +78,14 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
 }
 
 void TERendererOGL2::render() {
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+/*
+    glBindFramebufferOES(GL_FRAMEBUFFER_OES, mTextureFrameBuffer);
+    glClearColor(1, 0, 0, 1);
+    glClear(GL_COLOR_BUFFER_BIT);
+*/
+    glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
     renderBasic();
     renderTexture();
     [mContext presentRenderbuffer:GL_RENDERBUFFER_OES];
@@ -111,6 +134,38 @@ void TERendererOGL2::renderTexture() {
         glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
+    /*
+    glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
+    glVertexAttrib2f(coordsHandle, 0, 0);
+    float textureBuffer[8]; 
+    textureBuffer[0] = 0.0f;//left
+    textureBuffer[1] = 1.0f;//top
+    textureBuffer[2] = 1.0f;//right
+    textureBuffer[3] = 1.0f;//top
+    textureBuffer[4] = 1.0f;//right
+    textureBuffer[5] = 0.0f;//bottom
+    textureBuffer[6] = 0.0f;//left
+    textureBuffer[7] = 0.0f;//bottom
+
+    float vertexBuffer[8];
+    const float leftX = -240.0;
+    const float bottomY = -160.0;
+    const float rightX = 0.0;
+    const float topY = 240.0;
+    
+    vertexBuffer[0] = leftX;
+	vertexBuffer[1] = bottomY;
+	vertexBuffer[2] = rightX;
+	vertexBuffer[3] = bottomY;
+	vertexBuffer[4] = rightX;
+	vertexBuffer[5] = topY;
+	vertexBuffer[6] = leftX;
+	vertexBuffer[7] = topY;
+
+    glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, textureBuffer);
+    glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, vertexBuffer);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    */
     stopProgram(programName);
 }
 
@@ -219,7 +274,6 @@ void TERendererOGL2::checkGlError(String op) {
         if (error == GL_INVALID_ENUM) {
             NSLog(@"Bad");
         }
-        NSLog(@"Error!!");
     }
 }
 

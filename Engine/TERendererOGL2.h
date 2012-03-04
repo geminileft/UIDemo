@@ -15,6 +15,8 @@ private:
     uint mCoordsHandle;
     uint maPositionHandle;
     uint maTextureHandle;
+    uint mTextureFrameBuffer;
+    uint mTextureFrameBufferHandle;
     int mWidth;
     int mHeight;
     uint mTexture;
