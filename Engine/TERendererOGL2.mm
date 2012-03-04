@@ -13,7 +13,7 @@
 static std::map<String, uint> mPrograms;
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
-    mUseRenderToTexture = YES;
+    mUseRenderToTexture = NO;
     
     mWidth = width;
     mHeight = height;
@@ -95,10 +95,11 @@ void TERendererOGL2::render() {
 void TERendererOGL2::renderBasic() {
     String programName = "basic";
     uint program = switchProgram(programName);
-    //glBindFramebuffer(GL_FRAMEBUFFER, mTextureFrameBuffer);
-    //glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-    //glClear(GL_COLOR_BUFFER_BIT);
-    
+    if (mUseRenderToTexture) {
+        glBindFramebuffer(GL_FRAMEBUFFER, mTextureFrameBuffer);
+        glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
     uint m_a_positionHandle = TERendererOGL2::getAttributeLocation(program, "aVertices");
     uint colorHandle = TERendererOGL2::getUniformLocation(program, "aColor");
     uint posHandle = TERendererOGL2::getAttributeLocation(program, "aPosition");
