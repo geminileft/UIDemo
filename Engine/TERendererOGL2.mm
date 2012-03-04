@@ -22,27 +22,25 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     }
     
     glGenFramebuffersOES(1, &mFrameBuffer);
-    glGenRenderbuffersOES(1, &mRenderBuffer);
-    
     glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
+    
+    glGenRenderbuffersOES(1, &mRenderBuffer);
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, mRenderBuffer);
     [mContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:(CAEAGLLayer*)eaglLayer];
-    glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, mRenderBuffer);
+    glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, mRenderBuffer);    
+    if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
+        NSLog(@"Failed!!");
+    }
     
     int screenWidth, screenHeight;
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &screenWidth);
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &screenHeight);
-    
     setScreenAdjustment(screenWidth, screenHeight);
     
-    if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
-    }
-    
-    glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
+    //glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
     [EAGLContext setCurrentContext:mContext];
     
     glViewport(0, 0, screenWidth, screenHeight);
-    
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -67,7 +65,6 @@ void TERendererOGL2::render() {
     glClear(GL_COLOR_BUFFER_BIT);
     renderBasic();
     renderTexture();
-    glBindRenderbufferOES(GL_RENDERBUFFER_OES, mRenderBuffer);
     [mContext presentRenderbuffer:GL_RENDERBUFFER_OES];
 }
 
