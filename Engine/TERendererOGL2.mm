@@ -29,13 +29,15 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     /******************************
     NEEDED FOR RENDER TO TEXTURE
     *******************************/
-    glGenFramebuffers(1, &mTextureFrameBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER_OES, mTextureFrameBuffer);
     glGenTextures(1, &mTextureFrameBufferHandle);
     glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 
-                 1024, 1024, 0, GL_RGBA, 
-                 GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, 0);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);    
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glGenFramebuffers(1, &mTextureFrameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER_OES, mTextureFrameBuffer);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mTextureFrameBufferHandle, 0);
     GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER); 
     if(status != GL_FRAMEBUFFER_COMPLETE) {
@@ -97,6 +99,7 @@ void TERendererOGL2::renderBasic() {
     uint program = switchProgram(programName);
     if (mUseRenderToTexture) {
         glBindFramebuffer(GL_FRAMEBUFFER, mTextureFrameBuffer);
+        glViewport(0, 0, 1024, 1024);
         glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
     }
@@ -117,7 +120,9 @@ void TERendererOGL2::renderBasic() {
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);        
     }
     
-    
+    glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
+    //glViewport(0, 0, mHeight, mWidth);
+
     stopProgram(programName);
 }
 
@@ -126,6 +131,7 @@ void TERendererOGL2::renderTexture() {
     uint simpleProgram = switchProgram(programName);
     
     glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
+    //glViewport(0, 0, mWidth, mHeight);
 
     float textureBuffer[8]; 
     textureBuffer[0] = 0.0f;//left
@@ -138,10 +144,11 @@ void TERendererOGL2::renderTexture() {
     textureBuffer[7] = 0.0f;//bottom
     
     float vertexBuffer[8];
-    const float leftX = -80.0;
-    const float bottomY = -80.0;
-    const float rightX = 80.0;
-    const float topY = 80.0;
+    const float var = 80;
+    const float leftX = -var;
+    const float bottomY = -var;
+    const float rightX = var;
+    const float topY = var;
     
     vertexBuffer[0] = leftX;
 	vertexBuffer[1] = bottomY;
@@ -152,18 +159,18 @@ void TERendererOGL2::renderTexture() {
 	vertexBuffer[6] = leftX;
 	vertexBuffer[7] = topY;
     
-    /*
-     glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
-     glVertexAttrib2f(coordsHandle, 0, 0);
-     glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, textureBuffer);
-     glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, vertexBuffer);
-     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-     */
-
     uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
     uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
     uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
     
+    if (mUseRenderToTexture) {
+        glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
+        glVertexAttrib2f(coordsHandle, 0, 0);
+        glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, textureBuffer);
+        glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, vertexBuffer);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    }
+
     TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
     TEVec3 vec;
