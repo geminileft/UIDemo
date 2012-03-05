@@ -13,7 +13,7 @@
 static std::map<String, uint> mPrograms;
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
-    mUseRenderToTexture = NO;
+    mUseRenderToTexture = YES;
     mTextureLength = 256;
     mWidth = width;
     mHeight = height;
@@ -143,9 +143,13 @@ void TERendererOGL2::renderBasic() {
 void TERendererOGL2::renderTexture() {
     String programName = "texture";
     uint simpleProgram = switchProgram(programName, mWidth, mHeight);
+    uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
+    uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
+    uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
+    uint alphaHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uAlpha");
     
     glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
-    //glViewport(0, 0, mWidth, mHeight);
+    glViewport(0, 0, mWidth, mHeight);
 
     float textureBuffer[8]; 
     textureBuffer[0] = 0.0f;//left
@@ -172,16 +176,13 @@ void TERendererOGL2::renderTexture() {
 	vertexBuffer[5] = topY;
 	vertexBuffer[6] = leftX;
 	vertexBuffer[7] = topY;
-    
-    uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
-    uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
-    uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
-    
+        
     if (mUseRenderToTexture) {
         glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
         glVertexAttrib2f(coordsHandle, 0, 0);
         glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, textureBuffer);
         glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, vertexBuffer);
+        glUniform1f(alphaHandle, 1.0);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
 
@@ -194,6 +195,7 @@ void TERendererOGL2::renderTexture() {
         glVertexAttrib2f(coordsHandle, vec.x, vec.y);
         glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
         glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
+        glUniform1f(alphaHandle, 1.0);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
     stopProgram(programName);
