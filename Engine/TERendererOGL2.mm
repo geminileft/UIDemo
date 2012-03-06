@@ -89,11 +89,12 @@ void TERendererOGL2::render() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     TEFBOTarget target;
-    target.frameBuffer = mTextureFrameBuffer;
     if (mUseRenderToTexture) {
+        target.frameBuffer = mTextureFrameBuffer;
         target.width = mTextureLength;
         target.height = mTextureLength;
     } else {
+        target.frameBuffer = mFrameBuffer;
         target.width = mWidth;
         target.height = mHeight;
     }
@@ -110,7 +111,7 @@ void TERendererOGL2::renderBasic(TEFBOTarget target) {
     uint m_a_positionHandle = TERendererOGL2::getAttributeLocation(program, "aVertices");
     uint colorHandle = TERendererOGL2::getUniformLocation(program, "aColor");
     uint posHandle = TERendererOGL2::getAttributeLocation(program, "aPosition");
-        
+
     uint count = getPolygonCount();
     TERenderPolygonPrimative* primatives = getPolygonPrimatives();
     TERenderPolygonPrimative p;
