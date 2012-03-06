@@ -44,6 +44,7 @@
 		D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A914AD90AA00FDBB5F /* texture.vs */; };
 		D72D7BC514D0B60300C020A1 /* TEManagerTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC314D0B60200C020A1 /* TEManagerTime.cpp */; };
 		D72D7BC814D0B82100C020A1 /* TouchSingle.mm in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC714D0B82100C020A1 /* TouchSingle.mm */; };
+		D740F36C1505AA160061B2FC /* RenderToTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = D740F36B1505AA160061B2FC /* RenderToTexture.mm */; };
 		D74F3C0B14D079E500871B6D /* RenderImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = D74F3C0A14D079E500871B6D /* RenderImage.mm */; };
 		D74F3C0E14D07C2300871B6D /* table_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0D14D07C2300871B6D /* table_background.png */; };
 		D74F3C1014D0828D00871B6D /* spade_ace.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0F14D0828D00871B6D /* spade_ace.png */; };
@@ -123,6 +124,8 @@
 		D72D7BC414D0B60300C020A1 /* TEManagerTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEManagerTime.h; sourceTree = "<group>"; };
 		D72D7BC614D0B80900C020A1 /* TouchSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchSingle.h; sourceTree = "<group>"; };
 		D72D7BC714D0B82100C020A1 /* TouchSingle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchSingle.mm; sourceTree = "<group>"; };
+		D740F36A1505AA160061B2FC /* RenderToTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderToTexture.h; sourceTree = "<group>"; };
+		D740F36B1505AA160061B2FC /* RenderToTexture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderToTexture.mm; sourceTree = "<group>"; };
 		D74F3C0914D079E500871B6D /* RenderImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderImage.h; sourceTree = "<group>"; };
 		D74F3C0A14D079E500871B6D /* RenderImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderImage.mm; sourceTree = "<group>"; };
 		D74F3C0D14D07C2300871B6D /* table_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_background.png; sourceTree = "<group>"; };
@@ -276,6 +279,8 @@
 				D7092DFC14ACFB7000E1D6EE /* UIDemo.mm */,
 				D72D7BC614D0B80900C020A1 /* TouchSingle.h */,
 				D72D7BC714D0B82100C020A1 /* TouchSingle.mm */,
+				D740F36A1505AA160061B2FC /* RenderToTexture.h */,
+				D740F36B1505AA160061B2FC /* RenderToTexture.mm */,
 			);
 			name = Game;
 			path = ../Game;
@@ -402,6 +407,7 @@
 				D74F3C0B14D079E500871B6D /* RenderImage.mm in Sources */,
 				D72D7BC514D0B60300C020A1 /* TEManagerTime.cpp in Sources */,
 				D72D7BC814D0B82100C020A1 /* TouchSingle.mm in Sources */,
+				D740F36C1505AA160061B2FC /* RenderToTexture.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

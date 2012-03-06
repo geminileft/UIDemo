@@ -89,15 +89,6 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
 void TERendererOGL2::render() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    if (mUseRenderToTexture) {
-        glBindFramebuffer(GL_FRAMEBUFFER, mTextureFrameBuffer);
-        glViewport(0, 0, mTextureLength, mTextureLength);
-        glClearColor(0, 1, 0, 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-    } else {
-        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-    }
     renderBasic();
     if (mUseRenderToTexture) {
         glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
@@ -114,6 +105,10 @@ void TERendererOGL2::renderBasic() {
     float width;
     float height;
     if (mUseRenderToTexture) {
+        glBindFramebuffer(GL_FRAMEBUFFER, mTextureFrameBuffer);
+        glViewport(0, 0, mTextureLength, mTextureLength);
+        glClearColor(0, 1, 0, 0.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
         width = mTextureLength;
         height = mTextureLength;
     } else {
@@ -259,16 +254,16 @@ uint TERendererOGL2::switchProgram(String programName, float renderWidth, float 
     }
     
     float proj[16];
-    //float trans[16];
+    float trans[16];
     float view[16];
-    //float rotate[16];
+    float rotate[16];
     float angle;
     float zDepth;
     float ratio;
     
     zDepth = (float)renderHeight / 2;
-    //zDepth = mHeight;
     ratio = (float)renderWidth/(float)renderHeight;
+    
     if (mRotate) {
         angle = -90.0f;
         TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -1, 1, -ratio, ratio, 1.0f, 1000.0f);
@@ -277,12 +272,10 @@ uint TERendererOGL2::switchProgram(String programName, float renderWidth, float 
         TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -ratio, ratio, -1, 1, 1.0f, 1000.0f);
     }
 
-    /*
     TEUtilMatrix::setTranslate(&trans[0], ColumnMajor, 0.0f, 0.0f, -zDepth);
     TEUtilMatrix::setRotateZ(&rotate[0], ColumnMajor, deg2rad(angle));
     TEUtilMatrix::multiply(&view[0], ColumnMajor, rotate, trans);
-    */
-    TEUtilMatrix::setTranslate(&view[0], ColumnMajor, 0.0f, 0.0f, -zDepth);
+
     uint mProjHandle  = TERendererOGL2::getUniformLocation(program, "uProjectionMatrix");
     uint mViewHandle = TERendererOGL2::getUniformLocation(program, "uViewMatrix");
     glUniformMatrix4fv(mProjHandle, 1, GL_FALSE, &proj[0]);
