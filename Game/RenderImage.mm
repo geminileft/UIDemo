@@ -23,10 +23,7 @@ RenderImage::RenderImage(NSString* resourceName, TEPoint position, TESize size) 
 	mVertexBuffer[5] = topY;
 	mVertexBuffer[6] = leftX;
 	mVertexBuffer[7] = topY;
-    /*
-    -|
-    -|
-     */
+
     mTextureBuffer[0] = 0.0f;//left
 	mTextureBuffer[1] = 1.0f;//top
 	mTextureBuffer[2] = 1.0f;//right
@@ -35,16 +32,6 @@ RenderImage::RenderImage(NSString* resourceName, TEPoint position, TESize size) 
 	mTextureBuffer[5] = 0.0f;//bottom
 	mTextureBuffer[6] = 0.0f;//left
 	mTextureBuffer[7] = 0.0f;//bottom
-    /*
-    mTextureBuffer[0] = 0.0f;//left
-	mTextureBuffer[1] = 0.5f;//bottom
-	mTextureBuffer[2] = 0.5f;//right
-	mTextureBuffer[3] = 0.5f;//bottom
-	mTextureBuffer[4] = 0.5f;//right
-	mTextureBuffer[5] = 0.0f;//top
-	mTextureBuffer[6] = 0.0f;//left
-	mTextureBuffer[7] = 0.0f;//top
-    */
 }
 
 void RenderImage::update() {

@@ -9,7 +9,6 @@ UIDemo::UIDemo(int width, int height) : TEEngine(width, height){}
 
 void UIDemo::start() {
     TEGameObject* go = new TEGameObject();
-    //TESize size = TESizeMake(100, 150);
     TESize size = TESizeMake(160, 160);
     TEColor4 color = TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f);
     RenderBox* rf = new RenderBox(size, color);
