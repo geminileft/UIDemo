@@ -65,7 +65,6 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     //glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
     [EAGLContext setCurrentContext:mContext];
     
-    glViewport(0, 0, screenWidth, screenHeight);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -92,7 +91,6 @@ void TERendererOGL2::render() {
     renderBasic();
     if (mUseRenderToTexture) {
         glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
-        glViewport(0, 0, mWidth, mHeight);
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
     }
@@ -106,9 +104,6 @@ void TERendererOGL2::renderBasic() {
     float height;
     if (mUseRenderToTexture) {
         glBindFramebuffer(GL_FRAMEBUFFER, mTextureFrameBuffer);
-        glViewport(0, 0, mTextureLength, mTextureLength);
-        glClearColor(0, 1, 0, 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
         width = mTextureLength;
         height = mTextureLength;
     } else {
@@ -116,6 +111,8 @@ void TERendererOGL2::renderBasic() {
         height = mHeight;
     }
     uint program = switchProgram(programName, width, height);
+    glClearColor(0, 1, 0, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
     uint m_a_positionHandle = TERendererOGL2::getAttributeLocation(program, "aVertices");
     uint colorHandle = TERendererOGL2::getUniformLocation(program, "aColor");
     uint posHandle = TERendererOGL2::getAttributeLocation(program, "aPosition");
@@ -144,7 +141,6 @@ void TERendererOGL2::renderTexture() {
     uint alphaHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uAlpha");
     
     glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
-    glViewport(0, 0, mWidth, mHeight);
 
     float textureBuffer[8]; 
     textureBuffer[0] = 0.0f;//left
@@ -253,6 +249,8 @@ uint TERendererOGL2::switchProgram(String programName, float renderWidth, float 
         }
     }
     
+    glViewport(0, 0, renderWidth, renderHeight);
+
     float proj[16];
     float trans[16];
     float view[16];

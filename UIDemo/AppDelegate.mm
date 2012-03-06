@@ -20,6 +20,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 */
+    //rotating does not work!!
     //mGame = new UIDemo(480, 320);
     mGame = new UIDemo(320, 480);
     mGame->initialize();
