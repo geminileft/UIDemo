@@ -88,29 +88,23 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
 void TERendererOGL2::render() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    renderBasic();
+    TEFBOTarget target;
+    target.frameBuffer = mTextureFrameBuffer;
     if (mUseRenderToTexture) {
-        glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
-        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        target.width = mTextureLength;
+        target.height = mTextureLength;
+    } else {
+        target.width = mWidth;
+        target.height = mHeight;
     }
+    renderBasic(target);
     renderTexture();
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 
-void TERendererOGL2::renderBasic() {
+void TERendererOGL2::renderBasic(TEFBOTarget target) {
     String programName = "basic";
-    float width;
-    float height;
-    if (mUseRenderToTexture) {
-        glBindFramebuffer(GL_FRAMEBUFFER, mTextureFrameBuffer);
-        width = mTextureLength;
-        height = mTextureLength;
-    } else {
-        width = mWidth;
-        height = mHeight;
-    }
-    uint program = switchProgram(programName, width, height);
+    uint program = switchProgram(programName, target);
     glClearColor(0, 1, 0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     uint m_a_positionHandle = TERendererOGL2::getAttributeLocation(program, "aVertices");
@@ -134,13 +128,15 @@ void TERendererOGL2::renderBasic() {
 
 void TERendererOGL2::renderTexture() {
     String programName = "texture";
-    uint simpleProgram = switchProgram(programName, mWidth, mHeight);
+    TEFBOTarget target;
+    target.frameBuffer = mFrameBuffer;
+    target.width = mWidth;
+    target.height = mHeight;
+    uint simpleProgram = switchProgram(programName, target);
     uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
     uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
     uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
     uint alphaHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uAlpha");
-    
-    glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
 
     float textureBuffer[8]; 
     textureBuffer[0] = 0.0f;//left
@@ -234,7 +230,7 @@ uint TERendererOGL2::loadShader(uint shaderType, String source) {
     return shader;
 }
 
-uint TERendererOGL2::switchProgram(String programName, float renderWidth, float renderHeight) {
+uint TERendererOGL2::switchProgram(String programName, TEFBOTarget target) {
     uint program = mPrograms[programName];
     glUseProgram(program);
     checkGlError("glUseProgram");
@@ -249,7 +245,8 @@ uint TERendererOGL2::switchProgram(String programName, float renderWidth, float 
         }
     }
     
-    glViewport(0, 0, renderWidth, renderHeight);
+    glViewport(0, 0, target.width, target.height);
+    glBindFramebuffer(GL_FRAMEBUFFER, target.frameBuffer);
 
     float proj[16];
     float trans[16];
@@ -259,8 +256,8 @@ uint TERendererOGL2::switchProgram(String programName, float renderWidth, float 
     float zDepth;
     float ratio;
     
-    zDepth = (float)renderHeight / 2;
-    ratio = (float)renderWidth/(float)renderHeight;
+    zDepth = (float)target.height / 2;
+    ratio = (float)target.width/(float)target.height;
     
     if (mRotate) {
         angle = -90.0f;

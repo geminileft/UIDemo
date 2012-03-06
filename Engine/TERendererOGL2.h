@@ -7,6 +7,14 @@
 #include <list>
 #import <QuartzCore/QuartzCore.h>
 
+struct TEFBOTarget {
+    uint frameBuffer;
+    float width;
+    float height;
+};
+
+typedef struct TEFBOTarget TEFBOTarget;
+
 class TERendererOGL2 : public TERenderer {
 private:
     bool mUseRenderToTexture;
@@ -27,11 +35,11 @@ private:
     bool mRotate;
     
     void addProgramAttribute(uint program, String attribute);
-    uint switchProgram(String programName, float renderWidth, float renderHeight);
+    uint switchProgram(String programName, TEFBOTarget target);
     void stopProgram(String programName);
     static void checkGlError(String op);
     
-    void renderBasic();
+    void renderBasic(TEFBOTarget target);
     void renderTexture();
     void setScreenAdjustment(int width, int height);
     
