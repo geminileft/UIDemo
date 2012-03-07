@@ -92,7 +92,8 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
 }
 
 void TERendererOGL2::render() {
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+    //glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     TEFBOTarget target;
     target.frameBuffer = mTextureFrameBuffer;

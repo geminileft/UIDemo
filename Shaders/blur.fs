@@ -10,7 +10,6 @@ uniform float uWidth;
 uniform float uHeight;
 
 void main() {
-    /*
     // Gaussian kernel
     // 1 2 1
     // 2 4 2
@@ -26,7 +25,7 @@ void main() {
     kernel[6] = 1.0/16.0;
     kernel[7] = 2.0/16.0;
     kernel[8] = 1.0/16.0;
-     */
+
      // Mean kernel
      // 1 1 1
      // 1 1 1
@@ -66,7 +65,7 @@ void main() {
     // 2  0  0
     // 0 -1  0
     // 0  0 -1
-    
+    /*
     float kernel[KERNEL_SIZE];
     kernel[0] = -0.5/16.0;
     kernel[1] = 0.0/16.0;
@@ -77,6 +76,7 @@ void main() {
     kernel[6] = 0.0/16.0;
     kernel[7] = 0.0/16.0;
     kernel[8] = 2.0/16.0;
+    */
     /*
     // Laplacian kernel
     // 0  1  0
