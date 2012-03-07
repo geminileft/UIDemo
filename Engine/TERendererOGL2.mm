@@ -79,6 +79,12 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     addProgramAttribute(program, "aVertices");
     addProgramAttribute(program, "aTextureCoords");
     
+    vertexSource = TEManagerFile::readFileContents("texture.vs");
+    fragmentSource = TEManagerFile::readFileContents("blur.fs");
+    program = TERendererOGL2::createProgram("blur", vertexSource, fragmentSource);
+    addProgramAttribute(program, "aVertices");
+    addProgramAttribute(program, "aTextureCoords");
+    
     vertexSource = TEManagerFile::readFileContents("colorbox.vs");
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
     program = TERendererOGL2::createProgram("basic", vertexSource, fragmentSource);
@@ -89,17 +95,16 @@ void TERendererOGL2::render() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     TEFBOTarget target;
-    if (mUseRenderToTexture) {
-        target.frameBuffer = mTextureFrameBuffer;
-        target.width = mTextureLength;
-        target.height = mTextureLength;
-    } else {
-        target.frameBuffer = mFrameBuffer;
-        target.width = mWidth;
-        target.height = mHeight;
-    }
+    target.frameBuffer = mTextureFrameBuffer;
+    target.width = mTextureLength;
+    target.height = mTextureLength;
     renderBasic(target);
-    renderTexture();
+    target.frameBuffer = mFrameBuffer;
+    target.width = mWidth;
+    target.height = mHeight;
+    //renderBasic(target);
+    //renderTexture(target);
+    renderBlur(target);
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 
@@ -108,7 +113,7 @@ void TERendererOGL2::renderBasic(TEFBOTarget target) {
     uint program = switchProgram(programName, target);
     glClearColor(0, 1, 0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    uint m_a_positionHandle = TERendererOGL2::getAttributeLocation(program, "aVertices");
+    uint vertexHandle = TERendererOGL2::getAttributeLocation(program, "aVertices");
     uint colorHandle = TERendererOGL2::getUniformLocation(program, "aColor");
     uint posHandle = TERendererOGL2::getAttributeLocation(program, "aPosition");
 
@@ -119,7 +124,7 @@ void TERendererOGL2::renderBasic(TEFBOTarget target) {
     for (int i = 0;i < count;++i) {
         p = primatives[i];
 
-        glVertexAttribPointer(m_a_positionHandle, 2, GL_FLOAT, GL_FALSE, 0, &p.vertexBuffer[0]);
+        glVertexAttribPointer(vertexHandle, 2, GL_FLOAT, GL_FALSE, 0, &p.vertexBuffer[0]);
         glUniform4f(colorHandle, p.color.r, p.color.g, p.color.b, p.color.a);
         glVertexAttrib2f(posHandle, p.position.x, p.position.y);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);        
@@ -127,18 +132,15 @@ void TERendererOGL2::renderBasic(TEFBOTarget target) {
     stopProgram(programName);
 }
 
-void TERendererOGL2::renderTexture() {
+void TERendererOGL2::renderTexture(TEFBOTarget target) {
     String programName = "texture";
-    TEFBOTarget target;
-    target.frameBuffer = mFrameBuffer;
-    target.width = mWidth;
-    target.height = mHeight;
     uint simpleProgram = switchProgram(programName, target);
     uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
     uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
     uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
     uint alphaHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uAlpha");
-
+    
+    /*
     float textureBuffer[8]; 
     textureBuffer[0] = 0.0f;//left
     textureBuffer[1] = 1.0f;//top
@@ -151,9 +153,9 @@ void TERendererOGL2::renderTexture() {
     
     float vertexBuffer[8];
     const float var = mTextureLength / 2;
-    const float leftX = -var;
+    const float leftX = -var - 80;
     const float bottomY = -var;
-    const float rightX = var;
+    const float rightX = var - 80;
     const float topY = var;
     
     vertexBuffer[0] = leftX;
@@ -164,7 +166,7 @@ void TERendererOGL2::renderTexture() {
 	vertexBuffer[5] = topY;
 	vertexBuffer[6] = leftX;
 	vertexBuffer[7] = topY;
-        
+    
     if (mUseRenderToTexture) {
         glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
         glVertexAttrib2f(coordsHandle, 0, 0);
@@ -173,7 +175,8 @@ void TERendererOGL2::renderTexture() {
         glUniform1f(alphaHandle, 1.0);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
-
+    */
+    
     TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
     TEVec3 vec;
@@ -184,6 +187,67 @@ void TERendererOGL2::renderTexture() {
         glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
         glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
         glUniform1f(alphaHandle, 1.0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    }
+    stopProgram(programName);
+}
+
+void TERendererOGL2::renderBlur(TEFBOTarget target) {
+    String programName = "blur";
+    uint simpleProgram = switchProgram(programName, target);
+    uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
+    uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
+    uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
+    uint widthHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uWidth");
+    uint heightHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uHeight");
+    /*
+    float textureBuffer[8]; 
+    textureBuffer[0] = 0.0f;//left
+    textureBuffer[1] = 1.0f;//top
+    textureBuffer[2] = 1.0f;//right
+    textureBuffer[3] = 1.0f;//top
+    textureBuffer[4] = 1.0f;//right
+    textureBuffer[5] = 0.0f;//bottom
+    textureBuffer[6] = 0.0f;//left
+    textureBuffer[7] = 0.0f;//bottom
+    
+    float vertexBuffer[8];
+    const float var = mTextureLength / 2;
+    const float leftX = -var - 80;
+    const float bottomY = -var;
+    const float rightX = var - 80;
+    const float topY = var;
+    
+    vertexBuffer[0] = leftX;
+	vertexBuffer[1] = bottomY;
+	vertexBuffer[2] = rightX;
+	vertexBuffer[3] = bottomY;
+	vertexBuffer[4] = rightX;
+	vertexBuffer[5] = topY;
+	vertexBuffer[6] = leftX;
+	vertexBuffer[7] = topY;
+    
+    if (mUseRenderToTexture) {
+        glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
+        glVertexAttrib2f(coordsHandle, 0, 0);
+        glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, textureBuffer);
+        glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, vertexBuffer);
+        glUniform1f(alphaHandle, 1.0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    }
+    */
+    
+    TERenderTexturePrimative* primatives = getRenderPrimatives();
+    uint count = getPrimativeCount();
+    TEVec3 vec;
+    for (int i = 0;i < count;++i) {
+        vec = primatives[i].position;
+        glBindTexture(GL_TEXTURE_2D, primatives[i].textureName);
+        glVertexAttrib2f(coordsHandle, vec.x, vec.y);
+        glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
+        glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
+        glUniform1f(widthHandle, 1024.0);
+        glUniform1f(heightHandle, 1024.0);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
     stopProgram(programName);

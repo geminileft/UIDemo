@@ -40,7 +40,8 @@ private:
     static void checkGlError(String op);
     
     void renderBasic(TEFBOTarget target);
-    void renderTexture();
+    void renderTexture(TEFBOTarget target);
+    void renderBlur(TEFBOTarget target);
     void setScreenAdjustment(int width, int height);
     
 public:
