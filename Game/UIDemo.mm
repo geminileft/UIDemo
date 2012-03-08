@@ -35,7 +35,7 @@ void UIDemo::start() {
     position.x = 0.0f;
     position.y = 0.0f;
     
-    RenderImage* ri = new RenderImage(@"manroc.png", position, size);
+    RenderImage* ri = new RenderImage(@"olympic.jpg", position, size);
     //RenderImage* ri = new RenderImage(@"bitmap_font_sample_inverted_alpha.png", position, size);
     go->position.x = 80.0f;
     go->position.y = 0.0f;
