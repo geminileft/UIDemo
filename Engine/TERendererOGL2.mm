@@ -79,7 +79,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     addProgramAttribute(program, "aVertices");
     addProgramAttribute(program, "aTextureCoords");
     
-    vertexSource = TEManagerFile::readFileContents("texture.vs");
+    vertexSource = TEManagerFile::readFileContents("blur.vs");
     fragmentSource = TEManagerFile::readFileContents("blur.fs");
     program = TERendererOGL2::createProgram("blur", vertexSource, fragmentSource);
     addProgramAttribute(program, "aVertices");

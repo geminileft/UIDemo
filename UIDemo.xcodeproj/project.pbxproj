@@ -44,7 +44,7 @@
 		D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A914AD90AA00FDBB5F /* texture.vs */; };
 		D7231CB115080C9B00D3E2C1 /* olympic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB015080C9B00D3E2C1 /* olympic.jpg */; };
 		D7231CB6150817F100D3E2C1 /* manroc.png in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB5150817F100D3E2C1 /* manroc.png */; };
-		D7231CC11508325200D3E2C1 /* blur.vs in Sources */ = {isa = PBXBuildFile; fileRef = D7231CC01508325100D3E2C1 /* blur.vs */; };
+		D7231CC11508325200D3E2C1 /* blur.vs in Resources */ = {isa = PBXBuildFile; fileRef = D7231CC01508325100D3E2C1 /* blur.vs */; };
 		D72D7BC514D0B60300C020A1 /* TEManagerTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC314D0B60200C020A1 /* TEManagerTime.cpp */; };
 		D72D7BC814D0B82100C020A1 /* TouchSingle.mm in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC714D0B82100C020A1 /* TouchSingle.mm */; };
 		D740F36C1505AA160061B2FC /* RenderToTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = D740F36B1505AA160061B2FC /* RenderToTexture.mm */; };
@@ -375,6 +375,7 @@
 				D7092DEA14ACF2CE00E1D6EE /* InfoPlist.strings in Resources */,
 				D70D44AA14AD90AA00FDBB5F /* colorbox.fs in Resources */,
 				D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */,
+				D7231CC11508325200D3E2C1 /* blur.vs in Resources */,
 				D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */,
 				D75555971506CFEE00354C0F /* blur.fs in Resources */,
 				D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */,
@@ -423,7 +424,6 @@
 				D72D7BC514D0B60300C020A1 /* TEManagerTime.cpp in Sources */,
 				D72D7BC814D0B82100C020A1 /* TouchSingle.mm in Sources */,
 				D740F36C1505AA160061B2FC /* RenderToTexture.mm in Sources */,
-				D7231CC11508325200D3E2C1 /* blur.vs in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
