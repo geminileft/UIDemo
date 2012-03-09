@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D70090D91509D8DB00436161 /* grow.fs in Resources */ = {isa = PBXBuildFile; fileRef = D70090D81509D8DB00436161 /* grow.fs */; };
 		D7092DE014ACF2CE00E1D6EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7092DDF14ACF2CE00E1D6EE /* UIKit.framework */; };
 		D7092DE214ACF2CE00E1D6EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7092DE114ACF2CE00E1D6EE /* Foundation.framework */; };
 		D7092DE414ACF2CE00E1D6EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7092DE314ACF2CE00E1D6EE /* CoreGraphics.framework */; };
@@ -60,6 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D70090D81509D8DB00436161 /* grow.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = grow.fs; sourceTree = "<group>"; };
 		D7092DDB14ACF2CE00E1D6EE /* UIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7092DDF14ACF2CE00E1D6EE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D7092DE114ACF2CE00E1D6EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -299,6 +301,7 @@
 		D70D44A514AD905C00FDBB5F /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				D70090D81509D8DB00436161 /* grow.fs */,
 				D70D44A614AD90AA00FDBB5F /* colorbox.fs */,
 				D70D44A714AD90AA00FDBB5F /* colorbox.vs */,
 				D70D44A814AD90AA00FDBB5F /* texture.fs */,
@@ -381,6 +384,7 @@
 				D7231CC11508325200D3E2C1 /* blur.vs in Resources */,
 				D7232F8A15086F13008D1337 /* swirl.fs in Resources */,
 				D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */,
+				D70090D91509D8DB00436161 /* grow.fs in Resources */,
 				D75555971506CFEE00354C0F /* blur.fs in Resources */,
 				D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */,
 				D74F3C0E14D07C2300871B6D /* table_background.png in Resources */,

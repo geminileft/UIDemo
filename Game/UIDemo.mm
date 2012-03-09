@@ -30,14 +30,14 @@ void UIDemo::start() {
     
     go = new TEGameObject();
     TEPoint position;
-    size.width = 160;
-    size.height = 160;
+    size.width = 256;
+    size.height = 256;
     position.x = 0.0f;
     position.y = 0.0f;
     
-    RenderImage* ri = new RenderImage(@"bitmap_font_sample_inverted_alpha.png", position, size);
+    RenderImage* ri = new RenderImage(@"olympic.jpg", position, size);
     //RenderImage* ri = new RenderImage(@"bitmap_font_sample_inverted_alpha.png", position, size);
-    go->position.x = 80.0f;
+    go->position.x = 0.0f;
     go->position.y = 0.0f;
     go->addComponent(ri);
     addGameObject(go);

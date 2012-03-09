@@ -14,7 +14,7 @@ static std::map<String, uint> mPrograms;
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     mUseRenderToTexture = YES;
-    mTextureLength = 256;
+    mTextureLength = 1024;
     mWidth = width;
     mHeight = height;
 
@@ -78,7 +78,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     addProgramAttribute(program, "aVertices");
     addProgramAttribute(program, "aTextureCoords");
     
-    vertexSource = TEManagerFile::readFileContents("blur.vs");
+    vertexSource = TEManagerFile::readFileContents("texture.vs");
     fragmentSource = TEManagerFile::readFileContents("blur.fs");
     program = TERendererOGL2::createProgram("blur", vertexSource, fragmentSource);
     addProgramAttribute(program, "aVertices");
@@ -247,8 +247,8 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
         glVertexAttrib2f(coordsHandle, vec.x, vec.y);
         glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
         glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
-        glUniform1f(widthHandle, 1024.0);
-        glUniform1f(heightHandle, 1024.0);
+        glUniform1f(widthHandle, 256.0);
+        glUniform1f(heightHandle, 256.0);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
     stopProgram(programName);
