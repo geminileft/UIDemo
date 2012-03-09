@@ -10,12 +10,13 @@ uniform float uWidth;
 uniform float uHeight;
 
 void main() {
+    float kernel[KERNEL_SIZE];
+
     // Gaussian kernel
     // 1 2 1
     // 2 4 2
     // 1 2 1
-    //*
-    float kernel[KERNEL_SIZE];
+    /*
     kernel[0] = 1.0/16.0;
     kernel[1] = 2.0/16.0;
     kernel[2] = 1.0/16.0;
@@ -25,7 +26,7 @@ void main() {
     kernel[6] = 1.0/16.0;
     kernel[7] = 2.0/16.0;
     kernel[8] = 1.0/16.0;
-    //*/
+    */
      // Mean kernel
      // 1 1 1
      // 1 1 1
@@ -77,30 +78,26 @@ void main() {
     kernel[7] = 0.0/16.0;
     kernel[8] = 2.0/16.0;
     */
-    /*
     // Laplacian kernel
     // 0  1  0
     // 1 -4  1
     // 0  1  0
 
-    float kernel[KERNEL_SIZE];
-    kernel[0] = 0.0/9.0;
-    kernel[1] = 1.0/9.0;
-    kernel[2] = 0.0/9.0;
-    kernel[3] = 1.0/9.0;
-    kernel[4] = -4.0/9.0;
-    kernel[5] = 1.0/9.0;
-    kernel[6] = 0.0/9.0;
-    kernel[7] = 1.0/9.0;
-    kernel[8] = 0.0/9.0;
-    */
+    kernel[0] = -1.0/9.0;
+    kernel[1] = -1.0/9.0;
+    kernel[2] = -1.0/9.0;
+    kernel[3] = -1.0/9.0;
+    kernel[4] = 8.0/9.0;
+    kernel[5] = -1.0/9.0;
+    kernel[6] = -1.0/9.0;
+    kernel[7] = -1.0/9.0;
+    kernel[8] = -1.0/9.0;
     
-    /*
     // Sharpen kernel
     // -1  -1  -1
     // -1   9  -1
     // -1  -1  -1
-    
+    /*
     float kernel[KERNEL_SIZE];
     kernel[0] = -1.0/16.0;
     kernel[1] = -1.0/16.0;

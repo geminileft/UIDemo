@@ -60,9 +60,8 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     int screenWidth, screenHeight;
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &screenWidth);
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &screenHeight);
-    setScreenAdjustment(screenWidth, screenHeight);
+    //setScreenAdjustment(screenWidth, screenHeight);
     
-    //glBindFramebufferOES(GL_FRAMEBUFFER_OES, mFrameBuffer);
     [EAGLContext setCurrentContext:mContext];
     
     glEnable(GL_BLEND);
@@ -92,9 +91,9 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
 }
 
 void TERendererOGL2::render() {
-    //glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     //glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     TEFBOTarget target;
     target.frameBuffer = mTextureFrameBuffer;
@@ -248,8 +247,8 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
         glVertexAttrib2f(coordsHandle, vec.x, vec.y);
         glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
         glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
-        glUniform1f(widthHandle, 256.0);
-        glUniform1f(heightHandle, 256.0);
+        glUniform1f(widthHandle, 1024.0);
+        glUniform1f(heightHandle, 1024.0);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
     stopProgram(programName);
