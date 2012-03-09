@@ -73,7 +73,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     String fragmentSource;
     
     vertexSource = TEManagerFile::readFileContents("texture.vs");
-    fragmentSource = TEManagerFile::readFileContents("texture.fs");
+    fragmentSource = TEManagerFile::readFileContents("grow.fs");
     program = TERendererOGL2::createProgram("texture", vertexSource, fragmentSource);
     addProgramAttribute(program, "aVertices");
     addProgramAttribute(program, "aTextureCoords");
@@ -104,8 +104,8 @@ void TERendererOGL2::render() {
     target.width = mWidth;
     target.height = mHeight;
     //renderBasic(target);
-    //renderTexture(target);
-    renderBlur(target);
+    renderTexture(target);
+    //renderBlur(target);
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 
