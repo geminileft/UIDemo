@@ -45,8 +45,6 @@
 		D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A914AD90AA00FDBB5F /* texture.vs */; };
 		D7231CB115080C9B00D3E2C1 /* olympic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB015080C9B00D3E2C1 /* olympic.jpg */; };
 		D7231CB6150817F100D3E2C1 /* manroc.png in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB5150817F100D3E2C1 /* manroc.png */; };
-		D7231CC11508325200D3E2C1 /* blur.vs in Resources */ = {isa = PBXBuildFile; fileRef = D7231CC01508325100D3E2C1 /* blur.vs */; };
-		D7232F8A15086F13008D1337 /* swirl.fs in Resources */ = {isa = PBXBuildFile; fileRef = D7232F8915086F13008D1337 /* swirl.fs */; };
 		D72D7BC514D0B60300C020A1 /* TEManagerTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC314D0B60200C020A1 /* TEManagerTime.cpp */; };
 		D72D7BC814D0B82100C020A1 /* TouchSingle.mm in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC714D0B82100C020A1 /* TouchSingle.mm */; };
 		D740F36C1505AA160061B2FC /* RenderToTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = D740F36B1505AA160061B2FC /* RenderToTexture.mm */; };
@@ -129,8 +127,6 @@
 		D70D44A914AD90AA00FDBB5F /* texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
 		D7231CB015080C9B00D3E2C1 /* olympic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = olympic.jpg; sourceTree = "<group>"; };
 		D7231CB5150817F100D3E2C1 /* manroc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manroc.png; sourceTree = "<group>"; };
-		D7231CC01508325100D3E2C1 /* blur.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = blur.vs; sourceTree = "<group>"; };
-		D7232F8915086F13008D1337 /* swirl.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = swirl.fs; sourceTree = "<group>"; };
 		D72D7BC314D0B60200C020A1 /* TEManagerTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEManagerTime.cpp; sourceTree = "<group>"; };
 		D72D7BC414D0B60300C020A1 /* TEManagerTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEManagerTime.h; sourceTree = "<group>"; };
 		D72D7BC614D0B80900C020A1 /* TouchSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchSingle.h; sourceTree = "<group>"; };
@@ -307,8 +303,6 @@
 				D70D44A814AD90AA00FDBB5F /* texture.fs */,
 				D70D44A914AD90AA00FDBB5F /* texture.vs */,
 				D75555961506CFEE00354C0F /* blur.fs */,
-				D7231CC01508325100D3E2C1 /* blur.vs */,
-				D7232F8915086F13008D1337 /* swirl.fs */,
 			);
 			name = Shaders;
 			path = ../Shaders;
@@ -381,8 +375,6 @@
 				D7092DEA14ACF2CE00E1D6EE /* InfoPlist.strings in Resources */,
 				D70D44AA14AD90AA00FDBB5F /* colorbox.fs in Resources */,
 				D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */,
-				D7231CC11508325200D3E2C1 /* blur.vs in Resources */,
-				D7232F8A15086F13008D1337 /* swirl.fs in Resources */,
 				D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */,
 				D70090D91509D8DB00436161 /* grow.fs in Resources */,
 				D75555971506CFEE00354C0F /* blur.fs in Resources */,
