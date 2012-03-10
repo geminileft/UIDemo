@@ -56,6 +56,7 @@
 		D79780D114FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */; };
 		D7C5BA0814CF984F0012DF62 /* RenderBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0714CF984F0012DF62 /* RenderBox.mm */; };
 		D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */; };
+		D7FB8718150B3BBF002AD692 /* sketch.fs in Resources */ = {isa = PBXBuildFile; fileRef = D7FB8717150B3BBF002AD692 /* sketch.fs */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +144,7 @@
 		D7C5BA0614CF983C0012DF62 /* RenderBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderBox.h; sourceTree = "<group>"; };
 		D7C5BA0714CF984F0012DF62 /* RenderBox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderBox.mm; sourceTree = "<group>"; };
 		D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEComponentRender.cpp; sourceTree = "<group>"; };
+		D7FB8717150B3BBF002AD692 /* sketch.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sketch.fs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +305,7 @@
 				D70D44A814AD90AA00FDBB5F /* texture.fs */,
 				D70D44A914AD90AA00FDBB5F /* texture.vs */,
 				D75555961506CFEE00354C0F /* blur.fs */,
+				D7FB8717150B3BBF002AD692 /* sketch.fs */,
 			);
 			name = Shaders;
 			path = ../Shaders;
@@ -375,6 +378,7 @@
 				D7092DEA14ACF2CE00E1D6EE /* InfoPlist.strings in Resources */,
 				D70D44AA14AD90AA00FDBB5F /* colorbox.fs in Resources */,
 				D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */,
+				D7FB8718150B3BBF002AD692 /* sketch.fs in Resources */,
 				D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */,
 				D70090D91509D8DB00436161 /* grow.fs in Resources */,
 				D75555971506CFEE00354C0F /* blur.fs in Resources */,
