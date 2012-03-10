@@ -64,6 +64,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     
     [EAGLContext setCurrentContext:mContext];
     
+    glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -199,8 +200,6 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
     uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
     uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
     uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
-    uint widthHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uWidth");
-    uint heightHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uHeight");
     uint offsetHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uOffsets");
     uint kernelHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uKernel");
     /*
@@ -239,9 +238,9 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
     */
-    
-    float step_w = 1.0/256.0;
-    float step_h = 1.0/256.0;
+    const float TEXTURE_SIZE = 256.0;
+    float step_w = 1.0/TEXTURE_SIZE;
+    float step_h = 1.0/TEXTURE_SIZE;
     
     const int OFFSET_COUNT = 9;
     float offsets[OFFSET_COUNT * 2] = {
@@ -308,7 +307,7 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
     // 0  1  0
     // 1 -4  1
     // 0  1  0
-    /*
+
      kernel[0] = -1.0/9.0;
      kernel[1] = -1.0/9.0;
      kernel[2] = -1.0/9.0;
@@ -318,7 +317,7 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
      kernel[6] = -1.0/9.0;
      kernel[7] = -1.0/9.0;
      kernel[8] = -1.0/9.0;
-     */
+
     // Sharpen kernel
     // -1  -1  -1
     // -1   9  -1
@@ -336,6 +335,7 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
      kernel[8] = -1.0/16.0;
      */
     
+    /*
     //unknown
     kernel[0] = -0.5/16.0;
     kernel[1] = 0.0/16.0;
@@ -346,6 +346,7 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
     kernel[6] = 0.0/16.0;
     kernel[7] = 0.0/16.0;
     kernel[8] = 2.0/16.0;
+    */
     
     TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
@@ -356,8 +357,6 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
         glVertexAttrib2f(coordsHandle, vec.x, vec.y);
         glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
         glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
-        glUniform1f(widthHandle, 256.0);
-        glUniform1f(heightHandle, 256.0);
         glUniform2fv(offsetHandle, OFFSET_COUNT, &offsets[0]);
         glUniform1fv(kernelHandle, OFFSET_COUNT, &kernel[0]);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);

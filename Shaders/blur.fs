@@ -6,9 +6,6 @@ uniform sampler2D sTexture;
 
 #define KERNEL_SIZE 9
 
-uniform float uWidth;
-uniform float uHeight;
-
 uniform float uOffsets[KERNEL_SIZE];
 uniform float uKernel[KERNEL_SIZE];
 
@@ -25,7 +22,6 @@ void main() {
     else if( vTextureCoord.s>0.505 )
     {
 		sum = texture2D(sTexture, vTextureCoord.st);
-        sum.a *= 0.5;
     }
     else
     {
