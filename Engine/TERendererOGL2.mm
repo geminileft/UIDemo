@@ -104,8 +104,8 @@ void TERendererOGL2::render() {
     target.width = mWidth;
     target.height = mHeight;
     //renderBasic(target);
-    renderTexture(target);
-    //renderBlur(target);
+    //renderTexture(target);
+    renderBlur(target);
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 
@@ -201,6 +201,7 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
     uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
     uint widthHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uWidth");
     uint heightHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uHeight");
+    uint offsetHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uOffsets");
     /*
     float textureBuffer[8]; 
     textureBuffer[0] = 0.0f;//left
@@ -238,6 +239,22 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
     }
     */
     
+    float step_w = 1.0/256.0;
+    float step_h = 1.0/256.0;
+    
+    const int OFFSET_COUNT = 9;
+    float offsets[OFFSET_COUNT * 2] = {
+        -step_w, -step_h
+        , 0.0, -step_h
+        , step_w, -step_h
+        , -step_w, 0.0
+        , 0.0, 0.0
+        , step_w, 0.0
+        , -step_w, step_h
+        , 0.0, step_h
+        , step_w, step_h
+    };
+    
     TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
     TEVec3 vec;
@@ -249,6 +266,7 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
         glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
         glUniform1f(widthHandle, 256.0);
         glUniform1f(heightHandle, 256.0);
+        glUniform2fv(offsetHandle, OFFSET_COUNT, &offsets[0]);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
     stopProgram(programName);
