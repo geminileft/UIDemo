@@ -73,7 +73,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     String fragmentSource;
     
     vertexSource = TEManagerFile::readFileContents("texture.vs");
-    fragmentSource = TEManagerFile::readFileContents("grow.fs");
+    fragmentSource = TEManagerFile::readFileContents("texture.fs");
     program = TERendererOGL2::createProgram("texture", vertexSource, fragmentSource);
     addProgramAttribute(program, "aVertices");
     addProgramAttribute(program, "aTextureCoords");
@@ -346,7 +346,7 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
     kernel[6] = 0.0/16.0;
     kernel[7] = 0.0/16.0;
     kernel[8] = 2.0/16.0;
-
+    
     TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
     TEVec3 vec;
