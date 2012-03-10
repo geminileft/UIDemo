@@ -202,6 +202,7 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
     uint widthHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uWidth");
     uint heightHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uHeight");
     uint offsetHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uOffsets");
+    uint kernelHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uKernel");
     /*
     float textureBuffer[8]; 
     textureBuffer[0] = 0.0f;//left
@@ -255,6 +256,97 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
         , step_w, step_h
     };
     
+    float kernel[OFFSET_COUNT];
+
+    // Gaussian kernel
+    // 1 2 1
+    // 2 4 2
+    // 1 2 1
+    /*
+     kernel[0] = 1.0/16.0;
+     kernel[1] = 2.0/16.0;
+     kernel[2] = 1.0/16.0;
+     kernel[3] = 2.0/16.0;
+     kernel[4] = 4.0/16.0;
+     kernel[5] = 2.0/16.0;
+     kernel[6] = 1.0/16.0;
+     kernel[7] = 2.0/16.0;
+     kernel[8] = 1.0/16.0;
+     */
+    // Mean kernel
+    // 1 1 1
+    // 1 1 1
+    // 1 1 1
+    /*
+     kernel[0] = 1.0/9.0;
+     kernel[1] = 1.0/9.0;
+     kernel[2] = 1.0/9.0;
+     kernel[3] = 1.0/9.0;
+     kernel[4] = 1.0/9.0;
+     kernel[5] = 1.0/9.0;
+     kernel[6] = 1.0/9.0;
+     kernel[7] = 1.0/9.0;
+     kernel[8] = 1.0/9.0;
+     */
+    // Emboss kernel
+    // 2  0  0
+    // 0 -1  0
+    // 0  0 -1
+    /*
+     kernel[0] = 2.0/9.0;
+     kernel[1] = 0.0/9.0;
+     kernel[2] = 0.0/9.0;
+     kernel[3] = 0.0/9.0;
+     kernel[4] = -1.0/9.0;
+     kernel[5] = 0.0/9.0;
+     kernel[6] = 0.0/9.0;
+     kernel[7] = 0.0/9.0;
+     kernel[8] = -1.0/9.0;
+     */
+
+    // Laplacian kernel
+    // 0  1  0
+    // 1 -4  1
+    // 0  1  0
+    /*
+     kernel[0] = -1.0/9.0;
+     kernel[1] = -1.0/9.0;
+     kernel[2] = -1.0/9.0;
+     kernel[3] = -1.0/9.0;
+     kernel[4] = 8.0/9.0;
+     kernel[5] = -1.0/9.0;
+     kernel[6] = -1.0/9.0;
+     kernel[7] = -1.0/9.0;
+     kernel[8] = -1.0/9.0;
+     */
+    // Sharpen kernel
+    // -1  -1  -1
+    // -1   9  -1
+    // -1  -1  -1
+    /*
+     float kernel[KERNEL_SIZE];
+     kernel[0] = -1.0/16.0;
+     kernel[1] = -1.0/16.0;
+     kernel[2] = -1.0/16.0;
+     kernel[3] = -1.0/16.0;
+     kernel[4] = 9.0/16.0;
+     kernel[5] = -1.0/16.0;
+     kernel[6] = -1.0/16.0;
+     kernel[7] = -1.0/16.0;
+     kernel[8] = -1.0/16.0;
+     */
+    
+    //unknown
+    kernel[0] = -0.5/16.0;
+    kernel[1] = 0.0/16.0;
+    kernel[2] = 0.0/16.0;
+    kernel[3] = 0.0/16.0;
+    kernel[4] = 2.0/16.0;
+    kernel[5] = 0.0/16.0;
+    kernel[6] = 0.0/16.0;
+    kernel[7] = 0.0/16.0;
+    kernel[8] = 2.0/16.0;
+
     TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
     TEVec3 vec;
@@ -267,6 +359,7 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
         glUniform1f(widthHandle, 256.0);
         glUniform1f(heightHandle, 256.0);
         glUniform2fv(offsetHandle, OFFSET_COUNT, &offsets[0]);
+        glUniform1fv(kernelHandle, OFFSET_COUNT, &kernel[0]);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
     stopProgram(programName);
