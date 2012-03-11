@@ -117,7 +117,8 @@ struct TERenderTexturePrimative {
 typedef TERenderTexturePrimative TERenderTexturePrimative;
 
 struct TERenderPolygonPrimative {
-    float vertexBuffer[8];
+    float* vertexBuffer;
+    int vertexCount;
     TEVec3 position;
     TEColor4 color;
 };

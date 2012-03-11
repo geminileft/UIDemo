@@ -12,17 +12,10 @@ void TERenderer::addTexture(uint textureName, float* vertexBuffer, float* textur
     ++mTextureTop;
 }
 
-void TERenderer::addPolygon(float* vertexBuffer, TEVec3 position, TEColor4 color) {
+void TERenderer::addPolygon(float* vertexBuffer, int count, TEVec3 position, TEColor4 color) {
     TERenderPolygonPrimative pp;
-    pp.vertexBuffer[0] = vertexBuffer[0];
-    pp.vertexBuffer[1] = vertexBuffer[1];
-    pp.vertexBuffer[2] = vertexBuffer[2];
-    pp.vertexBuffer[3] = vertexBuffer[3];
-    pp.vertexBuffer[4] = vertexBuffer[4];
-    pp.vertexBuffer[5] = vertexBuffer[5];
-    pp.vertexBuffer[6] = vertexBuffer[6];
-    pp.vertexBuffer[7] = vertexBuffer[7];
-    //pp.vertexBuffer = vertexBuffer;
+    pp.vertexBuffer = vertexBuffer;
+    pp.vertexCount = count;
     pp.position = position;
     pp.color = color;
     mPolygonPrimatives[mPolygonTop] = pp;

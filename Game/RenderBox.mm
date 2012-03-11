@@ -4,19 +4,21 @@
 #include "TEGameObject.h"
 #include "TEEventListener.h"
 
-RenderBox::RenderBox(TESize size, TEColor4 color) :
-    mWidth(size.width), mHeight(size.height), mR(color.r), mG(color.g), mB(color.b), mA(color.a) {}
-
-void RenderBox::update() {
+RenderBox::RenderBox(TESize size, TEColor4 color) : mWidth(size.width), mHeight(size.height), mR(color.r), mG(color.g), mB(color.b), mA(color.a) {
     const float halfHeight = (float)mHeight / 2;
     const float halfWidth = (float)mWidth / 2;
-    
-    float squareVertices[] = {
-        -halfWidth, -halfHeight,//lb
-        halfWidth,  -halfHeight,//rb
-        -halfWidth,  halfHeight,//lt
-        halfWidth,   halfHeight,//rt
-    };
+    mVertices[0] = -halfWidth;
+    mVertices[1] = -halfHeight;
+    mVertices[2] = halfWidth;
+    mVertices[3] = -halfHeight;
+    mVertices[4] = -halfWidth;
+    mVertices[5] = halfHeight;
+    mVertices[6] = halfWidth;
+    mVertices[7] = halfHeight;
+    //draws Bottom Left->Bottom Right->Top Left->Top Right
+}
+
+void RenderBox::update() {
     
     TEColor4 color;
     color.r = mR;
@@ -29,7 +31,7 @@ void RenderBox::update() {
     position.y = mParent->position.y;
     position.z = 0.0f;
     
-    sharedRenderer()->addPolygon(squareVertices, position, color);
+    sharedRenderer()->addPolygon(mVertices, 4, position, color);
 }
 
 void RenderBox::draw() {

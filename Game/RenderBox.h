@@ -14,6 +14,7 @@ private:
     float mG;
     float mB;
     float mA;
+    float mVertices[8];
     
 public:
     RenderBox(TESize size, TEColor4 color);
