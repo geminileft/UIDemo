@@ -45,6 +45,7 @@
 		D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A914AD90AA00FDBB5F /* texture.vs */; };
 		D7231CB115080C9B00D3E2C1 /* olympic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB015080C9B00D3E2C1 /* olympic.jpg */; };
 		D7231CB6150817F100D3E2C1 /* manroc.png in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB5150817F100D3E2C1 /* manroc.png */; };
+		D72C7212150BF5B5007E6449 /* toon.fs in Resources */ = {isa = PBXBuildFile; fileRef = D72C7211150BF5B5007E6449 /* toon.fs */; };
 		D72D7BC514D0B60300C020A1 /* TEManagerTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC314D0B60200C020A1 /* TEManagerTime.cpp */; };
 		D72D7BC814D0B82100C020A1 /* TouchSingle.mm in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC714D0B82100C020A1 /* TouchSingle.mm */; };
 		D740F36C1505AA160061B2FC /* RenderToTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = D740F36B1505AA160061B2FC /* RenderToTexture.mm */; };
@@ -56,7 +57,7 @@
 		D79780D114FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */; };
 		D7C5BA0814CF984F0012DF62 /* RenderBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0714CF984F0012DF62 /* RenderBox.mm */; };
 		D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */; };
-		D7FB8718150B3BBF002AD692 /* sketch.fs in Resources */ = {isa = PBXBuildFile; fileRef = D7FB8717150B3BBF002AD692 /* sketch.fs */; };
+		D7FB871F150B6597002AD692 /* mountain_resize.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7FB871E150B6597002AD692 /* mountain_resize.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +129,7 @@
 		D70D44A914AD90AA00FDBB5F /* texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
 		D7231CB015080C9B00D3E2C1 /* olympic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = olympic.jpg; sourceTree = "<group>"; };
 		D7231CB5150817F100D3E2C1 /* manroc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manroc.png; sourceTree = "<group>"; };
+		D72C7211150BF5B5007E6449 /* toon.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = toon.fs; sourceTree = "<group>"; };
 		D72D7BC314D0B60200C020A1 /* TEManagerTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEManagerTime.cpp; sourceTree = "<group>"; };
 		D72D7BC414D0B60300C020A1 /* TEManagerTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEManagerTime.h; sourceTree = "<group>"; };
 		D72D7BC614D0B80900C020A1 /* TouchSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchSingle.h; sourceTree = "<group>"; };
@@ -144,7 +146,7 @@
 		D7C5BA0614CF983C0012DF62 /* RenderBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderBox.h; sourceTree = "<group>"; };
 		D7C5BA0714CF984F0012DF62 /* RenderBox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderBox.mm; sourceTree = "<group>"; };
 		D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEComponentRender.cpp; sourceTree = "<group>"; };
-		D7FB8717150B3BBF002AD692 /* sketch.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sketch.fs; sourceTree = "<group>"; };
+		D7FB871E150B6597002AD692 /* mountain_resize.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountain_resize.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,7 +307,7 @@
 				D70D44A814AD90AA00FDBB5F /* texture.fs */,
 				D70D44A914AD90AA00FDBB5F /* texture.vs */,
 				D75555961506CFEE00354C0F /* blur.fs */,
-				D7FB8717150B3BBF002AD692 /* sketch.fs */,
+				D72C7211150BF5B5007E6449 /* toon.fs */,
 			);
 			name = Shaders;
 			path = ../Shaders;
@@ -314,6 +316,7 @@
 		D74F3C0C14D07B3200871B6D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D7FB871E150B6597002AD692 /* mountain_resize.jpg */,
 				D7231CB5150817F100D3E2C1 /* manroc.png */,
 				D7231CB015080C9B00D3E2C1 /* olympic.jpg */,
 				D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */,
@@ -377,8 +380,8 @@
 			files = (
 				D7092DEA14ACF2CE00E1D6EE /* InfoPlist.strings in Resources */,
 				D70D44AA14AD90AA00FDBB5F /* colorbox.fs in Resources */,
+				D72C7212150BF5B5007E6449 /* toon.fs in Resources */,
 				D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */,
-				D7FB8718150B3BBF002AD692 /* sketch.fs in Resources */,
 				D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */,
 				D70090D91509D8DB00436161 /* grow.fs in Resources */,
 				D75555971506CFEE00354C0F /* blur.fs in Resources */,
@@ -389,6 +392,7 @@
 				D79780D114FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png in Resources */,
 				D7231CB115080C9B00D3E2C1 /* olympic.jpg in Resources */,
 				D7231CB6150817F100D3E2C1 /* manroc.png in Resources */,
+				D7FB871F150B6597002AD692 /* mountain_resize.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

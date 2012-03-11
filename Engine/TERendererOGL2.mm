@@ -64,6 +64,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     
     [EAGLContext setCurrentContext:mContext];
     
+    glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -79,7 +80,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     addProgramAttribute(program, "aTextureCoords");
     
     vertexSource = TEManagerFile::readFileContents("texture.vs");
-    fragmentSource = TEManagerFile::readFileContents("blur.fs");
+    fragmentSource = TEManagerFile::readFileContents("toon.fs");
     program = TERendererOGL2::createProgram("blur", vertexSource, fragmentSource);
     addProgramAttribute(program, "aVertices");
     addProgramAttribute(program, "aTextureCoords");
@@ -301,7 +302,6 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
      kernel[7] = 0.0/9.0;
      kernel[8] = -1.0/9.0;
      */
-
     // Laplacian kernel
     // 0  1  0
     // 1 -4  1
@@ -322,18 +322,16 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
     // -1   9  -1
     // -1  -1  -1
     /*
-     float kernel[KERNEL_SIZE];
-     kernel[0] = -1.0/16.0;
-     kernel[1] = -1.0/16.0;
-     kernel[2] = -1.0/16.0;
-     kernel[3] = -1.0/16.0;
-     kernel[4] = 9.0/16.0;
-     kernel[5] = -1.0/16.0;
-     kernel[6] = -1.0/16.0;
-     kernel[7] = -1.0/16.0;
-     kernel[8] = -1.0/16.0;
-     */
-    
+     kernel[0] = 0.0/9.0;
+     kernel[1] = -1.0/9.0;
+     kernel[2] = 0.0/9.0;
+     kernel[3] = -1.0/9.0;
+     kernel[4] = 5.0/9.0;
+     kernel[5] = -1.0/9.0;
+     kernel[6] = 0.0/9.0;
+     kernel[7] = -1.0/9.0;
+     kernel[8] = 0.0/9.0;
+    */
     /*
     //unknown
     kernel[0] = -0.5/16.0;
