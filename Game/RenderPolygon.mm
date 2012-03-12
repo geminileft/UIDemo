@@ -4,6 +4,9 @@
 #include "TEGameObject.h"
 #include "TEEventListener.h"
 
+/*
+RenderPolygon::RenderPolygon() {}
+
 RenderPolygon::RenderPolygon(TESize size, TEColor4 color) {
     const float halfHeight = (float)size.height / 2;
     const float halfWidth = (float)size.width / 2;
@@ -23,6 +26,7 @@ RenderPolygon::RenderPolygon(TESize size, TEColor4 color) {
     setVertices(&vertices[0], vertexCount);
     setColor(color);
 }
+*/
 
 void RenderPolygon::update() {
     

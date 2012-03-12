@@ -15,8 +15,29 @@ void UIDemo::start() {
     go = new TEGameObject();
     
     size = TESizeMake(160, 160);
+    
+    const float halfHeight = (float)size.height / 2;
+    const float halfWidth = (float)size.width / 2;
+    const int vertexCount = 5;
+    float vertices[10];
+    vertices[0] = -halfWidth;
+    vertices[1] = -halfHeight;
+    vertices[2] = halfWidth;
+    vertices[3] = -halfHeight;
+    vertices[4] = halfWidth;
+    vertices[5] = halfHeight;
+    vertices[6] = -halfWidth;
+    vertices[7] = halfHeight;
+    vertices[8] = -halfWidth;
+    vertices[9] = -halfHeight;
+
     TEColor4 color = TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f);
-    RenderPolygon* rf = new RenderPolygon(size, color);
+    //RenderPolygon* rf = new RenderPolygon(size, color);
+    RenderPolygon* rf = new RenderPolygon;
+
+    rf->setVertices(&vertices[0], vertexCount);
+    rf->setColor(color);
+
     
     RenderToTexture* rtt = new RenderToTexture();
     
