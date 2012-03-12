@@ -4,9 +4,10 @@
 #include "TEGameObject.h"
 #include "TEEventListener.h"
 
-RenderPolygon::RenderPolygon(TESize size, TEColor4 color) : mWidth(size.width), mHeight(size.height), mR(color.r), mG(color.g), mB(color.b), mA(color.a) {
+RenderPolygon::RenderPolygon(TESize size, TEColor4 color) : mWidth(size.width), mHeight(size.height), mR(color.r), mG(color.g), mB(color.b), mA(color.a), mVertexCount(5) {
     const float halfHeight = (float)mHeight / 2;
     const float halfWidth = (float)mWidth / 2;
+    mVertices = (float*)malloc(mVertexCount * 2);
     mVertices[0] = -halfWidth;
     mVertices[1] = -halfHeight;
     mVertices[2] = halfWidth;
@@ -33,7 +34,7 @@ void RenderPolygon::update() {
     position.y = mParent->position.y;
     position.z = 0.0f;
     
-    sharedRenderer()->addPolygon(mVertices, 5, position, color);
+    sharedRenderer()->addPolygon(mVertices, mVertexCount, position, color);
 }
 
 void RenderPolygon::draw() {
@@ -42,3 +43,11 @@ void RenderPolygon::draw() {
 void RenderPolygon::moveToTopListener() {
 	getManager()->moveComponentToTop(this);
 };
+
+void RenderPolygon::setColor(TEColor4 color) {
+    mR = color.r;
+    mG = color.g;
+    mB = color.b;
+    mA = color.a;
+}
+

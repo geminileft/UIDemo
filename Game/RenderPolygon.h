@@ -14,12 +14,14 @@ private:
     float mG;
     float mB;
     float mA;
-    float mVertices[10];
+    int mVertexCount;
+    float *mVertices;
 
 public:
     RenderPolygon(TESize size, TEColor4 color);
     virtual void update();
     virtual void draw();
 	void moveToTopListener();
+    void setColor(TEColor4 color);
 };
 #endif
