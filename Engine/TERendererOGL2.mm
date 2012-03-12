@@ -129,7 +129,7 @@ void TERendererOGL2::renderBasic(TEFBOTarget target) {
         glVertexAttribPointer(vertexHandle, 2, GL_FLOAT, GL_FALSE, 0, &p.vertexBuffer[0]);
         glUniform4f(colorHandle, p.color.r, p.color.g, p.color.b, p.color.a);
         glVertexAttrib2f(posHandle, p.position.x, p.position.y);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, p.vertexCount);        
+        glDrawArrays(GL_TRIANGLE_FAN, 0, p.vertexCount);        
     }
     stopProgram(programName);
 }

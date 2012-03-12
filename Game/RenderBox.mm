@@ -11,10 +11,12 @@ RenderBox::RenderBox(TESize size, TEColor4 color) : mWidth(size.width), mHeight(
     mVertices[1] = -halfHeight;
     mVertices[2] = halfWidth;
     mVertices[3] = -halfHeight;
-    mVertices[4] = -halfWidth;
+    mVertices[4] = halfWidth;
     mVertices[5] = halfHeight;
-    mVertices[6] = halfWidth;
+    mVertices[6] = -halfWidth;
     mVertices[7] = halfHeight;
+    mVertices[8] = -halfWidth;
+    mVertices[9] = -halfHeight;
     //draws Bottom Left->Bottom Right->Top Left->Top Right
 }
 
@@ -31,7 +33,7 @@ void RenderBox::update() {
     position.y = mParent->position.y;
     position.z = 0.0f;
     
-    sharedRenderer()->addPolygon(mVertices, 4, position, color);
+    sharedRenderer()->addPolygon(mVertices, 5, position, color);
 }
 
 void RenderBox::draw() {
