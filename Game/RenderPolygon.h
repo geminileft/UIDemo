@@ -8,8 +8,6 @@ class TEUtilTexture;
 
 class RenderPolygon : public TEComponentRender {
 private:
-	float mWidth;
-	float mHeight;
     float mR;
     float mG;
     float mB;
@@ -19,6 +17,7 @@ private:
 
 public:
     RenderPolygon(TESize size, TEColor4 color);
+    ~RenderPolygon();
     virtual void update();
     virtual void draw();
 	void moveToTopListener();
