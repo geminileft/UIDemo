@@ -4,22 +4,23 @@
 #include "TEGameObject.h"
 #include "TEEventListener.h"
 
-RenderPolygon::RenderPolygon(TESize size, TEColor4 color) : mVertexCount(5) {
+RenderPolygon::RenderPolygon(TESize size, TEColor4 color) {
     const float halfHeight = (float)size.height / 2;
     const float halfWidth = (float)size.width / 2;
-    mVertices = (float*)malloc(sizeof(float) * mVertexCount * 2);
-    mVertices[0] = -halfWidth;
-    mVertices[1] = -halfHeight;
-    mVertices[2] = halfWidth;
-    mVertices[3] = -halfHeight;
-    mVertices[4] = halfWidth;
-    mVertices[5] = halfHeight;
-    mVertices[6] = -halfWidth;
-    mVertices[7] = halfHeight;
-    mVertices[8] = -halfWidth;
-    mVertices[9] = -halfHeight;
-    //draws Bottom Left->Bottom Right->Top Left->Top Right
+    const int vertexCount = 5;
+    float vertices[10];
+    vertices[0] = -halfWidth;
+    vertices[1] = -halfHeight;
+    vertices[2] = halfWidth;
+    vertices[3] = -halfHeight;
+    vertices[4] = halfWidth;
+    vertices[5] = halfHeight;
+    vertices[6] = -halfWidth;
+    vertices[7] = halfHeight;
+    vertices[8] = -halfWidth;
+    vertices[9] = -halfHeight;
     
+    setVertices(&vertices[0], vertexCount);
     setColor(color);
 }
 
@@ -53,6 +54,14 @@ void RenderPolygon::setColor(TEColor4 color) {
     mA = color.a;
 }
 
+void RenderPolygon::setVertices(float* vertices, int vertexCount) {
+    int memSize = vertexCount * 2 * sizeof(float);
+    mVertices = (float*)malloc(memSize);
+    memcpy(mVertices, vertices, memSize);
+    mVertexCount = vertexCount;
+}
+
+
 RenderPolygon::~RenderPolygon() {
-    //free(mVertices);
+    free(mVertices);
 }

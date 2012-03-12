@@ -22,5 +22,6 @@ public:
     virtual void draw();
 	void moveToTopListener();
     void setColor(TEColor4 color);
+    void setVertices(float* vertices, int vertexCount);
 };
 #endif
