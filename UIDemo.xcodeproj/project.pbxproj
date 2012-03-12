@@ -43,6 +43,7 @@
 		D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A714AD90AA00FDBB5F /* colorbox.vs */; };
 		D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A814AD90AA00FDBB5F /* texture.fs */; };
 		D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A914AD90AA00FDBB5F /* texture.vs */; };
+		D71AE5FB150DB05F00772199 /* RenderPolygon.mm in Sources */ = {isa = PBXBuildFile; fileRef = D71AE5FA150DB05F00772199 /* RenderPolygon.mm */; };
 		D7231CB115080C9B00D3E2C1 /* olympic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB015080C9B00D3E2C1 /* olympic.jpg */; };
 		D7231CB6150817F100D3E2C1 /* manroc.png in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB5150817F100D3E2C1 /* manroc.png */; };
 		D72C7212150BF5B5007E6449 /* toon.fs in Resources */ = {isa = PBXBuildFile; fileRef = D72C7211150BF5B5007E6449 /* toon.fs */; };
@@ -127,6 +128,8 @@
 		D70D44A714AD90AA00FDBB5F /* colorbox.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = colorbox.vs; sourceTree = "<group>"; };
 		D70D44A814AD90AA00FDBB5F /* texture.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.fs; sourceTree = "<group>"; };
 		D70D44A914AD90AA00FDBB5F /* texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
+		D71AE5F8150DB05000772199 /* RenderPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderPolygon.h; sourceTree = "<group>"; };
+		D71AE5FA150DB05F00772199 /* RenderPolygon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderPolygon.mm; sourceTree = "<group>"; };
 		D7231CB015080C9B00D3E2C1 /* olympic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = olympic.jpg; sourceTree = "<group>"; };
 		D7231CB5150817F100D3E2C1 /* manroc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manroc.png; sourceTree = "<group>"; };
 		D72C7211150BF5B5007E6449 /* toon.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = toon.fs; sourceTree = "<group>"; };
@@ -287,12 +290,14 @@
 				D7C5BA0714CF984F0012DF62 /* RenderBox.mm */,
 				D74F3C0914D079E500871B6D /* RenderImage.h */,
 				D74F3C0A14D079E500871B6D /* RenderImage.mm */,
-				D7092DFB14ACFB6600E1D6EE /* UIDemo.h */,
-				D7092DFC14ACFB7000E1D6EE /* UIDemo.mm */,
-				D72D7BC614D0B80900C020A1 /* TouchSingle.h */,
-				D72D7BC714D0B82100C020A1 /* TouchSingle.mm */,
+				D71AE5FA150DB05F00772199 /* RenderPolygon.mm */,
+				D71AE5F8150DB05000772199 /* RenderPolygon.h */,
 				D740F36A1505AA160061B2FC /* RenderToTexture.h */,
 				D740F36B1505AA160061B2FC /* RenderToTexture.mm */,
+				D72D7BC614D0B80900C020A1 /* TouchSingle.h */,
+				D72D7BC714D0B82100C020A1 /* TouchSingle.mm */,
+				D7092DFB14ACFB6600E1D6EE /* UIDemo.h */,
+				D7092DFC14ACFB7000E1D6EE /* UIDemo.mm */,
 			);
 			name = Game;
 			path = ../Game;
@@ -432,6 +437,7 @@
 				D72D7BC514D0B60300C020A1 /* TEManagerTime.cpp in Sources */,
 				D72D7BC814D0B82100C020A1 /* TouchSingle.mm in Sources */,
 				D740F36C1505AA160061B2FC /* RenderToTexture.mm in Sources */,
+				D71AE5FB150DB05F00772199 /* RenderPolygon.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

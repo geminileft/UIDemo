@@ -1,6 +1,6 @@
 #include "UIDemo.h"
 #include "TEGameObject.h"
-#include "RenderBox.h"
+#include "RenderPolygon.h"
 #include "RenderImage.h"
 #include "RenderToTexture.h"
 #include "TEEventListener.h"
@@ -16,7 +16,7 @@ void UIDemo::start() {
     
     size = TESizeMake(160, 160);
     TEColor4 color = TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f);
-    RenderBox* rf = new RenderBox(size, color);
+    RenderPolygon* rf = new RenderPolygon(size, color);
     
     RenderToTexture* rtt = new RenderToTexture();
     
