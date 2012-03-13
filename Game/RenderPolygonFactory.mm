@@ -1,22 +1,30 @@
 #include "RenderPolygonFactory.h"
 #include "RenderPolygon.h"
 
-RenderPolygon* RenderPolygonFactory::roundedRect() {
+RenderPolygon* RenderPolygonFactory::roundedRect(float radius, uint density) {
     TESize size;
-    size = TESizeMake(160, 160);
+    size = TESizeMake(radius * 2, radius * 2);
     
     const float halfHeight = (float)size.height / 2;
     const float halfWidth = (float)size.width / 2;
-    const int vertexCount = 4;
+    const int vertexCount = 4 + density;
     float vertices[vertexCount * 2];
     vertices[0] = 0;
     vertices[1] = 0;
     vertices[2] = 0;
     vertices[3] = halfHeight;
+    float x;
     
-    vertices[4] = halfWidth;
-    vertices[5] = 0;
-    
+    if (density > 0) {
+        float theta = 90 / (density + 1);
+        for (int i = 0; i < density; ++i) {
+            x = (float)radius / (density + 1);
+            vertices[2 * i] = x;
+            vertices[2 * i + 1] = radius / (float)density;
+        }
+    }
+    vertices[(vertexCount - 2) * 2] = halfWidth;
+    vertices[((vertexCount - 2) * 2) + 1] = 0;
     vertices[(vertexCount - 1) * 2] = vertices[0];
     vertices[((vertexCount - 1) * 2) + 1] = vertices[1];
     

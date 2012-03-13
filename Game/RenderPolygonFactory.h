@@ -7,7 +7,7 @@ class RenderPolygon;
 
 class RenderPolygonFactory {
 public:
-    static RenderPolygon* roundedRect();
+    static RenderPolygon* roundedRect(float radius, uint density);
     static RenderPolygon* roundedRectPolygon();
 };
 #endif
