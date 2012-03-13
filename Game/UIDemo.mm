@@ -15,6 +15,21 @@ void UIDemo::start() {
     RenderPolygon* rp;
     TESize size;
     float radius;
+    
+    go = new TEGameObject();
+    
+    color = TEColor4Make(1.0, 0.0, 0.0, 1.0);
+    size = TESizeMake(160, 160);
+    radius = 20.0;
+    rp = RenderPolygonFactory::roundedRect(size, color, radius, (uint)radius);
+    
+    go->position.x = 0.0f;
+    go->position.y = 0.0f;
+    
+    go->addComponent(rp);
+    addGameObject(go);
+
+/*
     go = new TEGameObject();
     
     color = TEColor4Make(1.0, 0.0, 0.0, 1.0);
@@ -37,5 +52,5 @@ void UIDemo::start() {
     
     go->addComponent(rp);
     addGameObject(go);
-    
+*/
 }
