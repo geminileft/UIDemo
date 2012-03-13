@@ -1,5 +1,6 @@
 #include "RenderPolygonFactory.h"
 #include "RenderPolygon.h"
+#include <cmath>
 
 RenderPolygon* RenderPolygonFactory::roundedRect(float radius, uint density) {
     TESize size;
@@ -14,13 +15,19 @@ RenderPolygon* RenderPolygonFactory::roundedRect(float radius, uint density) {
     vertices[2] = 0;
     vertices[3] = halfHeight;
     float x;
-    
+    float y;
     if (density > 0) {
-        float theta = 90 / (density + 1);
-        for (int i = 0; i < density; ++i) {
-            x = (float)radius / (density + 1);
-            vertices[2 * i] = x;
-            vertices[2 * i + 1] = radius / (float)density;
+        float theta = 90.0 / (density + 1);
+        float angle;
+        for (int i = 1; i <= density; ++i) {
+            angle = theta * i;
+            float lCos = cos(deg2rad(angle));
+            float lSin = sin(deg2rad(angle));
+            x = lCos * radius;
+            y = lSin * radius;
+            vertices[4 + (i - 1) * 2] = x;
+            vertices[4 + (i - 1) * 2 + 1] = y;
+            NSLog(@"Code Here");
         }
     }
     vertices[(vertexCount - 2) * 2] = halfWidth;

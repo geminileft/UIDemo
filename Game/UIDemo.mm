@@ -13,7 +13,7 @@ void UIDemo::start() {
     TEGameObject* go;    
     go = new TEGameObject();
     
-    RenderPolygon* rf = RenderPolygonFactory::roundedRect(80.0, 1);
+    RenderPolygon* rf = RenderPolygonFactory::roundedRect(80.0, 2);
     //RenderPolygon* rf = RenderPolygonFactory::roundedRectPolygon();
 
     go->position.x = 0.0f;
@@ -21,7 +21,7 @@ void UIDemo::start() {
     
     go->addComponent(rf);
     addGameObject(go);
-    
+/*
     go = new TEGameObject();
     TEPoint position;
     TESize size;
@@ -36,4 +36,5 @@ void UIDemo::start() {
     go->position.y = 0.0f;
     go->addComponent(ri);
     addGameObject(go);
+*/
 }
