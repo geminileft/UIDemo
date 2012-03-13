@@ -13,8 +13,8 @@ void UIDemo::start() {
     TEGameObject* go;    
     go = new TEGameObject();
     
-    //RenderPolygon* rf = RenderPolygonFactory::roundedRect(80.0, 2);
-    RenderPolygon* rf = RenderPolygonFactory::roundedRectPolygon();
+    RenderPolygon* rf = RenderPolygonFactory::roundedRect(80.0, 2);
+    //RenderPolygon* rf = RenderPolygonFactory::roundedRectPolygon();
 
     go->position.x = 0.0f;
     go->position.y = 0.0f;

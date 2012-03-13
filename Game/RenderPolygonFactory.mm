@@ -5,8 +5,8 @@
 RenderPolygon* RenderPolygonFactory::roundedRect(float radius, uint density) {
     TESize size;
     size = TESizeMake(radius * 2, radius * 2);
-    const float halfHeight = (float)size.height / 2;
-    const float halfWidth = (float)size.width / 2;
+    const float halfHeight = radius;
+    const float halfWidth = radius;
     const int vertexCount = 4 + density;
     float vertices[vertexCount * 2];
     vertices[0] = 0;
@@ -19,7 +19,7 @@ RenderPolygon* RenderPolygonFactory::roundedRect(float radius, uint density) {
         float theta = 90.0 / (density + 1);
         float angle;
         for (int i = 1; i <= density; ++i) {
-            angle = theta * i;
+            angle = 90 - (theta * i);
             float lCos = cos(deg2rad(angle));
             float lSin = sin(deg2rad(angle));
             x = lCos * radius;
