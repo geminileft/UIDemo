@@ -26,7 +26,6 @@ RenderPolygon* RenderPolygonFactory::roundedRect(float radius, uint density) {
             y = lSin * radius;
             vertices[4 + (i - 1) * 2] = x;
             vertices[4 + (i - 1) * 2 + 1] = y;
-            NSLog(@"Code Here");
         }
     }
     vertices[(vertexCount - 2) * 2] = halfWidth;
