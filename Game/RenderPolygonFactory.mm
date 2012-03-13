@@ -2,12 +2,13 @@
 #include "RenderPolygon.h"
 #include <cmath>
 
-RenderPolygon* RenderPolygonFactory::roundedRect(TEColor4 color, float radius, uint density) {
+RenderPolygon* RenderPolygonFactory::roundedRectCorner(TEColor4 color, float radius, uint density) {
     TESize size;
     size = TESizeMake(radius * 2, radius * 2);
     const float halfHeight = radius;
     const float halfWidth = radius;
-    const int vertexCount = 4 + density;
+    const int offset = 4;
+    const int vertexCount = offset + density;
     float vertices[vertexCount * 2];
     vertices[0] = 0;
     vertices[1] = 0;
@@ -24,8 +25,8 @@ RenderPolygon* RenderPolygonFactory::roundedRect(TEColor4 color, float radius, u
             float lSin = sin(deg2rad(angle));
             x = lCos * radius;
             y = lSin * radius;
-            vertices[4 + (i - 1) * 2] = x;
-            vertices[4 + (i - 1) * 2 + 1] = y;
+            vertices[offset + (i - 1) * 2] = x;
+            vertices[offset + (i - 1) * 2 + 1] = y;
         }
     }
     vertices[(vertexCount - 2) * 2] = halfWidth;
@@ -41,7 +42,7 @@ RenderPolygon* RenderPolygonFactory::roundedRect(TEColor4 color, float radius, u
     return rf;
 }
 
-RenderPolygon* RenderPolygonFactory::roundedRectPolygon(TESize size, TEColor4 color, float radius) {    
+RenderPolygon* RenderPolygonFactory::roundedRectPolygon(TESize size, TEColor4 color, float radius, uint density) {    
     const float halfHeight = (float)size.height / 2;
     const float halfWidth = (float)size.width / 2;
     const int vertexCount = 9;
@@ -57,15 +58,17 @@ RenderPolygon* RenderPolygonFactory::roundedRectPolygon(TESize size, TEColor4 co
     vertices[6] = halfWidth;
     vertices[7] = halfHeight - radius;
     
-    vertices[8] = halfWidth - radius;
-    vertices[9] = halfHeight;
-    vertices[10] = -halfWidth + radius;
-    vertices[11] = halfHeight;
+    const int offset = 8;
     
-    vertices[12] = -halfWidth;
-    vertices[13] = halfHeight - radius;
-    vertices[14] = -halfWidth;
-    vertices[15] = -halfHeight + radius;
+    vertices[offset + density] = halfWidth - radius;
+    vertices[offset + density + 1] = halfHeight;
+    vertices[offset + density + 2] = -halfWidth + radius;
+    vertices[offset + density + 3] = halfHeight;
+    
+    vertices[offset + density + 4] = -halfWidth;
+    vertices[offset + density + 5] = halfHeight - radius;
+    vertices[offset + density + 6] = -halfWidth;
+    vertices[offset + density + 7] = -halfHeight + radius;
     
     vertices[(vertexCount - 1) * 2] = vertices[0];
     vertices[((vertexCount - 1) * 2) + 1] = vertices[1];

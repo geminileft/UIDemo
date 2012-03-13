@@ -17,11 +17,10 @@ void UIDemo::start() {
     float radius;
     go = new TEGameObject();
     
-    //RenderPolygon* rf = RenderPolygonFactory::roundedRect(5.0, 20.0);
     color = TEColor4Make(1.0, 0.0, 0.0, 1.0);
     size = TESizeMake(160, 160);
     radius = 20.0;
-    rp = RenderPolygonFactory::roundedRectPolygon(size, color, radius);
+    rp = RenderPolygonFactory::roundedRectPolygon(size, color, radius, 0);
 
     go->position.x = 0.0f;
     go->position.y = 0.0f;
@@ -29,16 +28,14 @@ void UIDemo::start() {
     go->addComponent(rp);
     addGameObject(go);
     
-    /*
     go = new TEGameObject();
     
-    rp = RenderPolygonFactory::roundedRect(color, radius, (uint)radius);
+    rp = RenderPolygonFactory::roundedRectCorner(color, radius, (uint)radius);
     
     go->position.x = (size.width / 2.0) - radius;
     go->position.y = (size.height / 2.0) - radius;
     
     go->addComponent(rp);
     addGameObject(go);
-    */
     
 }
