@@ -13,17 +13,13 @@ void UIDemo::start() {
     TEGameObject* go;    
     go = new TEGameObject();
     
-    //RenderPolygon* rf = RenderPolygonFactory::roundedRect();
-    RenderPolygon* rf = RenderPolygonFactory::roundedRectPolygon();
-
-    //RenderToTexture* rtt = new RenderToTexture();
+    RenderPolygon* rf = RenderPolygonFactory::roundedRect();
+    //RenderPolygon* rf = RenderPolygonFactory::roundedRectPolygon();
 
     go->position.x = 0.0f;
     go->position.y = 0.0f;
     
-    //go->addComponent(rtt);
     go->addComponent(rf);
-    //go->addComponent(new TouchSingle(size));
     addGameObject(go);
     
     go = new TEGameObject();

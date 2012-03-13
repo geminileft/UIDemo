@@ -3,6 +3,7 @@
 
 RenderPolygon* RenderPolygonFactory::roundedRect() {
     TESize size;
+    size = TESizeMake(160, 160);
     
     const float halfHeight = (float)size.height / 2;
     const float halfWidth = (float)size.width / 2;
@@ -63,7 +64,7 @@ RenderPolygon* RenderPolygonFactory::roundedRectPolygon() {
     
     TEColor4 color = TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f);
     
-    RenderPolygon* rf = RenderPolygonFactory::roundedRect();
+    RenderPolygon* rf = new RenderPolygon;
     
     rf->setVertices(&vertices[0], vertexCount);
     rf->setColor(color);
