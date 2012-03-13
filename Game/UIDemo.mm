@@ -13,28 +13,12 @@ void UIDemo::start() {
     TEGameObject* go;    
     go = new TEGameObject();
     
-    RenderPolygon* rf = RenderPolygonFactory::roundedRect(80.0, 1);
-    //RenderPolygon* rf = RenderPolygonFactory::roundedRectPolygon();
+    //RenderPolygon* rf = RenderPolygonFactory::roundedRect(80.0, 2);
+    RenderPolygon* rf = RenderPolygonFactory::roundedRectPolygon();
 
     go->position.x = 0.0f;
     go->position.y = 0.0f;
     
     go->addComponent(rf);
     addGameObject(go);
-/*
-    go = new TEGameObject();
-    TEPoint position;
-    TESize size;
-    size.width = 256;
-    size.height = 256;
-    position.x = 0.0f;
-    position.y = 0.0f;
-    
-    RenderImage* ri = new RenderImage(@"olympic.jpg", position, size);
-    //RenderImage* ri = new RenderImage(@"manroc.png", position, size);
-    go->position.x = 0.0f;
-    go->position.y = 0.0f;
-    go->addComponent(ri);
-    addGameObject(go);
-*/
 }
