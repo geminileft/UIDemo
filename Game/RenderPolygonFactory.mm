@@ -5,7 +5,6 @@
 RenderPolygon* RenderPolygonFactory::roundedRect(float radius, uint density) {
     TESize size;
     size = TESizeMake(radius * 2, radius * 2);
-    
     const float halfHeight = (float)size.height / 2;
     const float halfWidth = (float)size.width / 2;
     const int vertexCount = 4 + density;
