@@ -42,7 +42,7 @@ RenderPolygon* RenderPolygonFactory::roundedRectCorner(TEColor4 color, float rad
     return rf;
 }
 
-RenderPolygon* RenderPolygonFactory::roundedRectPolygon(TESize size, TEColor4 color, float radius, uint density) {    
+RenderPolygon* RenderPolygonFactory::roundedRectPolygon(TESize size, TEColor4 color, float radius) {    
     const float halfHeight = (float)size.height / 2;
     const float halfWidth = (float)size.width / 2;
     const int vertexCount = 9;
@@ -60,15 +60,15 @@ RenderPolygon* RenderPolygonFactory::roundedRectPolygon(TESize size, TEColor4 co
     
     const int offset = 8;
     
-    vertices[offset + density] = halfWidth - radius;
-    vertices[offset + density + 1] = halfHeight;
-    vertices[offset + density + 2] = -halfWidth + radius;
-    vertices[offset + density + 3] = halfHeight;
+    vertices[offset] = halfWidth - radius;
+    vertices[offset + 1] = halfHeight;
+    vertices[offset + 2] = -halfWidth + radius;
+    vertices[offset + 3] = halfHeight;
     
-    vertices[offset + density + 4] = -halfWidth;
-    vertices[offset + density + 5] = halfHeight - radius;
-    vertices[offset + density + 6] = -halfWidth;
-    vertices[offset + density + 7] = -halfHeight + radius;
+    vertices[offset + 4] = -halfWidth;
+    vertices[offset + 5] = halfHeight - radius;
+    vertices[offset + 6] = -halfWidth;
+    vertices[offset + 7] = -halfHeight + radius;
     
     vertices[(vertexCount - 1) * 2] = vertices[0];
     vertices[((vertexCount - 1) * 2) + 1] = vertices[1];

@@ -20,7 +20,7 @@ void UIDemo::start() {
     color = TEColor4Make(1.0, 0.0, 0.0, 1.0);
     size = TESizeMake(160, 160);
     radius = 20.0;
-    rp = RenderPolygonFactory::roundedRectPolygon(size, color, radius, 0);
+    rp = RenderPolygonFactory::roundedRectPolygon(size, color, radius);
 
     go->position.x = 0.0f;
     go->position.y = 0.0f;
