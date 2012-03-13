@@ -7,7 +7,7 @@ class RenderPolygon;
 
 class RenderPolygonFactory {
 public:
-    static RenderPolygon* roundedRect(float radius, uint density);
-    static RenderPolygon* roundedRectPolygon();
+    static RenderPolygon* roundedRect(TEColor4 color, float radius, uint density);
+    static RenderPolygon* roundedRectPolygon(TESize size, TEColor4 color, float radius);
 };
 #endif

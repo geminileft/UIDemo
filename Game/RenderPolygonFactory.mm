@@ -2,7 +2,7 @@
 #include "RenderPolygon.h"
 #include <cmath>
 
-RenderPolygon* RenderPolygonFactory::roundedRect(float radius, uint density) {
+RenderPolygon* RenderPolygonFactory::roundedRect(TEColor4 color, float radius, uint density) {
     TESize size;
     size = TESizeMake(radius * 2, radius * 2);
     const float halfHeight = radius;
@@ -32,9 +32,7 @@ RenderPolygon* RenderPolygonFactory::roundedRect(float radius, uint density) {
     vertices[((vertexCount - 2) * 2) + 1] = 0;
     vertices[(vertexCount - 1) * 2] = vertices[0];
     vertices[((vertexCount - 1) * 2) + 1] = vertices[1];
-    
-    TEColor4 color = TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f);
-    
+
     RenderPolygon* rf = new RenderPolygon;
     
     rf->setVertices(&vertices[0], vertexCount);
@@ -43,40 +41,35 @@ RenderPolygon* RenderPolygonFactory::roundedRect(float radius, uint density) {
     return rf;
 }
 
-RenderPolygon* RenderPolygonFactory::roundedRectPolygon() {
-    TESize size;
-    size = TESizeMake(160, 160);
-    
+RenderPolygon* RenderPolygonFactory::roundedRectPolygon(TESize size, TEColor4 color, float radius) {    
     const float halfHeight = (float)size.height / 2;
     const float halfWidth = (float)size.width / 2;
     const int vertexCount = 9;
     float vertices[vertexCount * 2];
-    const float roundRadius = 5;
-    vertices[0] = -halfWidth + roundRadius;
+    vertices[0] = -halfWidth + radius;
     vertices[1] = -halfHeight;
-    vertices[2] = halfWidth - roundRadius;
+    vertices[2] = halfWidth - radius;
     vertices[3] = -halfHeight;
     
-    vertices[4] = halfWidth;
-    vertices[5] = -halfHeight + roundRadius;
-    vertices[6] = halfWidth;
-    vertices[7] = halfHeight - roundRadius;
     
-    vertices[8] = halfWidth - roundRadius;
+    vertices[4] = halfWidth;
+    vertices[5] = -halfHeight + radius;
+    vertices[6] = halfWidth;
+    vertices[7] = halfHeight - radius;
+    
+    vertices[8] = halfWidth - radius;
     vertices[9] = halfHeight;
-    vertices[10] = -halfWidth + roundRadius;
+    vertices[10] = -halfWidth + radius;
     vertices[11] = halfHeight;
     
     vertices[12] = -halfWidth;
-    vertices[13] = halfHeight - roundRadius;
+    vertices[13] = halfHeight - radius;
     vertices[14] = -halfWidth;
-    vertices[15] = -halfHeight + roundRadius;
+    vertices[15] = -halfHeight + radius;
     
     vertices[(vertexCount - 1) * 2] = vertices[0];
     vertices[((vertexCount - 1) * 2) + 1] = vertices[1];
-    
-    TEColor4 color = TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f);
-    
+        
     RenderPolygon* rf = new RenderPolygon;
     
     rf->setVertices(&vertices[0], vertexCount);
