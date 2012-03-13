@@ -54,6 +54,7 @@
 		D74F3C0E14D07C2300871B6D /* table_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0D14D07C2300871B6D /* table_background.png */; };
 		D74F3C1014D0828D00871B6D /* spade_ace.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0F14D0828D00871B6D /* spade_ace.png */; };
 		D75555971506CFEE00354C0F /* blur.fs in Resources */ = {isa = PBXBuildFile; fileRef = D75555961506CFEE00354C0F /* blur.fs */; };
+		D7566F58150F0D0C00C102CF /* RenderPolygonFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7566F57150F0D0C00C102CF /* RenderPolygonFactory.mm */; };
 		D77CDE7514FC84990069B977 /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = D77CDE7414FC84990069B977 /* characters.png */; };
 		D79780D114FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */; };
 		D7C5BA0814CF984F0012DF62 /* RenderBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0714CF984F0012DF62 /* RenderBox.mm */; };
@@ -144,6 +145,8 @@
 		D74F3C0D14D07C2300871B6D /* table_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_background.png; sourceTree = "<group>"; };
 		D74F3C0F14D0828D00871B6D /* spade_ace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spade_ace.png; sourceTree = "<group>"; };
 		D75555961506CFEE00354C0F /* blur.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = blur.fs; sourceTree = "<group>"; };
+		D7566F56150F0CFB00C102CF /* RenderPolygonFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderPolygonFactory.h; sourceTree = "<group>"; };
+		D7566F57150F0D0C00C102CF /* RenderPolygonFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderPolygonFactory.mm; sourceTree = "<group>"; };
 		D77CDE7414FC84990069B977 /* characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characters.png; sourceTree = "<group>"; };
 		D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bitmap_font_sample_inverted_alpha.png; sourceTree = "<group>"; };
 		D7C5BA0614CF983C0012DF62 /* RenderBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderBox.h; sourceTree = "<group>"; };
@@ -292,6 +295,8 @@
 				D74F3C0A14D079E500871B6D /* RenderImage.mm */,
 				D71AE5F8150DB05000772199 /* RenderPolygon.h */,
 				D71AE5FA150DB05F00772199 /* RenderPolygon.mm */,
+				D7566F56150F0CFB00C102CF /* RenderPolygonFactory.h */,
+				D7566F57150F0D0C00C102CF /* RenderPolygonFactory.mm */,
 				D740F36A1505AA160061B2FC /* RenderToTexture.h */,
 				D740F36B1505AA160061B2FC /* RenderToTexture.mm */,
 				D72D7BC614D0B80900C020A1 /* TouchSingle.h */,
@@ -438,6 +443,7 @@
 				D72D7BC814D0B82100C020A1 /* TouchSingle.mm in Sources */,
 				D740F36C1505AA160061B2FC /* RenderToTexture.mm in Sources */,
 				D71AE5FB150DB05F00772199 /* RenderPolygon.mm in Sources */,
+				D7566F58150F0D0C00C102CF /* RenderPolygonFactory.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
