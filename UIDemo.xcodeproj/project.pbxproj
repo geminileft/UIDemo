@@ -48,6 +48,7 @@
 		D71D8B8A15110A5C00FB6A52 /* TERendererBasic.mm in Sources */ = {isa = PBXBuildFile; fileRef = D71D8B8915110A5900FB6A52 /* TERendererBasic.mm */; };
 		D71D8B8D1511163700FB6A52 /* TERenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D71D8B8C1511163400FB6A52 /* TERenderTarget.cpp */; };
 		D71D8B901511382C00FB6A52 /* TERendererTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = D71D8B8F1511382900FB6A52 /* TERendererTexture.mm */; };
+		D71D8B93151144FC00FB6A52 /* TERendererKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = D71D8B92151144F700FB6A52 /* TERendererKernel.mm */; };
 		D7231CB115080C9B00D3E2C1 /* olympic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB015080C9B00D3E2C1 /* olympic.jpg */; };
 		D7231CB6150817F100D3E2C1 /* manroc.png in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB5150817F100D3E2C1 /* manroc.png */; };
 		D72C7212150BF5B5007E6449 /* toon.fs in Resources */ = {isa = PBXBuildFile; fileRef = D72C7211150BF5B5007E6449 /* toon.fs */; };
@@ -142,6 +143,8 @@
 		D71D8B8C1511163400FB6A52 /* TERenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TERenderTarget.cpp; sourceTree = "<group>"; };
 		D71D8B8E1511381400FB6A52 /* TERendererTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TERendererTexture.h; sourceTree = "<group>"; };
 		D71D8B8F1511382900FB6A52 /* TERendererTexture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TERendererTexture.mm; sourceTree = "<group>"; };
+		D71D8B91151144E300FB6A52 /* TERendererKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TERendererKernel.h; sourceTree = "<group>"; };
+		D71D8B92151144F700FB6A52 /* TERendererKernel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TERendererKernel.mm; sourceTree = "<group>"; };
 		D7231CB015080C9B00D3E2C1 /* olympic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = olympic.jpg; sourceTree = "<group>"; };
 		D7231CB5150817F100D3E2C1 /* manroc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manroc.png; sourceTree = "<group>"; };
 		D72C7211150BF5B5007E6449 /* toon.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = toon.fs; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 				D7092E2B14ACFE9500E1D6EE /* TERenderer.mm */,
 				D71D8B8815110A4800FB6A52 /* TERendererBasic.h */,
 				D71D8B8915110A5900FB6A52 /* TERendererBasic.mm */,
+				D71D8B91151144E300FB6A52 /* TERendererKernel.h */,
+				D71D8B92151144F700FB6A52 /* TERendererKernel.mm */,
 				D7092E2D14ACFEAB00E1D6EE /* TERendererOGL1.h */,
 				D7092E2E14ACFEAB00E1D6EE /* TERendererOGL1.mm */,
 				D7092E3614ACFEF700E1D6EE /* TERendererOGL2.h */,
@@ -462,6 +467,7 @@
 				D71D8B8A15110A5C00FB6A52 /* TERendererBasic.mm in Sources */,
 				D71D8B8D1511163700FB6A52 /* TERenderTarget.cpp in Sources */,
 				D71D8B901511382C00FB6A52 /* TERendererTexture.mm in Sources */,
+				D71D8B93151144FC00FB6A52 /* TERendererKernel.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

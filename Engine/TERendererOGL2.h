@@ -10,12 +10,6 @@
 class TERendererProgram;
 class TERenderTarget;
 
-struct TEShaderProgram {
-    uint programId;
-};
-
-typedef struct TEShaderProgram TEShaderProgram;
-
 class TERendererOGL2 : public TERenderer {
 private:
     bool mUseRenderToTexture;
@@ -34,7 +28,6 @@ private:
     uint mTexture;
     std::map<uint, std::list<String> > mProgramAttributes;
     bool mRotate;
-    TERendererProgram* mBasicProgram;
     std::map<String, TERendererProgram*> mShaderPrograms;
     
     void addProgramAttribute(uint program, String attribute);
@@ -42,7 +35,6 @@ private:
     void stopProgram(String programName);
     static void checkGlError(String op);
     
-    void renderBlur(TERenderTarget* target);
     void setScreenAdjustment(int width, int height);
     void createPrograms();
     
@@ -50,7 +42,6 @@ public:
     TERendererOGL2(CALayer* eaglLayer, uint width, uint height);
     virtual void render();
     static uint loadShader(uint shaderType, String source);
-    TEShaderProgram createProgram(String programName, String vertexSource, String fragmentSource);
     static uint getAttributeLocation(uint program, String attribute);
     static uint getUniformLocation(uint program, String uniform);
 };

@@ -11,6 +11,7 @@
 #include "TERendererBasic.h"
 #include "TERenderTarget.h"
 #include "TERendererTexture.h"
+#include "TERendererKernel.h"
 
 static std::map<String, uint> mPrograms;
 
@@ -84,7 +85,6 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
 }
 
 void TERendererOGL2::createPrograms() {
-    TEShaderProgram program;
     String vertexSource;
     String fragmentSource;
     vertexSource = TEManagerFile::readFileContents("texture.vs");
@@ -92,25 +92,20 @@ void TERendererOGL2::createPrograms() {
     
     TERendererProgram* rp = new TERendererTexture(vertexSource, fragmentSource);
     mShaderPrograms["texture"] = rp;
-    program = TERendererOGL2::createProgram("texture", vertexSource, fragmentSource);
     rp->addAttribute("aVertices");
     rp->addAttribute("aTextureCoords");
     
-    addProgramAttribute(program.programId, "aVertices");
-    addProgramAttribute(program.programId, "aTextureCoords");
-    
-    vertexSource = TEManagerFile::readFileContents("texture.vs");
-    fragmentSource = TEManagerFile::readFileContents("toon.fs");
-    program = TERendererOGL2::createProgram("blur", vertexSource, fragmentSource);
-    addProgramAttribute(program.programId, "aVertices");
-    addProgramAttribute(program.programId, "aTextureCoords");
+    fragmentSource = TEManagerFile::readFileContents("blur.fs");
+    rp = new TERendererKernel(vertexSource, fragmentSource);
+    mShaderPrograms["kernel"] = rp;
+    rp->addAttribute("aVertices");
+    rp->addAttribute("aTextureCoords");
     
     vertexSource = TEManagerFile::readFileContents("colorbox.vs");
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
-    mBasicProgram = new TERendererBasic(vertexSource, fragmentSource);
-    //program = TERendererOGL2::createProgram("basic", vertexSource, fragmentSource);
-    mBasicProgram->addAttribute("aVertices");
-    //addProgramAttribute(program.programId, "aVertices");
+    rp = new TERendererBasic(vertexSource, fragmentSource);
+    mShaderPrograms["basic"] = rp;
+    rp->addAttribute("aVertices");
 }
 
 void TERendererOGL2::render() {
@@ -126,7 +121,8 @@ void TERendererOGL2::render() {
 
     uint count = getPolygonCount();
     TERenderPolygonPrimative* primatives = getPolygonPrimatives();
-    mBasicProgram->run(rt, primatives, count);
+    rp = mShaderPrograms["basic"];
+    rp->run(rt, primatives, count);
 
     /************************
      RENDER TO TEXTURE
@@ -162,202 +158,9 @@ void TERendererOGL2::render() {
     addTexture(mTextureFrameBufferHandle, vertexBuffer, textureBuffer, vec);
 
     rt = getTarget(mScreenFrameBuffer);
-    rp = mShaderPrograms["texture"];
+    rp = mShaderPrograms["kernel"];
     rp->run(rt, getRenderPrimatives(), getPrimativeCount());
-    //renderBlur(target);
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
-}
-
-void TERendererOGL2::renderBlur(TERenderTarget* target) {
-    String programName = "blur";
-    uint simpleProgram = switchProgram(programName, target);
-    uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
-    uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
-    uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
-    uint offsetHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uOffsets");
-    uint kernelHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uKernel");
-    /*
-    float textureBuffer[8]; 
-    textureBuffer[0] = 0.0f;//left
-    textureBuffer[1] = 1.0f;//top
-    textureBuffer[2] = 1.0f;//right
-    textureBuffer[3] = 1.0f;//top
-    textureBuffer[4] = 1.0f;//right
-    textureBuffer[5] = 0.0f;//bottom
-    textureBuffer[6] = 0.0f;//left
-    textureBuffer[7] = 0.0f;//bottom
-    
-    float vertexBuffer[8];
-    const float var = mTextureLength / 2;
-    const float leftX = -var - 80;
-    const float bottomY = -var;
-    const float rightX = var - 80;
-    const float topY = var;
-    
-    vertexBuffer[0] = leftX;
-	vertexBuffer[1] = bottomY;
-	vertexBuffer[2] = rightX;
-	vertexBuffer[3] = bottomY;
-	vertexBuffer[4] = rightX;
-	vertexBuffer[5] = topY;
-	vertexBuffer[6] = leftX;
-	vertexBuffer[7] = topY;
-    
-    if (mUseRenderToTexture) {
-        glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
-        glVertexAttrib2f(coordsHandle, 0, 0);
-        glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, textureBuffer);
-        glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, vertexBuffer);
-        glUniform1f(alphaHandle, 1.0);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-    }
-    */
-    const float TEXTURE_SIZE = 256.0;
-    float step_w = 1.0/TEXTURE_SIZE;
-    float step_h = 1.0/TEXTURE_SIZE;
-    
-    const int OFFSET_COUNT = 9;
-    float offsets[OFFSET_COUNT * 2] = {
-        -step_w, -step_h
-        , 0.0, -step_h
-        , step_w, -step_h
-        , -step_w, 0.0
-        , 0.0, 0.0
-        , step_w, 0.0
-        , -step_w, step_h
-        , 0.0, step_h
-        , step_w, step_h
-    };
-    
-    float kernel[OFFSET_COUNT];
-
-    // Gaussian kernel
-    // 1 2 1
-    // 2 4 2
-    // 1 2 1
-    /*
-     kernel[0] = 1.0/16.0;
-     kernel[1] = 2.0/16.0;
-     kernel[2] = 1.0/16.0;
-     kernel[3] = 2.0/16.0;
-     kernel[4] = 4.0/16.0;
-     kernel[5] = 2.0/16.0;
-     kernel[6] = 1.0/16.0;
-     kernel[7] = 2.0/16.0;
-     kernel[8] = 1.0/16.0;
-     */
-    // Mean kernel
-    // 1 1 1
-    // 1 1 1
-    // 1 1 1
-    /*
-     kernel[0] = 1.0/9.0;
-     kernel[1] = 1.0/9.0;
-     kernel[2] = 1.0/9.0;
-     kernel[3] = 1.0/9.0;
-     kernel[4] = 1.0/9.0;
-     kernel[5] = 1.0/9.0;
-     kernel[6] = 1.0/9.0;
-     kernel[7] = 1.0/9.0;
-     kernel[8] = 1.0/9.0;
-     */
-    // Emboss kernel
-    // 2  0  0
-    // 0 -1  0
-    // 0  0 -1
-    /*
-     kernel[0] = 2.0/9.0;
-     kernel[1] = 0.0/9.0;
-     kernel[2] = 0.0/9.0;
-     kernel[3] = 0.0/9.0;
-     kernel[4] = -1.0/9.0;
-     kernel[5] = 0.0/9.0;
-     kernel[6] = 0.0/9.0;
-     kernel[7] = 0.0/9.0;
-     kernel[8] = -1.0/9.0;
-     */
-    // Laplacian kernel
-    // 0  1  0
-    // 1 -4  1
-    // 0  1  0
-
-     kernel[0] = -1.0/9.0;
-     kernel[1] = -1.0/9.0;
-     kernel[2] = -1.0/9.0;
-     kernel[3] = -1.0/9.0;
-     kernel[4] = 8.0/9.0;
-     kernel[5] = -1.0/9.0;
-     kernel[6] = -1.0/9.0;
-     kernel[7] = -1.0/9.0;
-     kernel[8] = -1.0/9.0;
-
-    // Sharpen kernel
-    // -1  -1  -1
-    // -1   9  -1
-    // -1  -1  -1
-    /*
-     kernel[0] = 0.0/9.0;
-     kernel[1] = -1.0/9.0;
-     kernel[2] = 0.0/9.0;
-     kernel[3] = -1.0/9.0;
-     kernel[4] = 5.0/9.0;
-     kernel[5] = -1.0/9.0;
-     kernel[6] = 0.0/9.0;
-     kernel[7] = -1.0/9.0;
-     kernel[8] = 0.0/9.0;
-    */
-    /*
-    //unknown
-    kernel[0] = -0.5/16.0;
-    kernel[1] = 0.0/16.0;
-    kernel[2] = 0.0/16.0;
-    kernel[3] = 0.0/16.0;
-    kernel[4] = 2.0/16.0;
-    kernel[5] = 0.0/16.0;
-    kernel[6] = 0.0/16.0;
-    kernel[7] = 0.0/16.0;
-    kernel[8] = 2.0/16.0;
-    */
-    
-    TERenderTexturePrimative* primatives = getRenderPrimatives();
-    uint count = getPrimativeCount();
-    TEVec3 vec;
-    for (int i = 0;i < count;++i) {
-        vec = primatives[i].position;
-        glBindTexture(GL_TEXTURE_2D, primatives[i].textureName);
-        glVertexAttrib2f(coordsHandle, vec.x, vec.y);
-        glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
-        glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
-        glUniform2fv(offsetHandle, OFFSET_COUNT, &offsets[0]);
-        glUniform1fv(kernelHandle, OFFSET_COUNT, &kernel[0]);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-    }
-    stopProgram(programName);
-}
-
-TEShaderProgram TERendererOGL2::createProgram(String programName, String vertexSource, String fragmentSource) {
-    uint programId = glCreateProgram();
-    //NSAssert(program != 0, @"Failed to create program");
-    checkGlError("created program");
-    mPrograms[programName] = programId;
-    uint vertexShader = loadShader(GL_VERTEX_SHADER, vertexSource);
-    glAttachShader(programId, vertexShader);
-    checkGlError("attached shader");
-    uint fragmentShader = loadShader(GL_FRAGMENT_SHADER, fragmentSource);
-    glAttachShader(programId, fragmentShader);
-    checkGlError("attached shader");
-    glLinkProgram(programId);
-    checkGlError("linked program");
-    int linkStatus[1];
-    glGetProgramiv(programId, GL_LINK_STATUS, linkStatus);
-    if (linkStatus[0] != GL_TRUE) {
-        NSLog(@"Error");
-        glDeleteProgram(programId);
-        programId = 0;
-    }
-    TEShaderProgram program;
-    program.programId = programId;
-    return program;
 }
 
 void TERendererOGL2::addProgramAttribute(uint program, String attribute) {
