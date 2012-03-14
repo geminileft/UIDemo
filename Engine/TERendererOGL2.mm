@@ -163,90 +163,6 @@ void TERendererOGL2::render() {
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 
-void TERendererOGL2::addProgramAttribute(uint program, String attribute) {
-    std::list<String> list = mProgramAttributes[program];
-    list.push_back(attribute);
-    mProgramAttributes[program] = list;
-}
-
-uint TERendererOGL2::loadShader(uint shaderType, String source) {
-    uint shader = glCreateShader(shaderType);
-    if (shader == 0) {
-        NSLog(@"Big problem!");
-    }
-    const char* str = source.c_str();
-    glShaderSource(shader, 1, &str, NULL);
-    checkGlError("shader source");
-    glCompileShader(shader);
-    checkGlError("compile source");
-    return shader;
-}
-
-uint TERendererOGL2::switchProgram(String programName, TERenderTarget* target) {
-    uint program = mPrograms[programName];
-    glUseProgram(program);
-    checkGlError("glUseProgram");
-    
-    if (mProgramAttributes.count(program) > 0) {
-        std::list<String> list = mProgramAttributes[program];
-        std::list<String>::iterator iterator;
-        for (iterator = list.begin();iterator != list.end();++iterator) {
-            uint handle = getAttributeLocation(program, (*iterator));
-            glEnableVertexAttribArray(handle);
-            checkGlError("glEnableVertexAttribArray");        		
-        }
-    }
-    
-    const float width = target->getFrameWidth();
-    const float height = target->getFrameHeight();
-    
-    glViewport(0, 0, width, height);
-    glBindFramebuffer(GL_FRAMEBUFFER, target->getFrameBuffer());
-
-    float proj[16];
-    float trans[16];
-    float view[16];
-    float rotate[16];
-    float angle;
-    float zDepth;
-    float ratio;
-    
-    zDepth = (float)height / 2;
-    ratio = (float)width/(float)height;
-    
-    if (mRotate) {
-        angle = -90.0f;
-        TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -1, 1, -ratio, ratio, 1.0f, 1000.0f);
-    } else {
-        angle = 0.0f;
-        TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -ratio, ratio, -1, 1, 1.0f, 1000.0f);
-    }
-
-    TEUtilMatrix::setTranslate(&trans[0], ColumnMajor, 0.0f, 0.0f, -zDepth);
-    TEUtilMatrix::setRotateZ(&rotate[0], ColumnMajor, deg2rad(angle));
-    TEUtilMatrix::multiply(&view[0], ColumnMajor, rotate, trans);
-
-    uint mProjHandle  = TERendererOGL2::getUniformLocation(program, "uProjectionMatrix");
-    uint mViewHandle = TERendererOGL2::getUniformLocation(program, "uViewMatrix");
-    glUniformMatrix4fv(mProjHandle, 1, GL_FALSE, &proj[0]);
-    glUniformMatrix4fv(mViewHandle, 1, GL_FALSE, &view[0]);
-    return program;
-}
-
-void TERendererOGL2::stopProgram(String programName) {
-    uint program = mPrograms[programName];
-    
-    if (mProgramAttributes.count(program) > 0) {
-        std::list<String> list = mProgramAttributes[program];
-        std::list<String>::iterator iterator;
-        for (iterator = list.begin();iterator != list.end();++iterator) {
-            uint handle = getAttributeLocation(program, (*iterator));
-            glDisableVertexAttribArray(handle);
-            checkGlError("glDisableVertexAttribArray");
-        }
-    }
-}
-
 void TERendererOGL2::checkGlError(String op) {
     uint error;
     while ((error = glGetError()) != GL_NO_ERROR) {
@@ -254,14 +170,6 @@ void TERendererOGL2::checkGlError(String op) {
             NSLog(@"Bad");
         }
     }
-}
-
-uint TERendererOGL2::getAttributeLocation(uint program, String attribute) {
-    return glGetAttribLocation(program, attribute.c_str());
-}
-
-uint TERendererOGL2::getUniformLocation(uint program, String uniform) {
-    return glGetUniformLocation(program, uniform.c_str());
 }
 
 void TERendererOGL2::setScreenAdjustment(int width, int height) {
