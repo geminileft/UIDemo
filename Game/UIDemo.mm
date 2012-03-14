@@ -21,7 +21,7 @@ void UIDemo::start() {
     color = TEColor4Make(1.0, 0.0, 0.0, 1.0);
     size = TESizeMake(160, 160);
     radius = 5.0;
-    RenderToTexture* rtt  = new RenderToTexture();
+    //RenderToTexture* rtt  = new RenderToTexture();
     rp = RenderPolygonFactory::roundedRect(size, color, radius, (uint)radius);
     
     go->position.x = 0.0f;

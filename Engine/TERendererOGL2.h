@@ -7,17 +7,12 @@
 #include <list>
 #import <QuartzCore/QuartzCore.h>
 
-struct TEFBOTarget {
-    uint frameBuffer;
-    float width;
-    float height;
-};
+class TERendererProgram;
 
 struct TEShaderProgram {
     uint programId;
 };
 
-typedef struct TEFBOTarget TEFBOTarget;
 typedef struct TEShaderProgram TEShaderProgram;
 
 class TERendererOGL2 : public TERenderer {
@@ -38,6 +33,7 @@ private:
     uint mTexture;
     std::map<uint, std::list<String> > mProgramAttributes;
     bool mRotate;
+    TERendererProgram* mBasicProgram;
     
     void addProgramAttribute(uint program, String attribute);
     uint switchProgram(String programName, TEFBOTarget target);

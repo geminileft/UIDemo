@@ -44,6 +44,7 @@
 		D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A814AD90AA00FDBB5F /* texture.fs */; };
 		D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A914AD90AA00FDBB5F /* texture.vs */; };
 		D71AE5FB150DB05F00772199 /* RenderPolygon.mm in Sources */ = {isa = PBXBuildFile; fileRef = D71AE5FA150DB05F00772199 /* RenderPolygon.mm */; };
+		D71D8B871510FCF900FB6A52 /* TERendererProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = D71D8B861510FCF800FB6A52 /* TERendererProgram.mm */; };
 		D7231CB115080C9B00D3E2C1 /* olympic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB015080C9B00D3E2C1 /* olympic.jpg */; };
 		D7231CB6150817F100D3E2C1 /* manroc.png in Resources */ = {isa = PBXBuildFile; fileRef = D7231CB5150817F100D3E2C1 /* manroc.png */; };
 		D72C7212150BF5B5007E6449 /* toon.fs in Resources */ = {isa = PBXBuildFile; fileRef = D72C7211150BF5B5007E6449 /* toon.fs */; };
@@ -130,6 +131,8 @@
 		D70D44A914AD90AA00FDBB5F /* texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
 		D71AE5F8150DB05000772199 /* RenderPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderPolygon.h; sourceTree = "<group>"; };
 		D71AE5FA150DB05F00772199 /* RenderPolygon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderPolygon.mm; sourceTree = "<group>"; };
+		D71D8B841510FCCD00FB6A52 /* TERendererProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TERendererProgram.h; sourceTree = "<group>"; };
+		D71D8B861510FCF800FB6A52 /* TERendererProgram.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TERendererProgram.mm; sourceTree = "<group>"; };
 		D7231CB015080C9B00D3E2C1 /* olympic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = olympic.jpg; sourceTree = "<group>"; };
 		D7231CB5150817F100D3E2C1 /* manroc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manroc.png; sourceTree = "<group>"; };
 		D72C7211150BF5B5007E6449 /* toon.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = toon.fs; sourceTree = "<group>"; };
@@ -278,6 +281,8 @@
 				D7092E4314ACFF7600E1D6EE /* TEUtilMatrix.h */,
 				D7092E3314ACFEE200E1D6EE /* TEUtilTexture.h */,
 				D7092E3414ACFEE200E1D6EE /* TEUtilTexture.mm */,
+				D71D8B841510FCCD00FB6A52 /* TERendererProgram.h */,
+				D71D8B861510FCF800FB6A52 /* TERendererProgram.mm */,
 			);
 			name = Engine;
 			path = ../Engine;
@@ -438,6 +443,7 @@
 				D740F36C1505AA160061B2FC /* RenderToTexture.mm in Sources */,
 				D71AE5FB150DB05F00772199 /* RenderPolygon.mm in Sources */,
 				D7566F58150F0D0C00C102CF /* RenderPolygonFactory.mm in Sources */,
+				D71D8B871510FCF900FB6A52 /* TERendererProgram.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

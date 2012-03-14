@@ -8,7 +8,7 @@
 #include "TEManagerTexture.h"
 #include "TEUtilTexture.h"
 #include "TEUtilMatrix.h"
-
+#include "TERendererProgram.h"
 
 static std::map<String, uint> mPrograms;
 
@@ -75,7 +75,6 @@ void TERendererOGL2::createPrograms() {
     TEShaderProgram program;
     String vertexSource;
     String fragmentSource;
-    
     vertexSource = TEManagerFile::readFileContents("texture.vs");
     fragmentSource = TEManagerFile::readFileContents("texture.fs");
     program = TERendererOGL2::createProgram("texture", vertexSource, fragmentSource);
@@ -90,7 +89,9 @@ void TERendererOGL2::createPrograms() {
     
     vertexSource = TEManagerFile::readFileContents("colorbox.vs");
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
+    mBasicProgram = new TERendererProgram(vertexSource, fragmentSource);
     program = TERendererOGL2::createProgram("basic", vertexSource, fragmentSource);
+    mBasicProgram->addAttribute("aVertices");
     addProgramAttribute(program.programId, "aVertices");
 }
 

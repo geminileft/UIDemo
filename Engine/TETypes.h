@@ -129,4 +129,12 @@ inline double deg2rad(double deg) {
     return (deg * 3.14159265358979323846f / 180.0f);
 }
 
+struct TEFBOTarget {
+    uint frameBuffer;
+    float width;
+    float height;
+};
+
+typedef struct TEFBOTarget TEFBOTarget;
+
 #endif
