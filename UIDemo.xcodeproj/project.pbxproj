@@ -57,7 +57,6 @@
 		D7566F58150F0D0C00C102CF /* RenderPolygonFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7566F57150F0D0C00C102CF /* RenderPolygonFactory.mm */; };
 		D77CDE7514FC84990069B977 /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = D77CDE7414FC84990069B977 /* characters.png */; };
 		D79780D114FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */; };
-		D7C5BA0814CF984F0012DF62 /* RenderBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0714CF984F0012DF62 /* RenderBox.mm */; };
 		D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */; };
 		D7FB871F150B6597002AD692 /* mountain_resize.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7FB871E150B6597002AD692 /* mountain_resize.jpg */; };
 /* End PBXBuildFile section */
@@ -149,8 +148,6 @@
 		D7566F57150F0D0C00C102CF /* RenderPolygonFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderPolygonFactory.mm; sourceTree = "<group>"; };
 		D77CDE7414FC84990069B977 /* characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characters.png; sourceTree = "<group>"; };
 		D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bitmap_font_sample_inverted_alpha.png; sourceTree = "<group>"; };
-		D7C5BA0614CF983C0012DF62 /* RenderBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderBox.h; sourceTree = "<group>"; };
-		D7C5BA0714CF984F0012DF62 /* RenderBox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderBox.mm; sourceTree = "<group>"; };
 		D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEComponentRender.cpp; sourceTree = "<group>"; };
 		D7FB871E150B6597002AD692 /* mountain_resize.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountain_resize.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -289,8 +286,6 @@
 		D7092DF714ACFA8400E1D6EE /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				D7C5BA0614CF983C0012DF62 /* RenderBox.h */,
-				D7C5BA0714CF984F0012DF62 /* RenderBox.mm */,
 				D74F3C0914D079E500871B6D /* RenderImage.h */,
 				D74F3C0A14D079E500871B6D /* RenderImage.mm */,
 				D71AE5F8150DB05000772199 /* RenderPolygon.h */,
@@ -436,7 +431,6 @@
 				D7092E4114ACFF5400E1D6EE /* TEManagerFile.mm in Sources */,
 				D7092E4414ACFF7700E1D6EE /* TEUtilMatrix.cpp in Sources */,
 				D7092E4614AD008E00E1D6EE /* TEComponent.cpp in Sources */,
-				D7C5BA0814CF984F0012DF62 /* RenderBox.mm in Sources */,
 				D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */,
 				D74F3C0B14D079E500871B6D /* RenderImage.mm in Sources */,
 				D72D7BC514D0B60300C020A1 /* TEManagerTime.cpp in Sources */,

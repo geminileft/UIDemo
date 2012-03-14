@@ -67,28 +67,31 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    
-    int program;
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f); 
+    createPrograms();
+}
+
+void TERendererOGL2::createPrograms() {
+    TEShaderProgram program;
     String vertexSource;
     String fragmentSource;
     
     vertexSource = TEManagerFile::readFileContents("texture.vs");
     fragmentSource = TEManagerFile::readFileContents("texture.fs");
     program = TERendererOGL2::createProgram("texture", vertexSource, fragmentSource);
-    addProgramAttribute(program, "aVertices");
-    addProgramAttribute(program, "aTextureCoords");
+    addProgramAttribute(program.programId, "aVertices");
+    addProgramAttribute(program.programId, "aTextureCoords");
     
     vertexSource = TEManagerFile::readFileContents("texture.vs");
     fragmentSource = TEManagerFile::readFileContents("toon.fs");
     program = TERendererOGL2::createProgram("blur", vertexSource, fragmentSource);
-    addProgramAttribute(program, "aVertices");
-    addProgramAttribute(program, "aTextureCoords");
+    addProgramAttribute(program.programId, "aVertices");
+    addProgramAttribute(program.programId, "aTextureCoords");
     
     vertexSource = TEManagerFile::readFileContents("colorbox.vs");
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
     program = TERendererOGL2::createProgram("basic", vertexSource, fragmentSource);
-    addProgramAttribute(program, "aVertices");
+    addProgramAttribute(program.programId, "aVertices");
 }
 
 void TERendererOGL2::render() {
@@ -116,8 +119,8 @@ void TERendererOGL2::render() {
 void TERendererOGL2::renderBasic(TEFBOTarget target) {
     String programName = "basic";
     uint program = switchProgram(programName, target);
-    glClearColor(0, 1, 0, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    //glClearColor(1, 0, 1, 1.0f);
+    //glClear(GL_COLOR_BUFFER_BIT);
     uint vertexHandle = TERendererOGL2::getAttributeLocation(program, "aVertices");
     uint colorHandle = TERendererOGL2::getUniformLocation(program, "aColor");
     uint posHandle = TERendererOGL2::getAttributeLocation(program, "aPosition");
@@ -364,26 +367,28 @@ void TERendererOGL2::renderBlur(TEFBOTarget target) {
     stopProgram(programName);
 }
 
-int TERendererOGL2::createProgram(String programName, String vertexSource, String fragmentSource) {
-    uint program = glCreateProgram();
+TEShaderProgram TERendererOGL2::createProgram(String programName, String vertexSource, String fragmentSource) {
+    uint programId = glCreateProgram();
     //NSAssert(program != 0, @"Failed to create program");
     checkGlError("created program");
-    mPrograms[programName] = program;
+    mPrograms[programName] = programId;
     uint vertexShader = loadShader(GL_VERTEX_SHADER, vertexSource);
-    glAttachShader(program, vertexShader);
+    glAttachShader(programId, vertexShader);
     checkGlError("attached shader");
     uint fragmentShader = loadShader(GL_FRAGMENT_SHADER, fragmentSource);
-    glAttachShader(program, fragmentShader);
+    glAttachShader(programId, fragmentShader);
     checkGlError("attached shader");
-    glLinkProgram(program);
+    glLinkProgram(programId);
     checkGlError("linked program");
     int linkStatus[1];
-    glGetProgramiv(program, GL_LINK_STATUS, linkStatus);
+    glGetProgramiv(programId, GL_LINK_STATUS, linkStatus);
     if (linkStatus[0] != GL_TRUE) {
         NSLog(@"Error");
-        glDeleteProgram(program);
-        program = 0;
+        glDeleteProgram(programId);
+        programId = 0;
     }
+    TEShaderProgram program;
+    program.programId = programId;
     return program;
 }
 

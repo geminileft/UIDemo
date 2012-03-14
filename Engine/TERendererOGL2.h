@@ -13,7 +13,12 @@ struct TEFBOTarget {
     float height;
 };
 
+struct TEShaderProgram {
+    uint programId;
+};
+
 typedef struct TEFBOTarget TEFBOTarget;
+typedef struct TEShaderProgram TEShaderProgram;
 
 class TERendererOGL2 : public TERenderer {
 private:
@@ -43,12 +48,13 @@ private:
     void renderTexture(TEFBOTarget target);
     void renderBlur(TEFBOTarget target);
     void setScreenAdjustment(int width, int height);
+    void createPrograms();
     
 public:
     TERendererOGL2(CALayer* eaglLayer, uint width, uint height);
     virtual void render();
     static uint loadShader(uint shaderType, String source);
-    static int createProgram(String programName, String vertexSource, String fragmentSource);
+    TEShaderProgram createProgram(String programName, String vertexSource, String fragmentSource);
     static uint getAttributeLocation(uint program, String attribute);
     static uint getUniformLocation(uint program, String uniform);
 };
