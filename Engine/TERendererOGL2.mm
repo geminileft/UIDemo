@@ -8,7 +8,7 @@
 #include "TEManagerTexture.h"
 #include "TEUtilTexture.h"
 #include "TEUtilMatrix.h"
-#include "TERendererProgram.h"
+#include "TERendererBasic.h"
 
 static std::map<String, uint> mPrograms;
 
@@ -89,7 +89,7 @@ void TERendererOGL2::createPrograms() {
     
     vertexSource = TEManagerFile::readFileContents("colorbox.vs");
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
-    mBasicProgram = new TERendererProgram(vertexSource, fragmentSource);
+    mBasicProgram = new TERendererBasic(vertexSource, fragmentSource);
     program = TERendererOGL2::createProgram("basic", vertexSource, fragmentSource);
     mBasicProgram->addAttribute("aVertices");
     addProgramAttribute(program.programId, "aVertices");
@@ -108,37 +108,17 @@ void TERendererOGL2::render() {
         target.width = mWidth;
         target.height = mHeight;
     }
-    renderBasic(target);
+
+    uint count = getPolygonCount();
+    TERenderPolygonPrimative* primatives = getPolygonPrimatives();
+    mBasicProgram->run(target, primatives, count);
+
     target.frameBuffer = mFrameBuffer;
     target.width = mWidth;
     target.height = mHeight;
     renderTexture(target);
     //renderBlur(target);
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
-}
-
-void TERendererOGL2::renderBasic(TEFBOTarget target) {
-    String programName = "basic";
-    uint program = switchProgram(programName, target);
-    //glClearColor(1, 0, 1, 1.0f);
-    //glClear(GL_COLOR_BUFFER_BIT);
-    uint vertexHandle = TERendererOGL2::getAttributeLocation(program, "aVertices");
-    uint colorHandle = TERendererOGL2::getUniformLocation(program, "aColor");
-    uint posHandle = TERendererOGL2::getAttributeLocation(program, "aPosition");
-
-    uint count = getPolygonCount();
-    TERenderPolygonPrimative* primatives = getPolygonPrimatives();
-    TERenderPolygonPrimative p;
-
-    for (int i = 0;i < count;++i) {
-        p = primatives[i];
-
-        glVertexAttribPointer(vertexHandle, 2, GL_FLOAT, GL_FALSE, 0, &p.vertexBuffer[0]);
-        glUniform4f(colorHandle, p.color.r, p.color.g, p.color.b, p.color.a);
-        glVertexAttrib2f(posHandle, p.position.x, p.position.y);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, p.vertexCount);        
-    }
-    stopProgram(programName);
 }
 
 void TERendererOGL2::renderTexture(TEFBOTarget target) {

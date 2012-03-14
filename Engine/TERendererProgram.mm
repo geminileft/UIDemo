@@ -108,4 +108,7 @@ void TERendererProgram::deactivate() {
     }
 }
 
+uint TERendererProgram::getProgramId() const {
+    return mProgramId;
+}
 

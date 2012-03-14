@@ -18,6 +18,8 @@ public:
     void addAttribute(String attribute);
     uint activate(TEFBOTarget target);
     void deactivate();
+    virtual void run(TEFBOTarget target, TERenderPolygonPrimative* primatives, uint primativeCount) = 0;
+    uint getProgramId() const;
 
 };
 #endif

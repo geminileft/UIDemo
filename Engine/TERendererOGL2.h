@@ -40,7 +40,6 @@ private:
     void stopProgram(String programName);
     static void checkGlError(String op);
     
-    void renderBasic(TEFBOTarget target);
     void renderTexture(TEFBOTarget target);
     void renderBlur(TEFBOTarget target);
     void setScreenAdjustment(int width, int height);
