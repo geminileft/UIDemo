@@ -16,8 +16,6 @@ private:
     float *mVertices;
 
 public:
-    //RenderPolygon();
-    //RenderPolygon(TESize size, TEColor4 color);
     ~RenderPolygon();
     virtual void update();
     virtual void draw();
