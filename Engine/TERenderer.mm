@@ -42,3 +42,12 @@ uint TERenderer::getPrimativeCount() const {
 uint TERenderer::getPolygonCount() const {
     return mPolygonTop;
 }
+
+void TERenderer::setTarget(uint frameBuffer, TERenderTarget* target) {
+    mTargets[frameBuffer] = target;
+}
+
+TERenderTarget* TERenderer::getTarget(uint frameBuffer) {
+    return mTargets[frameBuffer];
+}
+

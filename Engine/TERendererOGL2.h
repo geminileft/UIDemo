@@ -8,6 +8,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 class TERendererProgram;
+class TERenderTarget;
 
 struct TEShaderProgram {
     uint programId;
@@ -21,7 +22,7 @@ private:
     
     EAGLContext* mContext;
     uint mRenderBuffer;
-    uint mFrameBuffer;
+    uint mScreenFrameBuffer;
     uint mCoordsHandle;
     uint maPositionHandle;
     uint maTextureHandle;

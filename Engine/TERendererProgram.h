@@ -3,6 +3,8 @@
 
 #include "TETypes.h"
 
+class TERenderTarget;
+
 class TERendererProgram {
 private:
     uint mProgramId;
@@ -16,9 +18,9 @@ public:
     TERendererProgram(String vertexSource, String fragmentSource);
     
     void addAttribute(String attribute);
-    uint activate(TEFBOTarget target);
+    uint activate(TERenderTarget* target);
     void deactivate();
-    virtual void run(TEFBOTarget target, TERenderPolygonPrimative* primatives, uint primativeCount) = 0;
+    virtual void run(TERenderTarget* target, TERenderPolygonPrimative* primatives, uint primativeCount) = 0;
     uint getProgramId() const;
 
 };

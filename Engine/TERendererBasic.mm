@@ -5,7 +5,7 @@ TERendererBasic::TERendererBasic() {}
 TERendererBasic::TERendererBasic(String vertexSource, String fragmentSource) :
     TERendererProgram(vertexSource, fragmentSource) {}
 
-void TERendererBasic::run(TEFBOTarget target, TERenderPolygonPrimative* primatives, uint primativeCount) {
+void TERendererBasic::run(TERenderTarget* target, TERenderPolygonPrimative* primatives, uint primativeCount) {
     uint programId = activate(target);
     uint vertexHandle = glGetAttribLocation(programId, "aVertices");
     uint colorHandle = glGetUniformLocation(programId, "aColor");

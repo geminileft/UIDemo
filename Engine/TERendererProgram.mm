@@ -1,5 +1,6 @@
 #include "TERendererProgram.h"
 #include "TEUtilMatrix.h"
+#include "TERenderTarget.h"
 
 TERendererProgram::TERendererProgram() {
 }
@@ -51,7 +52,7 @@ void TERendererProgram::addAttribute(String attribute) {
     mAttributes.push_back(attribute);
 }
 
-uint TERendererProgram::activate(TEFBOTarget target) {
+uint TERendererProgram::activate(TERenderTarget* target) {
     glUseProgram(mProgramId);
     checkGlError("glUseProgram");
     
@@ -64,8 +65,10 @@ uint TERendererProgram::activate(TEFBOTarget target) {
         }
     }
     
-    glViewport(0, 0, target.width, target.height);
-    glBindFramebuffer(GL_FRAMEBUFFER, target.frameBuffer);
+    const float width = target->getFrameWidth();
+    const float height = target->getFrameHeight();
+    glViewport(0, 0, width, height);
+    glBindFramebuffer(GL_FRAMEBUFFER, target->getFrameBuffer());
     
     float proj[16];
     float trans[16];
@@ -75,8 +78,8 @@ uint TERendererProgram::activate(TEFBOTarget target) {
     float zDepth;
     float ratio;
     
-    zDepth = (float)target.height / 2;
-    ratio = (float)target.width/(float)target.height;
+    zDepth = (float)height / 2;
+    ratio = (float)width/(float)height;
     
     if (false) {
         angle = -90.0f;

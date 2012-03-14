@@ -3,13 +3,15 @@
 
 #include "TERendererProgram.h"
 
+class TERenderTarget;
+
 class TERendererBasic : public TERendererProgram {
 
 public:
     TERendererBasic();
     TERendererBasic(String vertexSource, String fragmentSource);
     
-    virtual void run(TEFBOTarget target, TERenderPolygonPrimative* primatives, uint primativeCount);
+    virtual void run(TERenderTarget* target, TERenderPolygonPrimative* primatives, uint primativeCount);
 };
 
 #endif

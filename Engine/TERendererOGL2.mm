@@ -9,10 +9,13 @@
 #include "TEUtilTexture.h"
 #include "TEUtilMatrix.h"
 #include "TERendererBasic.h"
+#include "TERenderTarget.h"
 
 static std::map<String, uint> mPrograms;
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
+    TERenderTarget* target;
+
     mUseRenderToTexture = YES;
     mTextureLength = 1024;
     mWidth = width;
@@ -23,8 +26,8 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     if (!mContext || ![EAGLContext setCurrentContext:mContext]) {
     }
     
-    glGenFramebuffers(1, &mFrameBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
+    glGenFramebuffers(1, &mScreenFrameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, mScreenFrameBuffer);
     
     /******************************
     NEEDED FOR RENDER TO TEXTURE
@@ -43,11 +46,15 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     if(status != GL_FRAMEBUFFER_COMPLETE) {
         NSLog(@"failed to make complete framebuffer object %x", status);
     }
+    
+    target = new TERenderTarget(mTextureFrameBuffer);
+    target->setSize(TESizeMake(mTextureLength, mTextureLength));
+    setTarget(mTextureFrameBuffer, target);
     /******************************
      NEEDED FOR RENDER TO TEXTURE
      *******************************/
 
-    glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, mScreenFrameBuffer);
     
     glGenRenderbuffers(1, &mRenderBuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, mRenderBuffer);
@@ -60,6 +67,10 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     int screenWidth, screenHeight;
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &screenWidth);
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &screenHeight);
+    
+    target = new TERenderTarget(mScreenFrameBuffer);
+    target->setSize(TESizeMake(screenWidth, screenHeight));
+    setTarget(mScreenFrameBuffer, target);
     //setScreenAdjustment(screenWidth, screenHeight);
     
     [EAGLContext setCurrentContext:mContext];
@@ -90,30 +101,27 @@ void TERendererOGL2::createPrograms() {
     vertexSource = TEManagerFile::readFileContents("colorbox.vs");
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
     mBasicProgram = new TERendererBasic(vertexSource, fragmentSource);
-    program = TERendererOGL2::createProgram("basic", vertexSource, fragmentSource);
+    //program = TERendererOGL2::createProgram("basic", vertexSource, fragmentSource);
     mBasicProgram->addAttribute("aVertices");
-    addProgramAttribute(program.programId, "aVertices");
+    //addProgramAttribute(program.programId, "aVertices");
 }
 
 void TERendererOGL2::render() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     TEFBOTarget target;
+    TERenderTarget* rt;
     if (mUseRenderToTexture) {
-        target.frameBuffer = mTextureFrameBuffer;
-        target.width = mTextureLength;
-        target.height = mTextureLength;
+        rt = getTarget(mTextureFrameBuffer);
     } else {
-        target.frameBuffer = mFrameBuffer;
-        target.width = mWidth;
-        target.height = mHeight;
+        rt = getTarget(mScreenFrameBuffer);
     }
 
     uint count = getPolygonCount();
     TERenderPolygonPrimative* primatives = getPolygonPrimatives();
-    mBasicProgram->run(target, primatives, count);
+    mBasicProgram->run(rt, primatives, count);
 
-    target.frameBuffer = mFrameBuffer;
+    target.frameBuffer = mScreenFrameBuffer;
     target.width = mWidth;
     target.height = mHeight;
     //mBasicProgram->run(target, primatives, count);
