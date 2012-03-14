@@ -5,7 +5,8 @@
 #include "TEEventListener.h"
 #include "TEManagerTexture.h"
 
-RenderImage::RenderImage(NSString* resourceName, TEPoint position, TESize size) {
+RenderImage::RenderImage(NSString* resourceName, TEPoint position, TESize size)
+: TEComponentRender() {
     UIImage* image = [UIImage imageNamed:resourceName];
     mTextureName = TEManagerTexture::GLUtexImage2D([image CGImage]);
     mTexture = new TEUtilTexture(resourceName, position, size);

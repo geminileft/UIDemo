@@ -51,3 +51,10 @@ TERenderTarget* TERenderer::getTarget(uint frameBuffer) {
     return mTargets[frameBuffer];
 }
 
+uint TERenderer::getScreenFrameBuffer() const {
+    return mScreenFrameBuffer;
+}
+void TERenderer::setScreenFrameBuffer(uint screenFrameBuffer) {
+    mScreenFrameBuffer = screenFrameBuffer;
+}
+

@@ -16,6 +16,7 @@ private:
     float *mVertices;
 
 public:
+    RenderPolygon();
     ~RenderPolygon();
     virtual void update();
     virtual void draw();

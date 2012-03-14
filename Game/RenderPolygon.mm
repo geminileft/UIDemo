@@ -4,6 +4,10 @@
 #include "TEGameObject.h"
 #include "TEEventListener.h"
 
+RenderPolygon::RenderPolygon() : TEComponentRender() {
+    
+}
+
 void RenderPolygon::update() {
     
     TEColor4 color;

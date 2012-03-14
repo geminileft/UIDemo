@@ -16,6 +16,7 @@ private:
     TERenderTexturePrimative mTexturePrimatives[MAX_RENDER_PRIMATIVES];
     TERenderPolygonPrimative mPolygonPrimatives[MAX_RENDER_PRIMATIVES];
     std::map<uint, TERenderTarget*> mTargets;
+    uint mScreenFrameBuffer;
 
     
 public:
@@ -30,6 +31,8 @@ public:
     uint getPolygonCount() const;
     void setTarget(uint frameBuffer, TERenderTarget* target);
     TERenderTarget* getTarget(uint frameBuffer);
+    uint getScreenFrameBuffer() const;
+    void setScreenFrameBuffer(uint screenFrameBuffer);
 };
 
 #endif

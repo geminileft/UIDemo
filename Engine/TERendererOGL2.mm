@@ -25,9 +25,10 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     mContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     if (!mContext || ![EAGLContext setCurrentContext:mContext]) {
     }
-    
-    glGenFramebuffers(1, &mScreenFrameBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, mScreenFrameBuffer);
+    uint screenFrameBuffer;
+    glGenFramebuffers(1, &screenFrameBuffer);
+    setScreenFrameBuffer(screenFrameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, screenFrameBuffer);
     
     /******************************
     NEEDED FOR RENDER TO TEXTURE
@@ -54,7 +55,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
      NEEDED FOR RENDER TO TEXTURE
      *******************************/
 
-    glBindFramebuffer(GL_FRAMEBUFFER, mScreenFrameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, screenFrameBuffer);
     
     glGenRenderbuffers(1, &mRenderBuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, mRenderBuffer);
@@ -68,9 +69,9 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &screenWidth);
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &screenHeight);
     
-    target = new TERenderTarget(mScreenFrameBuffer);
+    target = new TERenderTarget(screenFrameBuffer);
     target->setSize(TESizeMake(screenWidth, screenHeight));
-    setTarget(mScreenFrameBuffer, target);
+    setTarget(screenFrameBuffer, target);
     //setScreenAdjustment(screenWidth, screenHeight);
     
     [EAGLContext setCurrentContext:mContext];
@@ -115,7 +116,7 @@ void TERendererOGL2::render() {
     if (mUseRenderToTexture) {
         rt = getTarget(mTextureFrameBuffer);
     } else {
-        rt = getTarget(mScreenFrameBuffer);
+        rt = getTarget(getScreenFrameBuffer());
     }
 
     uint count = getPolygonCount();
@@ -154,10 +155,11 @@ void TERendererOGL2::render() {
     TEVec3 vec;
     vec.x = 0;
     vec.y = -160;
-    rt = getTarget(mScreenFrameBuffer);
+    uint screenFrameBuffer = getScreenFrameBuffer();
+    rt = getTarget(screenFrameBuffer);
     addTexture(rt, mTextureFrameBufferHandle, vertexBuffer, textureBuffer, vec);
 
-    rt = getTarget(mScreenFrameBuffer);
+    rt = getTarget(screenFrameBuffer);
     rp = mShaderPrograms["kernel"];
     rp->run(rt, getRenderPrimatives(), getPrimativeCount());
     [mContext presentRenderbuffer:GL_RENDERBUFFER];

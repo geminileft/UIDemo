@@ -2,6 +2,9 @@
 
 static TERenderer* mSharedRenderer = NULL;
 
+TEComponentRender::TEComponentRender() {
+}
+
 TERenderer* TEComponentRender::sharedRenderer() {
     return mSharedRenderer;
 }

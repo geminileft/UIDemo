@@ -15,7 +15,6 @@ private:
     bool mUseRenderToTexture;
     EAGLContext* mContext;
     uint mRenderBuffer;
-    uint mScreenFrameBuffer;
     uint mCoordsHandle;
     uint maPositionHandle;
     uint maTextureHandle;
