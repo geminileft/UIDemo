@@ -115,3 +115,6 @@ uint TERendererProgram::getProgramId() const {
     return mProgramId;
 }
 
+void TERendererProgram::run(TERenderTarget* target, TERenderPolygonPrimative* primatives, uint primativeCount) {}
+void TERendererProgram::run(TERenderTarget* target, TERenderTexturePrimative* primatives, uint primativeCount) {}
+

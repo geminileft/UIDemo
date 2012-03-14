@@ -35,14 +35,14 @@ private:
     std::map<uint, std::list<String> > mProgramAttributes;
     bool mRotate;
     TERendererProgram* mBasicProgram;
+    std::map<String, TERendererProgram*> mShaderPrograms;
     
     void addProgramAttribute(uint program, String attribute);
-    uint switchProgram(String programName, TEFBOTarget target);
+    uint switchProgram(String programName, TERenderTarget* target);
     void stopProgram(String programName);
     static void checkGlError(String op);
     
-    void renderTexture(TEFBOTarget target);
-    void renderBlur(TEFBOTarget target);
+    void renderBlur(TERenderTarget* target);
     void setScreenAdjustment(int width, int height);
     void createPrograms();
     

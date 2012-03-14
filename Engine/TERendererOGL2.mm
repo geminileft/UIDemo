@@ -10,6 +10,7 @@
 #include "TEUtilMatrix.h"
 #include "TERendererBasic.h"
 #include "TERenderTarget.h"
+#include "TERendererTexture.h"
 
 static std::map<String, uint> mPrograms;
 
@@ -88,7 +89,13 @@ void TERendererOGL2::createPrograms() {
     String fragmentSource;
     vertexSource = TEManagerFile::readFileContents("texture.vs");
     fragmentSource = TEManagerFile::readFileContents("texture.fs");
+    
+    TERendererProgram* rp = new TERendererTexture(vertexSource, fragmentSource);
+    mShaderPrograms["texture"] = rp;
     program = TERendererOGL2::createProgram("texture", vertexSource, fragmentSource);
+    rp->addAttribute("aVertices");
+    rp->addAttribute("aTextureCoords");
+    
     addProgramAttribute(program.programId, "aVertices");
     addProgramAttribute(program.programId, "aTextureCoords");
     
@@ -107,10 +114,10 @@ void TERendererOGL2::createPrograms() {
 }
 
 void TERendererOGL2::render() {
+    TERenderTarget* rt;
+    TERendererProgram* rp;
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    TEFBOTarget target;
-    TERenderTarget* rt;
     if (mUseRenderToTexture) {
         rt = getTarget(mTextureFrameBuffer);
     } else {
@@ -121,24 +128,9 @@ void TERendererOGL2::render() {
     TERenderPolygonPrimative* primatives = getPolygonPrimatives();
     mBasicProgram->run(rt, primatives, count);
 
-    target.frameBuffer = mScreenFrameBuffer;
-    target.width = mWidth;
-    target.height = mHeight;
-    //mBasicProgram->run(target, primatives, count);
-    renderTexture(target);
-    //renderBlur(target);
-    [mContext presentRenderbuffer:GL_RENDERBUFFER];
-}
-
-void TERendererOGL2::renderTexture(TEFBOTarget target) {
-    String programName = "texture";
-    uint simpleProgram = switchProgram(programName, target);
-    uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
-    uint textureHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aTextureCoords");
-    uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
-    uint alphaHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uAlpha");
-    
-
+    /************************
+     RENDER TO TEXTURE
+    *************************/
     float textureBuffer[8]; 
     textureBuffer[0] = 0.0f;//left
     textureBuffer[1] = 1.0f;//top
@@ -152,9 +144,9 @@ void TERendererOGL2::renderTexture(TEFBOTarget target) {
     float vertexBuffer[8];
     const float var = mTextureLength / 2;
     const float leftX = -var;
-    const float bottomY = -var - 160;
+    const float bottomY = -var;
     const float rightX = var;
-    const float topY = var - 160;
+    const float topY = var;
     
     vertexBuffer[0] = leftX;
 	vertexBuffer[1] = bottomY;
@@ -164,33 +156,19 @@ void TERendererOGL2::renderTexture(TEFBOTarget target) {
 	vertexBuffer[5] = topY;
 	vertexBuffer[6] = leftX;
 	vertexBuffer[7] = topY;
-    
-    if (mUseRenderToTexture) {
-        glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
-        glVertexAttrib2f(coordsHandle, 0, 0);
-        glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, textureBuffer);
-        glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, vertexBuffer);
-        glUniform1f(alphaHandle, 1.0);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-    }
-
-    TERenderTexturePrimative* primatives = getRenderPrimatives();
-    uint count = getPrimativeCount();
     TEVec3 vec;
-    for (int i = 0;i < count;++i) {
-        vec = primatives[i].position;
-        glBindTexture(GL_TEXTURE_2D, primatives[i].textureName);
-        glVertexAttrib2f(coordsHandle, vec.x, vec.y);
-        glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
-        glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
-        glUniform1f(alphaHandle, 1.0);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-    }
+    vec.x = 0;
+    vec.y = -160;
+    addTexture(mTextureFrameBufferHandle, vertexBuffer, textureBuffer, vec);
 
-    stopProgram(programName);
+    rt = getTarget(mScreenFrameBuffer);
+    rp = mShaderPrograms["texture"];
+    rp->run(rt, getRenderPrimatives(), getPrimativeCount());
+    //renderBlur(target);
+    [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 
-void TERendererOGL2::renderBlur(TEFBOTarget target) {
+void TERendererOGL2::renderBlur(TERenderTarget* target) {
     String programName = "blur";
     uint simpleProgram = switchProgram(programName, target);
     uint positionHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aVertices");
@@ -401,7 +379,7 @@ uint TERendererOGL2::loadShader(uint shaderType, String source) {
     return shader;
 }
 
-uint TERendererOGL2::switchProgram(String programName, TEFBOTarget target) {
+uint TERendererOGL2::switchProgram(String programName, TERenderTarget* target) {
     uint program = mPrograms[programName];
     glUseProgram(program);
     checkGlError("glUseProgram");
@@ -416,8 +394,11 @@ uint TERendererOGL2::switchProgram(String programName, TEFBOTarget target) {
         }
     }
     
-    glViewport(0, 0, target.width, target.height);
-    glBindFramebuffer(GL_FRAMEBUFFER, target.frameBuffer);
+    const float width = target->getFrameWidth();
+    const float height = target->getFrameHeight();
+    
+    glViewport(0, 0, width, height);
+    glBindFramebuffer(GL_FRAMEBUFFER, target->getFrameBuffer());
 
     float proj[16];
     float trans[16];
@@ -427,8 +408,8 @@ uint TERendererOGL2::switchProgram(String programName, TEFBOTarget target) {
     float zDepth;
     float ratio;
     
-    zDepth = (float)target.height / 2;
-    ratio = (float)target.width/(float)target.height;
+    zDepth = (float)height / 2;
+    ratio = (float)width/(float)height;
     
     if (mRotate) {
         angle = -90.0f;
