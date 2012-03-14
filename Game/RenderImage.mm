@@ -40,7 +40,7 @@ void RenderImage::update() {
     vec3.y = mParent->position.y;
     vec3.z = 0;
 
-    sharedRenderer()->addTexture(mTextureName, mVertexBuffer, mTextureBuffer, vec3);
+    sharedRenderer()->addTexture(getRenderTarget(), mTextureName, mVertexBuffer, mTextureBuffer, vec3);
 }
 
 void RenderImage::draw() {

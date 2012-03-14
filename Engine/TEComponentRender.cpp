@@ -9,3 +9,11 @@ TERenderer* TEComponentRender::sharedRenderer() {
 void TEComponentRender::setSharedRenderer(TERenderer* renderer) {
     mSharedRenderer = renderer;
 }
+
+void TEComponentRender::setRenderTarget(TERenderTarget* target) {
+    mTarget = target;
+}
+
+TERenderTarget* TEComponentRender::getRenderTarget() {
+    return mTarget;
+}

@@ -17,7 +17,7 @@ void RenderPolygon::update() {
     position.y = mParent->position.y;
     position.z = 0.0f;
     
-    sharedRenderer()->addPolygon(mVertices, mVertexCount, position, color);
+    sharedRenderer()->addPolygon(getRenderTarget(), mVertices, mVertexCount, position, color);
 }
 
 void RenderPolygon::draw() {

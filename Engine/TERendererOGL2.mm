@@ -13,8 +13,6 @@
 #include "TERendererTexture.h"
 #include "TERendererKernel.h"
 
-static std::map<String, uint> mPrograms;
-
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     TERenderTarget* target;
 
@@ -87,10 +85,11 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
 void TERendererOGL2::createPrograms() {
     String vertexSource;
     String fragmentSource;
+    TERendererProgram* rp;
+    
     vertexSource = TEManagerFile::readFileContents("texture.vs");
     fragmentSource = TEManagerFile::readFileContents("texture.fs");
-    
-    TERendererProgram* rp = new TERendererTexture(vertexSource, fragmentSource);
+    rp = new TERendererTexture(vertexSource, fragmentSource);
     mShaderPrograms["texture"] = rp;
     rp->addAttribute("aVertices");
     rp->addAttribute("aTextureCoords");
@@ -155,7 +154,8 @@ void TERendererOGL2::render() {
     TEVec3 vec;
     vec.x = 0;
     vec.y = -160;
-    addTexture(mTextureFrameBufferHandle, vertexBuffer, textureBuffer, vec);
+    rt = getTarget(mScreenFrameBuffer);
+    addTexture(rt, mTextureFrameBufferHandle, vertexBuffer, textureBuffer, vec);
 
     rt = getTarget(mScreenFrameBuffer);
     rp = mShaderPrograms["kernel"];

@@ -25,7 +25,6 @@ private:
     int mWidth;
     int mHeight;
     uint mTexture;
-    std::map<uint, std::list<String> > mProgramAttributes;
     bool mRotate;
     std::map<String, TERendererProgram*> mShaderPrograms;
     
