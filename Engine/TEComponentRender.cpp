@@ -1,8 +1,11 @@
 #include "TEComponentRender.h"
+#include "TERenderer.h"
 
 static TERenderer* mSharedRenderer = NULL;
 
 TEComponentRender::TEComponentRender() {
+    uint screenFrameBuffer = mSharedRenderer->getScreenFrameBuffer();
+    mTarget = sharedRenderer()->getTarget(screenFrameBuffer);
 }
 
 TERenderer* TEComponentRender::sharedRenderer() {
