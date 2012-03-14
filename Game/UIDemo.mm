@@ -23,11 +23,12 @@ void UIDemo::start() {
     radius = 5.0;
     rp = RenderPolygonFactory::roundedRect(size, color, radius, (uint)radius);
     
-    go->position.x = -80.0f;
+    go->position.x = 0.0f;
     go->position.y = 0.0f;
     
     go->addComponent(rp);
     addGameObject(go);
+
 
     go = new TEGameObject();
     
@@ -38,6 +39,7 @@ void UIDemo::start() {
     
     go->addComponent(ri);
     addGameObject(go);
+
 /*
     go = new TEGameObject();
     

@@ -13,7 +13,7 @@
 static std::map<String, uint> mPrograms;
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
-    mUseRenderToTexture = NO;
+    mUseRenderToTexture = YES;
     mTextureLength = 1024;
     mWidth = width;
     mHeight = height;
@@ -105,6 +105,9 @@ void TERendererOGL2::render() {
         target.height = mHeight;
     }
     renderBasic(target);
+    target.frameBuffer = mFrameBuffer;
+    target.width = mWidth;
+    target.height = mHeight;
     renderTexture(target);
     //renderBlur(target);
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
@@ -177,8 +180,6 @@ void TERendererOGL2::renderTexture(TEFBOTarget target) {
         glUniform1f(alphaHandle, 1.0);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
-    
-
 
     TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
