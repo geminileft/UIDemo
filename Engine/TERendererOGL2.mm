@@ -97,15 +97,17 @@ void TERendererOGL2::render() {
     //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     TEFBOTarget target;
-    target.frameBuffer = mTextureFrameBuffer;
-    target.width = mTextureLength;
-    target.height = mTextureLength;
+    if (mUseRenderToTexture) {
+        target.frameBuffer = mTextureFrameBuffer;
+        target.width = mTextureLength;
+        target.height = mTextureLength;
+    } else {
+        target.frameBuffer = mFrameBuffer;
+        target.width = mWidth;
+        target.height = mHeight;
+    }
     renderBasic(target);
-    target.frameBuffer = mFrameBuffer;
-    target.width = mWidth;
-    target.height = mHeight;
-    renderBasic(target);
-    //renderTexture(target);
+    renderTexture(target);
     //renderBlur(target);
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
@@ -142,7 +144,7 @@ void TERendererOGL2::renderTexture(TEFBOTarget target) {
     uint coordsHandle = TERendererOGL2::getAttributeLocation(simpleProgram, "aPosition");
     uint alphaHandle = TERendererOGL2::getUniformLocation(simpleProgram, "uAlpha");
     
-    /*
+
     float textureBuffer[8]; 
     textureBuffer[0] = 0.0f;//left
     textureBuffer[1] = 1.0f;//top
@@ -155,9 +157,9 @@ void TERendererOGL2::renderTexture(TEFBOTarget target) {
     
     float vertexBuffer[8];
     const float var = mTextureLength / 2;
-    const float leftX = -var - 80;
+    const float leftX = -var;
     const float bottomY = -var;
-    const float rightX = var - 80;
+    const float rightX = var;
     const float topY = var;
     
     vertexBuffer[0] = leftX;
@@ -177,8 +179,8 @@ void TERendererOGL2::renderTexture(TEFBOTarget target) {
         glUniform1f(alphaHandle, 1.0);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
-    */
     
+
     TERenderTexturePrimative* primatives = getRenderPrimatives();
     uint count = getPrimativeCount();
     TEVec3 vec;
@@ -191,6 +193,7 @@ void TERendererOGL2::renderTexture(TEFBOTarget target) {
         glUniform1f(alphaHandle, 1.0);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
+
     stopProgram(programName);
 }
 
