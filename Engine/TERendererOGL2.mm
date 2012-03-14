@@ -116,6 +116,7 @@ void TERendererOGL2::render() {
     target.frameBuffer = mFrameBuffer;
     target.width = mWidth;
     target.height = mHeight;
+    //mBasicProgram->run(target, primatives, count);
     renderTexture(target);
     //renderBlur(target);
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
@@ -143,9 +144,9 @@ void TERendererOGL2::renderTexture(TEFBOTarget target) {
     float vertexBuffer[8];
     const float var = mTextureLength / 2;
     const float leftX = -var;
-    const float bottomY = -var;
+    const float bottomY = -var - 160;
     const float rightX = var;
-    const float topY = var;
+    const float topY = var - 160;
     
     vertexBuffer[0] = leftX;
 	vertexBuffer[1] = bottomY;
