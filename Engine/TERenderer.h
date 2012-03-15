@@ -24,9 +24,7 @@ public:
     void addTexture(TERenderTarget* target, uint textureName, float* vertexBuffer, float* textureBuffer, TEVec3 position);
     void addPolygon(TERenderTarget* target, float* vertexBuffer, int count, TEVec3 position, TEColor4 color);
     void reset();
-    TERenderTexturePrimative* getRenderPrimatives();
     TERenderPolygonPrimative* getPolygonPrimatives();
-    uint getPrimativeCount() const;
     uint getPolygonCount() const;
     void setTarget(uint frameBuffer, TERenderTarget* target);
     TERenderTarget* getTarget(uint frameBuffer);

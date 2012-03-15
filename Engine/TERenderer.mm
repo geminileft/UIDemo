@@ -41,16 +41,8 @@ void TERenderer::reset() {
     }
 }
 
-TERenderTexturePrimative* TERenderer::getRenderPrimatives() {
-    return mTexturePrimatives;
-}
-
 TERenderPolygonPrimative* TERenderer::getPolygonPrimatives() {
     return mPolygonPrimatives;
-}
-
-uint TERenderer::getPrimativeCount() const {
-    return mTextureTop;
 }
 
 uint TERenderer::getPolygonCount() const {

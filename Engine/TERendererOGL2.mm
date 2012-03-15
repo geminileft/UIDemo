@@ -161,7 +161,10 @@ void TERendererOGL2::render() {
 
     rt = getTarget(screenFrameBuffer);
     rp = mShaderPrograms["kernel"];
-    rp->run(rt, getRenderPrimatives(), getPrimativeCount());
+    uint primativeCount;
+    TERenderTexturePrimative* rtp = rt->getTexturePrimatives(primativeCount);
+    //rp->run(rt, getRenderPrimatives(), getPrimativeCount());
+    rp->run(rt, rtp, primativeCount);
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 

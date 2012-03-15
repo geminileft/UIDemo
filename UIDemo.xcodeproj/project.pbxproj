@@ -26,7 +26,6 @@
 		D7092E2014ACFE1E00E1D6EE /* TEInputTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7092E1E14ACFE1E00E1D6EE /* TEInputTouch.cpp */; };
 		D7092E2614ACFE6500E1D6EE /* TEManagerSound.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7092E2514ACFE6500E1D6EE /* TEManagerSound.mm */; };
 		D7092E2C14ACFE9500E1D6EE /* TERenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7092E2B14ACFE9500E1D6EE /* TERenderer.mm */; };
-		D7092E2F14ACFEAB00E1D6EE /* TERendererOGL1.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7092E2E14ACFEAB00E1D6EE /* TERendererOGL1.mm */; };
 		D7092E3214ACFECE00E1D6EE /* TEComponentSound.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7092E3114ACFECE00E1D6EE /* TEComponentSound.mm */; };
 		D7092E3514ACFEE200E1D6EE /* TEUtilTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7092E3414ACFEE200E1D6EE /* TEUtilTexture.mm */; };
 		D7092E3814ACFEF700E1D6EE /* TERendererOGL2.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7092E3714ACFEF700E1D6EE /* TERendererOGL2.mm */; };
@@ -107,8 +106,6 @@
 		D7092E2514ACFE6500E1D6EE /* TEManagerSound.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TEManagerSound.mm; sourceTree = "<group>"; };
 		D7092E2A14ACFE9500E1D6EE /* TERenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TERenderer.h; sourceTree = "<group>"; };
 		D7092E2B14ACFE9500E1D6EE /* TERenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TERenderer.mm; sourceTree = "<group>"; };
-		D7092E2D14ACFEAB00E1D6EE /* TERendererOGL1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TERendererOGL1.h; sourceTree = "<group>"; };
-		D7092E2E14ACFEAB00E1D6EE /* TERendererOGL1.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TERendererOGL1.mm; sourceTree = "<group>"; };
 		D7092E3014ACFECE00E1D6EE /* TEComponentSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEComponentSound.h; sourceTree = "<group>"; };
 		D7092E3114ACFECE00E1D6EE /* TEComponentSound.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TEComponentSound.mm; sourceTree = "<group>"; };
 		D7092E3314ACFEE200E1D6EE /* TEUtilTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEUtilTexture.h; sourceTree = "<group>"; };
@@ -286,8 +283,6 @@
 				D71D8B8915110A5900FB6A52 /* TERendererBasic.mm */,
 				D71D8B91151144E300FB6A52 /* TERendererKernel.h */,
 				D71D8B92151144F700FB6A52 /* TERendererKernel.mm */,
-				D7092E2D14ACFEAB00E1D6EE /* TERendererOGL1.h */,
-				D7092E2E14ACFEAB00E1D6EE /* TERendererOGL1.mm */,
 				D7092E3614ACFEF700E1D6EE /* TERendererOGL2.h */,
 				D7092E3714ACFEF700E1D6EE /* TERendererOGL2.mm */,
 				D71D8B841510FCCD00FB6A52 /* TERendererProgram.h */,
@@ -447,7 +442,6 @@
 				D7092E2014ACFE1E00E1D6EE /* TEInputTouch.cpp in Sources */,
 				D7092E2614ACFE6500E1D6EE /* TEManagerSound.mm in Sources */,
 				D7092E2C14ACFE9500E1D6EE /* TERenderer.mm in Sources */,
-				D7092E2F14ACFEAB00E1D6EE /* TERendererOGL1.mm in Sources */,
 				D7092E3214ACFECE00E1D6EE /* TEComponentSound.mm in Sources */,
 				D7092E3514ACFEE200E1D6EE /* TEUtilTexture.mm in Sources */,
 				D7092E3814ACFEF700E1D6EE /* TERendererOGL2.mm in Sources */,

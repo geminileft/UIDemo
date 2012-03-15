@@ -12,6 +12,8 @@ private:
     float mFrameHeight;
     std::vector<TERenderTexturePrimative> mTexturePrimatives;
     std::vector<TERenderPolygonPrimative> mPolygonPrimatives;
+    TERenderTexturePrimative* mFrameTexturePrimatives;
+    TERenderPolygonPrimative* mFramePolygonPrimatives;
 
 public:
     TERenderTarget(uint frameBuffer);
@@ -23,6 +25,8 @@ public:
     void addTexturePrimative(TERenderTexturePrimative primative);
     void addPolygonPrimative(TERenderPolygonPrimative primative);
     void resetPrimatives();
+    TERenderTexturePrimative* getTexturePrimatives(uint &count);
+    TERenderPolygonPrimative* getPolygonPrimatives(uint &count);
 };
 
 #endif

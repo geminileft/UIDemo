@@ -31,3 +31,22 @@ void TERenderTarget::resetPrimatives() {
     mTexturePrimatives.clear();
     mPolygonPrimatives.clear();
 }
+
+TERenderTexturePrimative* TERenderTarget::getTexturePrimatives(uint &count) {
+    count = mTexturePrimatives.size();
+    free(mFrameTexturePrimatives);
+    if (count > 0) {
+        mFrameTexturePrimatives = (TERenderTexturePrimative*)malloc(count * sizeof(TERenderTexturePrimative));
+        std::vector<TERenderTexturePrimative>::iterator iterator;
+        uint c = 0;
+        for(iterator = mTexturePrimatives.begin(); iterator != mTexturePrimatives.end(); iterator++) {
+            mFrameTexturePrimatives[c] = (*iterator);
+            ++c;
+        }
+    }
+    return mFrameTexturePrimatives;
+}
+
+TERenderPolygonPrimative* TERenderTarget::getPolygonPrimatives(uint &count) {
+    return NULL;
+}
