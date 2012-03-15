@@ -1,7 +1,7 @@
 #include "TERenderer.h"
 #include "TERenderTarget.h"
 
-TERenderer::TERenderer() : mTextureTop(0), mPolygonTop(0) {}
+TERenderer::TERenderer() : mPolygonTop(0) {}
 
 void TERenderer::addTexture(TERenderTarget* target, uint textureName, float* vertexBuffer, float* textureBuffer, TEVec3 position) {
     TERenderTexturePrimative rp;
@@ -9,8 +9,6 @@ void TERenderer::addTexture(TERenderTarget* target, uint textureName, float* ver
     rp.position = position;
     rp.vertexBuffer = vertexBuffer;
     rp.textureBuffer = textureBuffer;
-    mTexturePrimatives[mTextureTop] = rp;
-    ++mTextureTop;
     target->addTexturePrimative(rp);
 }
 
@@ -32,7 +30,6 @@ void TERenderer::addPolygon(TERenderTarget* target, float* vertexBuffer, int cou
 }
 
 void TERenderer::reset() {
-    mTextureTop = 0;
     mPolygonTop = 0;
     std::map<uint, TERenderTarget*>::iterator iterator;
 

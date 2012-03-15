@@ -11,9 +11,7 @@ class TERenderTarget;
 
 class TERenderer {
 private:
-    uint mTextureTop;
     uint mPolygonTop;
-    TERenderTexturePrimative mTexturePrimatives[MAX_RENDER_PRIMATIVES];
     TERenderPolygonPrimative mPolygonPrimatives[MAX_RENDER_PRIMATIVES];
     std::map<uint, TERenderTarget*> mTargets;
     uint mScreenFrameBuffer;
