@@ -12,6 +12,7 @@
 #include "TERenderTarget.h"
 #include "TERendererTexture.h"
 #include "TERendererKernel.h"
+#include "TEManagerTime.h"
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     TERenderTarget* target;
@@ -52,6 +53,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     
     createPrograms();
+    mPreviousFrameTime = TEManagerTime::currentTime();
 }
 
 void TERendererOGL2::createPrograms() {
@@ -85,6 +87,7 @@ void TERendererOGL2::render() {
     TERenderTexturePrimative* rtp;
     uint count;
     TERenderPolygonPrimative* primatives;
+    double currentFrameTime;
     
     rp = mShaderPrograms["basic"];
 
@@ -108,7 +111,6 @@ void TERendererOGL2::render() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
-
     primatives = rt->getPolygonPrimatives(count);
     rp->run(rt, primatives, count);
     
@@ -117,6 +119,10 @@ void TERendererOGL2::render() {
     rp->run(rt, rtp, count);
     
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
+    currentFrameTime = TEManagerTime::currentTime();
+    double diff = currentFrameTime - mPreviousFrameTime;
+    mPreviousFrameTime = currentFrameTime;
+    NSLog(@"FrameRate: %.1f", diff);
 }
 
 void TERendererOGL2::checkGlError(String op) {

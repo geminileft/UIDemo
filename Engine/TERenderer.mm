@@ -18,11 +18,6 @@ void TERenderer::addTexture(TERenderTarget* target, uint textureName, float* ver
 }
 
 void TERenderer::addPolygon(TERenderTarget* target, float* vertexBuffer, int count, TEVec3 position, TEColor4 color) {
-    if (target->getFrameBuffer() == mScreenFrameBuffer) {
-        NSLog(@"Render to Screen");
-    } else {
-        NSLog(@"Render to something else");
-    }
     TERenderPolygonPrimative pp;
     pp.vertexBuffer = vertexBuffer;
     pp.vertexCount = count;

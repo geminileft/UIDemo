@@ -20,6 +20,7 @@ private:
     int mWidth;
     int mHeight;
     std::map<String, TERendererProgram*> mShaderPrograms;
+    double mPreviousFrameTime;
     
     static void checkGlError(String op);
     void createPrograms();
