@@ -15,7 +15,7 @@
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     TERenderTarget* target;
-
+    
     mUseRenderToTexture = YES;
     mTextureLength = 1024;
     mWidth = width;
@@ -29,20 +29,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glGenFramebuffers(1, &screenFrameBuffer);
     setScreenFrameBuffer(screenFrameBuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, screenFrameBuffer);
-    
-    /******************************
-    NEEDED FOR RENDER TO TEXTURE
-    *******************************/
-    target = createRenderTarget(mTextureFrameBufferHandle, mTextureLength);
-    setTextureTarget(target);
-    mTextureFrameBuffer = target->getFrameBuffer();
-    setTarget(mTextureFrameBuffer, target);
-    /******************************
-     NEEDED FOR RENDER TO TEXTURE
-     *******************************/
-
-    glBindFramebuffer(GL_FRAMEBUFFER, screenFrameBuffer);
-    
+        
     glGenRenderbuffers(1, &mRenderBuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, mRenderBuffer);
     [mContext renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer*)eaglLayer];
@@ -64,8 +51,10 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f); 
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+    
     createPrograms();
+    createRenderToTexture(screenFrameBuffer);    
 }
 
 void TERendererOGL2::createPrograms() {
@@ -99,16 +88,7 @@ void TERendererOGL2::render() {
     TERenderTexturePrimative* rtp;
     uint count;
     TERenderPolygonPrimative* primatives;
-
     
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    if (mUseRenderToTexture) {
-        rt = getTarget(mTextureFrameBuffer);
-    } else {
-        rt = getScreenTarget();
-    }
-
     //uint count = getPolygonCount();
     //TERenderPolygonPrimative* primatives = getPolygonPrimatives();
     rp = mShaderPrograms["basic"];
@@ -159,12 +139,17 @@ void TERendererOGL2::render() {
     TEVec3 vec;
     vec.x = 0;
     vec.y = -160;
-        
+    
+    rp = mShaderPrograms["kernel"];
     rt = getScreenTarget();
+    rp->activate(rt);
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+
     if (mUseRenderToTexture)
         addTexture(rt, mTextureFrameBufferHandle, vertexBuffer, textureBuffer, vec);
 
-    rp = mShaderPrograms["kernel"];
     uint primativeCount;
     rtp = rt->getTexturePrimatives(primativeCount);
     rp->run(rt, rtp, primativeCount);
@@ -179,4 +164,13 @@ void TERendererOGL2::checkGlError(String op) {
             NSLog(@"Bad");
         }
     }
+}
+
+void TERendererOGL2::createRenderToTexture(uint currentFrameBuffer) {
+    TERenderTarget* target;
+    target = createRenderTarget(mTextureFrameBufferHandle, mTextureLength);
+    setTextureTarget(target);
+    mTextureFrameBuffer = target->getFrameBuffer();
+    setTarget(mTextureFrameBuffer, target);
+    glBindFramebuffer(GL_FRAMEBUFFER, currentFrameBuffer);
 }
