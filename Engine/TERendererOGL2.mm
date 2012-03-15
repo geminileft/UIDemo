@@ -97,6 +97,10 @@ void TERendererOGL2::render() {
     TERenderTarget* rt;
     TERendererProgram* rp;
     TERenderTexturePrimative* rtp;
+    uint count;
+    TERenderPolygonPrimative* primatives;
+
+    
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     if (mUseRenderToTexture) {
@@ -105,10 +109,9 @@ void TERendererOGL2::render() {
         rt = getScreenTarget();
     }
 
-    uint count = getPolygonCount();
-    TERenderPolygonPrimative* primatives = getPolygonPrimatives();
+    //uint count = getPolygonCount();
+    //TERenderPolygonPrimative* primatives = getPolygonPrimatives();
     rp = mShaderPrograms["basic"];
-    rp->run(rt, primatives, count);
 
     std::map<uint, TERenderTarget*> targets = getTargets();
     uint targetCount = targets.size();
@@ -119,7 +122,8 @@ void TERendererOGL2::render() {
             rt = (*iterator).second;
             primatives = rt->getPolygonPrimatives(count);
             if (count > 0) {
-                NSLog(@"We have something!");
+                rp->run(rt, primatives, count);
+                //NSLog(@"We have something!");
             }
         }
     }

@@ -6,7 +6,7 @@
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
-TERenderer::TERenderer() : mPolygonTop(0) {}
+TERenderer::TERenderer() {}
 
 void TERenderer::addTexture(TERenderTarget* target, uint textureName, float* vertexBuffer, float* textureBuffer, TEVec3 position) {
     TERenderTexturePrimative rp;
@@ -28,27 +28,16 @@ void TERenderer::addPolygon(TERenderTarget* target, float* vertexBuffer, int cou
     pp.vertexCount = count;
     pp.position = position;
     pp.color = color;
-    mPolygonPrimatives[mPolygonTop] = pp;
-    ++mPolygonTop;
     target->addPolygonPrimative(pp);
 
 }
 
 void TERenderer::reset() {
-    mPolygonTop = 0;
     std::map<uint, TERenderTarget*>::iterator iterator;
 
     for (iterator = mTargets.begin(); iterator != mTargets.end(); iterator++) {
         (*iterator).second->resetPrimatives();
     }
-}
-
-TERenderPolygonPrimative* TERenderer::getPolygonPrimatives() {
-    return mPolygonPrimatives;
-}
-
-uint TERenderer::getPolygonCount() const {
-    return mPolygonTop;
 }
 
 void TERenderer::setTarget(uint frameBuffer, TERenderTarget* target) {

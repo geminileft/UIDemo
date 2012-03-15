@@ -11,8 +11,6 @@ class TERenderTarget;
 
 class TERenderer {
 private:
-    uint mPolygonTop;
-    TERenderPolygonPrimative mPolygonPrimatives[MAX_RENDER_PRIMATIVES];
     std::map<uint, TERenderTarget*> mTargets;
     TERenderTarget* mScreenTarget;
     TERenderTarget* mTextureTarget;
@@ -24,8 +22,6 @@ public:
     void addTexture(TERenderTarget* target, uint textureName, float* vertexBuffer, float* textureBuffer, TEVec3 position);
     void addPolygon(TERenderTarget* target, float* vertexBuffer, int count, TEVec3 position, TEColor4 color);
     void reset();
-    TERenderPolygonPrimative* getPolygonPrimatives();
-    uint getPolygonCount() const;
     void setTarget(uint frameBuffer, TERenderTarget* target);
     TERenderTarget* getTarget(uint frameBuffer);
     uint getScreenFrameBuffer() const;
