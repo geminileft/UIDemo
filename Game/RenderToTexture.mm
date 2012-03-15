@@ -7,9 +7,7 @@ RenderToTexture::RenderToTexture(uint size) : TEComponentRender() {
     mSize = size;
     uint handle;
     mTarget = sharedRenderer()->createRenderTarget(handle, size);
-    //sharedRenderer()->setTextureFrameBufferHandle(handle);
     mTextureHandle = handle;
-    //sharedRenderer()->setTextureTarget(target);
     sharedRenderer()->setTarget(mTarget->getFrameBuffer(), mTarget);
     uint currentFrameBuffer = sharedRenderer()->getScreenFrameBuffer();
     glBindFramebuffer(GL_FRAMEBUFFER, currentFrameBuffer);
