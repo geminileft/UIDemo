@@ -112,13 +112,13 @@ void TERendererOGL2::createPrograms() {
 void TERendererOGL2::render() {
     TERenderTarget* rt;
     TERendererProgram* rp;
-    uint screenFrameBuffer = getScreenFrameBuffer();
+    TERenderTexturePrimative* rtp;
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     if (mUseRenderToTexture) {
         rt = getTarget(mTextureFrameBuffer);
     } else {
-        rt = getTarget(screenFrameBuffer);
+        rt = getScreenTarget();
     }
 
     uint count = getPolygonCount();
@@ -157,16 +157,11 @@ void TERendererOGL2::render() {
     TEVec3 vec;
     vec.x = 0;
     vec.y = -160;
-    //    rt = getTarget(screenFrameBuffer);
+    
+    
     rt = getScreenTarget();
     addTexture(rt, mTextureFrameBufferHandle, vertexBuffer, textureBuffer, vec);
 
-    rp = mShaderPrograms["kernel"];
-    uint primativeCount;
-    TERenderTexturePrimative* rtp = rt->getTexturePrimatives(primativeCount);
-    //rp->run(rt, getRenderPrimatives(), getPrimativeCount());
-    rp->run(rt, rtp, primativeCount);
-    
     std::map<uint, TERenderTarget*> targets = getTargets();
     uint targetCount = targets.size();
     
@@ -175,9 +170,14 @@ void TERendererOGL2::render() {
         for (iterator = targets.begin(); iterator != targets.end(); iterator++) {
             uint dCount;
             rtp = (*iterator).second->getTexturePrimatives(dCount);
-            int x = 5;
         }
     }
+
+    rp = mShaderPrograms["kernel"];
+    uint primativeCount;
+    rtp = rt->getTexturePrimatives(primativeCount);
+    rp->run(rt, rtp, primativeCount);
+    
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 
