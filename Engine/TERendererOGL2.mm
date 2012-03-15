@@ -53,9 +53,6 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     
     createPrograms();
-    
-    if (mUseRenderToTexture)
-        createRenderToTexture(screenFrameBuffer);    
 }
 
 void TERendererOGL2::createPrograms() {
@@ -167,14 +164,4 @@ void TERendererOGL2::checkGlError(String op) {
             NSLog(@"Bad");
         }
     }
-}
-
-void TERendererOGL2::createRenderToTexture(uint currentFrameBuffer) {
-    TERenderTarget* target;
-    uint handle;
-    target = createRenderTarget(handle, 1024);
-    setTextureFrameBufferHandle(handle);
-    setTextureTarget(target);
-    setTarget(target->getFrameBuffer(), target);
-    glBindFramebuffer(GL_FRAMEBUFFER, currentFrameBuffer);
 }

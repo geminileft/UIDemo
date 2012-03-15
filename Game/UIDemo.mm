@@ -22,7 +22,9 @@ void UIDemo::start() {
     color = TEColor4Make(1.0, 0.0, 0.0, 1.0);
     size = TESizeMake(160, 160);
     radius = 5.0;
-    //RenderToTexture* rtt  = new RenderToTexture(1024);
+    RenderToTexture* rtt  = new RenderToTexture(1024);
+    rtt->sharedRenderer()->setTextureTarget(rtt->getRenderTarget());
+    rtt->sharedRenderer()->setTextureFrameBufferHandle(rtt->getTextureHandle());
     rp = RenderPolygonFactory::roundedRect(size, color, radius, (uint)radius);
     rp->setRenderTarget(rp->sharedRenderer()->getTextureTarget());
     //rp->setRenderTarget(rtt->getRenderTarget());

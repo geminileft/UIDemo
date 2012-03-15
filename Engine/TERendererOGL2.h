@@ -24,7 +24,6 @@ private:
     
     static void checkGlError(String op);
     void createPrograms();
-    void createRenderToTexture(uint currentFrameBuffer);
 
 public:
     TERendererOGL2(CALayer* eaglLayer, uint width, uint height);
