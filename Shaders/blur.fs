@@ -12,22 +12,13 @@ uniform float uKernel[KERNEL_SIZE];
 void main() {
     int i = 0;
     vec4 sum = vec4(0.0);
+    float preserveAlpha = texture2D(sTexture, vTextureCoord.st).a;
     
-    if(vTextureCoord.s<0.495) {
-        for( i=0; i<KERNEL_SIZE; i++ )
-        {
-			sum += texture2D(sTexture, vTextureCoord.st + uOffsets[i]) * uKernel[i];
-        }
-        sum.a = 1.0;
-    }
-    else if( vTextureCoord.s>0.505 )
+    for( i=0; i<KERNEL_SIZE; i++ )
     {
-		sum = texture2D(sTexture, vTextureCoord.st);
+        sum += texture2D(sTexture, vTextureCoord.st + uOffsets[i]) * uKernel[i];
     }
-    else
-    {
-		sum = vec4(0.0, 0.0, 1.0, 1.0);
-	}
-    
+    sum.a = preserveAlpha;
+
     gl_FragColor = sum;
 }

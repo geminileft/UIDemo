@@ -20,7 +20,7 @@ void UIDemo::start() {
 
     go = new TEGameObject();
     go->position.x = 0.0f;
-    go->position.y = -160.0f;
+    go->position.y = 0.0f;
     
     RenderToTexture* rtt  = new RenderToTexture(256);
     
@@ -33,23 +33,37 @@ void UIDemo::start() {
     radius = 5.0;
     
     rp = RenderPolygonFactory::roundedRect(size, color, radius, (uint)radius);
-    //rp->setRenderTarget(rtt->getRenderTarget());
-    go->position.x = -80.0f;
-    go->position.y = 0.0f;
-    
+    rp->setRenderTarget(rtt->getRenderTarget());
     go->addComponent(rp);
-    addGameObject(go);
-
-    go = new TEGameObject();
-    size = TESizeMake(160, 160);
-    RenderImage* ri = new RenderImage(@"olympic.jpg", TEPointMake(0, 0), size);
-    ri->setRenderTarget(rtt->getRenderTarget());
+    
+    size.width += 4;
+    size.height += 4;
+    color.r = 0.0;
+    color.g = 0.0;
+    color.b = 0.0;
+    color.a = 1.0;
+    rp = RenderPolygonFactory::roundedRect(size, color, radius, (uint)radius);
+    rp->setRenderTarget(rtt->getRenderTarget());
+    go->addComponent(rp);
+    
     
     go->position.x = 0.0f;
     go->position.y = 0.0f;
     
+    addGameObject(go);
+
+    /*
+    go = new TEGameObject();
+    size = TESizeMake(160, 160);
+    RenderImage* ri = new RenderImage(@"olympic.jpg", TEPointMake(0, 0), size);
+    //ri->setRenderTarget(rtt->getRenderTarget());
+    
+    go->position.x = 80.0f;
+    go->position.y = 0.0f;
+    
     go->addComponent(ri);
     addGameObject(go);
+    */
 /*
     go = new TEGameObject();
     

@@ -24,5 +24,4 @@ TERenderTarget* TEComponentRender::getRenderTarget() {
 }
 
 void TEComponentRender::setKernel(float* kernel) {
-    int i = 0;
 }

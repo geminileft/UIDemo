@@ -117,13 +117,14 @@ void TERendererOGL2::render() {
     rp = mShaderPrograms["basic"];
     rp->activate(rt);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+    //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
     primatives = rt->getPolygonPrimatives(count);
     rp->run(rt, primatives, count);
     
     rtp = rt->getTexturePrimatives(count);
-    rp = mShaderPrograms["texture"];
+    rp = mShaderPrograms["kernel"];
     rp->run(rt, rtp, count);
     
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
