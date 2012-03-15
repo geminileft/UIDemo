@@ -22,13 +22,15 @@ void UIDemo::start() {
     color = TEColor4Make(1.0, 0.0, 0.0, 1.0);
     size = TESizeMake(160, 160);
     radius = 5.0;
-    //RenderToTexture* rtt  = new RenderToTexture();
+    //RenderToTexture* rtt  = new RenderToTexture(1024);
     rp = RenderPolygonFactory::roundedRect(size, color, radius, (uint)radius);
     rp->setRenderTarget(rp->sharedRenderer()->getTextureTarget());
+    //rp->setRenderTarget(rtt->getRenderTarget());
     go->position.x = 0.0f;
     go->position.y = 0.0f;
     
     go->addComponent(rp);
+    //go->addComponent(rtt);
     addGameObject(go);
 
 
