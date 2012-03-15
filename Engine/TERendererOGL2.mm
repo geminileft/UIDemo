@@ -33,27 +33,8 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     /******************************
     NEEDED FOR RENDER TO TEXTURE
     *******************************/
-    //target = createRenderTarget(mTextureFrameBufferHandle, mTextureLength);
-    //mTextureFrameBuffer = target->getFrameBuffer();
-
-    glGenTextures(1, &mTextureFrameBufferHandle);
-    glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mTextureLength, mTextureLength, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);    
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glGenFramebuffers(1, &mTextureFrameBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER_OES, mTextureFrameBuffer);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mTextureFrameBufferHandle, 0);
-    GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER); 
-    if(status != GL_FRAMEBUFFER_COMPLETE) {
-        NSLog(@"failed to make complete framebuffer object %x", status);
-    }
-    
-    target = new TERenderTarget(mTextureFrameBuffer);
-    target->setSize(TESizeMake(mTextureLength, mTextureLength));
-    
+    target = createRenderTarget(mTextureFrameBufferHandle, mTextureLength);
+    mTextureFrameBuffer = target->getFrameBuffer();
     setTarget(mTextureFrameBuffer, target);
     /******************************
      NEEDED FOR RENDER TO TEXTURE
@@ -76,8 +57,6 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     target = new TERenderTarget(screenFrameBuffer);
     target->setSize(TESizeMake(screenWidth, screenHeight));
     setScreenTarget(target);
-    //setTarget(screenFrameBuffer, target);
-    //setScreenAdjustment(screenWidth, screenHeight);
     
     [EAGLContext setCurrentContext:mContext];
     

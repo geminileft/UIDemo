@@ -79,23 +79,23 @@ TERenderTarget* TERenderer::getScreenTarget() const {
 }
 
 TERenderTarget* TERenderer::createRenderTarget(uint &textureHandle, uint size) {
-    uint frameHandle;
+    uint frameBuffer;;
     glGenTextures(1, &textureHandle);
     glBindTexture(GL_TEXTURE_2D, textureHandle);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size, size, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size, size, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);    
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glGenFramebuffers(1, &frameHandle);
-    glBindFramebuffer(GL_FRAMEBUFFER_OES, frameHandle);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, frameHandle, 0);
+    glGenFramebuffers(1, &frameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER_OES, frameBuffer);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureHandle, 0);
     GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER); 
     if(status != GL_FRAMEBUFFER_COMPLETE) {
-        NSLog(@"failed to make complete framebuffer object %x", status);
+    NSLog(@"failed to make complete framebuffer object %x", status);
     }
-    
-    TERenderTarget* target = new TERenderTarget(frameHandle);
+
+    TERenderTarget* target = new TERenderTarget(frameBuffer);
     target->setSize(TESizeMake(size, size));
     return target;
 
