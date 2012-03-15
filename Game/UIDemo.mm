@@ -26,13 +26,12 @@ void UIDemo::start() {
     rtt->sharedRenderer()->setTextureTarget(rtt->getRenderTarget());
     rtt->sharedRenderer()->setTextureFrameBufferHandle(rtt->getTextureHandle());
     rp = RenderPolygonFactory::roundedRect(size, color, radius, (uint)radius);
-    rp->setRenderTarget(rp->sharedRenderer()->getTextureTarget());
-    //rp->setRenderTarget(rtt->getRenderTarget());
+    rp->setRenderTarget(rtt->getRenderTarget());
     go->position.x = 0.0f;
     go->position.y = 0.0f;
     
     go->addComponent(rp);
-    //go->addComponent(rtt);
+    go->addComponent(rtt);
     addGameObject(go);
 
 

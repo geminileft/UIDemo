@@ -51,7 +51,7 @@ void RenderToTexture::draw() {
     TEVec3 vec;
     vec.x = 0;
     vec.y = -160;
-    sharedRenderer()->addTexture(sharedRenderer()->getScreenTarget(), mTextureHandle, vertexBuffer, textureBuffer, vec);        
+    //sharedRenderer()->addTexture(sharedRenderer()->getScreenTarget(), mTextureHandle, vertexBuffer, textureBuffer, vec);        
 }
 
 TERenderTarget* RenderToTexture::getRenderTarget() {
