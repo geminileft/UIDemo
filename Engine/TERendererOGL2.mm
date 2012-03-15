@@ -16,7 +16,7 @@
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     TERenderTarget* target;
     
-    mUseRenderToTexture = NO;
+    mUseRenderToTexture = YES;
     mWidth = width;
     mHeight = height;
 
