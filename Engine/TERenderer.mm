@@ -1,4 +1,5 @@
 #include "TERenderer.h"
+#include "TERenderTarget.h"
 
 TERenderer::TERenderer() : mTextureTop(0), mPolygonTop(0) {}
 
@@ -10,9 +11,15 @@ void TERenderer::addTexture(TERenderTarget* target, uint textureName, float* ver
     rp.textureBuffer = textureBuffer;
     mTexturePrimatives[mTextureTop] = rp;
     ++mTextureTop;
+    target->addTexturePrimative(rp);
 }
 
 void TERenderer::addPolygon(TERenderTarget* target, float* vertexBuffer, int count, TEVec3 position, TEColor4 color) {
+    if (target->getFrameBuffer() == mScreenFrameBuffer) {
+        NSLog(@"Render to Screen");
+    } else {
+        NSLog(@"Render to something else");
+    }
     TERenderPolygonPrimative pp;
     pp.vertexBuffer = vertexBuffer;
     pp.vertexCount = count;
@@ -20,11 +27,18 @@ void TERenderer::addPolygon(TERenderTarget* target, float* vertexBuffer, int cou
     pp.color = color;
     mPolygonPrimatives[mPolygonTop] = pp;
     ++mPolygonTop;
+    target->addPolygonPrimative(pp);
+
 }
 
 void TERenderer::reset() {
     mTextureTop = 0;
     mPolygonTop = 0;
+    std::map<uint, TERenderTarget*>::iterator iterator;
+
+    for (iterator = mTargets.begin(); iterator != mTargets.end(); iterator++) {
+        (*iterator).second->resetPrimatives();
+    }
 }
 
 TERenderTexturePrimative* TERenderer::getRenderPrimatives() {

@@ -18,3 +18,16 @@ float TERenderTarget::getFrameWidth() const {
 float TERenderTarget::getFrameHeight() const {
     return mFrameHeight;
 }
+
+void TERenderTarget::addTexturePrimative(TERenderTexturePrimative primative) {
+    mTexturePrimatives.push_back(primative);
+}
+
+void TERenderTarget::addPolygonPrimative(TERenderPolygonPrimative primative) {
+    mPolygonPrimatives.push_back(primative);
+}
+
+void TERenderTarget::resetPrimatives() {
+    mTexturePrimatives.clear();
+    mPolygonPrimatives.clear();
+}

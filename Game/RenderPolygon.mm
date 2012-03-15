@@ -3,6 +3,7 @@
 #include "TEUtilTexture.h"
 #include "TEGameObject.h"
 #include "TEEventListener.h"
+#include "TERenderTarget.h"
 
 RenderPolygon::RenderPolygon() : TEComponentRender() {
     

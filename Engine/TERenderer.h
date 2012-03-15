@@ -18,7 +18,6 @@ private:
     std::map<uint, TERenderTarget*> mTargets;
     uint mScreenFrameBuffer;
 
-    
 public:
     TERenderer();
     virtual void render() = 0;
