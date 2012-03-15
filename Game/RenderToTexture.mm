@@ -39,8 +39,9 @@ RenderToTexture::RenderToTexture(uint size) : TEComponentRender() {
 }
 void RenderToTexture::update() {
     TEVec3 vec;
-    vec.x = 0;
-    vec.y = -160;
+    vec.x = mParent->position.x;
+    vec.y = mParent->position.y;
+    vec.z = 0;
     sharedRenderer()->addTexture(sharedRenderer()->getScreenTarget(), mTextureHandle, mVertexBuffer, mTextureBuffer, vec);
 }
 
