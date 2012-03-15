@@ -89,19 +89,3 @@ TERenderTarget* TERenderer::createRenderTarget(uint &textureHandle, uint size) {
     return target;
 
 }
-
-void TERenderer::setTextureTarget(TERenderTarget* target) {
-    mTextureTarget = target;
-}
-
-TERenderTarget* TERenderer::getTextureTarget() const {
-    return mTextureTarget;
-}
-
-void TERenderer::setTextureFrameBufferHandle(uint handle) {
-    mTextureFrameBufferHandle = handle;
-}
-
-uint TERenderer::getTextureFrameBufferHandle() {
-    return mTextureFrameBufferHandle;
-}
