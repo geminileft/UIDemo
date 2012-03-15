@@ -24,7 +24,7 @@ void UIDemo::start() {
     radius = 5.0;
     //RenderToTexture* rtt  = new RenderToTexture();
     rp = RenderPolygonFactory::roundedRect(size, color, radius, (uint)radius);
-    rp->setRenderTarget(rp->sharedRenderer()->getTextureTarget());
+    //rp->setRenderTarget(rp->sharedRenderer()->getTextureTarget());
     go->position.x = 0.0f;
     go->position.y = 0.0f;
     
