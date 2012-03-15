@@ -61,3 +61,7 @@ void TERenderer::setScreenFrameBuffer(uint screenFrameBuffer) {
     mScreenFrameBuffer = screenFrameBuffer;
 }
 
+std::map<uint, TERenderTarget*> TERenderer::getTargets() const {
+    return mTargets;
+}
+

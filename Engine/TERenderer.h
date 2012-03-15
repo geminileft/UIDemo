@@ -28,6 +28,7 @@ public:
     TERenderTarget* getTarget(uint frameBuffer);
     uint getScreenFrameBuffer() const;
     void setScreenFrameBuffer(uint screenFrameBuffer);
+    std::map<uint, TERenderTarget*> getTargets() const;
 };
 
 #endif
