@@ -16,7 +16,6 @@
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     TERenderTarget* target;
     
-    mUseRenderToTexture = YES;
     mWidth = width;
     mHeight = height;
 
@@ -87,6 +86,7 @@ void TERendererOGL2::render() {
     uint count;
     TERenderPolygonPrimative* primatives;
     float size;
+    bool useTexture = false;
     
     rp = mShaderPrograms["basic"];
 
@@ -100,11 +100,12 @@ void TERendererOGL2::render() {
             primatives = rt->getPolygonPrimatives(count);
             if (count > 0) {
                 rp->run(rt, primatives, count);
+                useTexture = true;
             }
         }
     }
     
-    if (mUseRenderToTexture) {
+    if (useTexture) {
         size = getTextureTarget()->getFrameWidth();
         /************************
          RENDER TO TEXTURE
