@@ -18,12 +18,9 @@ private:
     uint mCoordsHandle;
     uint maPositionHandle;
     uint maTextureHandle;
-    uint mTextureFrameBufferHandle;
     float mTextureLength;
     int mWidth;
     int mHeight;
-    uint mTexture;
-    bool mRotate;
     std::map<String, TERendererProgram*> mShaderPrograms;
     
     static void checkGlError(String op);

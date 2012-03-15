@@ -15,6 +15,7 @@ private:
     TERenderTarget* mScreenTarget;
     TERenderTarget* mTextureTarget;
     uint mScreenFrameBuffer;
+    uint mTextureFrameBufferHandle;
 
 public:
     TERenderer();
@@ -32,6 +33,8 @@ public:
     static TERenderTarget* createRenderTarget(uint &textureHandle, uint size);
     void setTextureTarget(TERenderTarget* target);
     TERenderTarget* getTextureTarget() const;
+    void setTextureFrameBufferHandle(uint handle);
+    uint getTextureFrameBufferHandle();
 };
 
 #endif

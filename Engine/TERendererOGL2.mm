@@ -148,7 +148,7 @@ void TERendererOGL2::render() {
     
 
     if (mUseRenderToTexture)
-        addTexture(rt, mTextureFrameBufferHandle, vertexBuffer, textureBuffer, vec);
+        addTexture(rt, getTextureFrameBufferHandle(), vertexBuffer, textureBuffer, vec);
 
     uint primativeCount;
     rtp = rt->getTexturePrimatives(primativeCount);
@@ -168,7 +168,9 @@ void TERendererOGL2::checkGlError(String op) {
 
 void TERendererOGL2::createRenderToTexture(uint currentFrameBuffer) {
     TERenderTarget* target;
-    target = createRenderTarget(mTextureFrameBufferHandle, mTextureLength);
+    uint handle;
+    target = createRenderTarget(handle, mTextureLength);
+    setTextureFrameBufferHandle(handle);
     setTextureTarget(target);
     setTarget(target->getFrameBuffer(), target);
     glBindFramebuffer(GL_FRAMEBUFFER, currentFrameBuffer);
