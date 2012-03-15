@@ -170,7 +170,6 @@ void TERendererOGL2::createRenderToTexture(uint currentFrameBuffer) {
     TERenderTarget* target;
     target = createRenderTarget(mTextureFrameBufferHandle, mTextureLength);
     setTextureTarget(target);
-    mTextureFrameBuffer = target->getFrameBuffer();
-    setTarget(mTextureFrameBuffer, target);
+    setTarget(target->getFrameBuffer(), target);
     glBindFramebuffer(GL_FRAMEBUFFER, currentFrameBuffer);
 }

@@ -18,7 +18,6 @@ private:
     uint mCoordsHandle;
     uint maPositionHandle;
     uint maTextureHandle;
-    uint mTextureFrameBuffer;
     uint mTextureFrameBufferHandle;
     float mTextureLength;
     int mWidth;
