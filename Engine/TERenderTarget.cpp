@@ -1,6 +1,6 @@
 #include "TERenderTarget.h"
 
-TERenderTarget::TERenderTarget(uint frameBuffer) : mFrameBuffer(frameBuffer) {}
+TERenderTarget::TERenderTarget(uint frameBuffer) : mFrameBuffer(frameBuffer), mTextureCount(0), mPolygonCount(0) {}
 
 void TERenderTarget::setSize(TESize size) {
     mFrameWidth = size.width;
@@ -34,7 +34,10 @@ void TERenderTarget::resetPrimatives() {
 
 TERenderTexturePrimative* TERenderTarget::getTexturePrimatives(uint &count) {
     count = mTexturePrimatives.size();
-    free(mFrameTexturePrimatives);
+    if (mTextureCount > 0) {
+        free(mFrameTexturePrimatives);
+    }
+    mTextureCount = count;
     if (count > 0) {
         mFrameTexturePrimatives = (TERenderTexturePrimative*)malloc(count * sizeof(TERenderTexturePrimative));
         std::vector<TERenderTexturePrimative>::iterator iterator;

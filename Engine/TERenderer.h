@@ -32,6 +32,7 @@ public:
     std::map<uint, TERenderTarget*> getTargets() const;
     void setScreenTarget(TERenderTarget* target);
     TERenderTarget* getScreenTarget() const;
+    static TERenderTarget* createRenderTarget(uint &textureHandle, uint size);
 };
 
 #endif

@@ -14,6 +14,8 @@ private:
     std::vector<TERenderPolygonPrimative> mPolygonPrimatives;
     TERenderTexturePrimative* mFrameTexturePrimatives;
     TERenderPolygonPrimative* mFramePolygonPrimatives;
+    uint mTextureCount;
+    uint mPolygonCount;
 
 public:
     TERenderTarget(uint frameBuffer);

@@ -33,6 +33,9 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     /******************************
     NEEDED FOR RENDER TO TEXTURE
     *******************************/
+    //target = createRenderTarget(mTextureFrameBufferHandle, mTextureLength);
+    //mTextureFrameBuffer = target->getFrameBuffer();
+
     glGenTextures(1, &mTextureFrameBufferHandle);
     glBindTexture(GL_TEXTURE_2D, mTextureFrameBufferHandle);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mTextureLength, mTextureLength, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
@@ -50,6 +53,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     
     target = new TERenderTarget(mTextureFrameBuffer);
     target->setSize(TESizeMake(mTextureLength, mTextureLength));
+    
     setTarget(mTextureFrameBuffer, target);
     /******************************
      NEEDED FOR RENDER TO TEXTURE
