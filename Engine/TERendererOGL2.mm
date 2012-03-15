@@ -85,8 +85,6 @@ void TERendererOGL2::render() {
     TERenderTexturePrimative* rtp;
     uint count;
     TERenderPolygonPrimative* primatives;
-    float size;
-    bool useTexture = false;
     
     rp = mShaderPrograms["basic"];
 
@@ -100,47 +98,10 @@ void TERendererOGL2::render() {
             primatives = rt->getPolygonPrimatives(count);
             if (count > 0) {
                 rp->run(rt, primatives, count);
-                useTexture = true;
             }
         }
     }
     
-    if (useTexture) {
-        size = getTextureTarget()->getFrameWidth();
-        /************************
-         RENDER TO TEXTURE
-         *************************/
-        float textureBuffer[8];
-        textureBuffer[0] = 0.0f;//left
-        textureBuffer[1] = 1.0f;//top
-        textureBuffer[2] = 1.0f;//right
-        textureBuffer[3] = 1.0f;//top
-        textureBuffer[4] = 1.0f;//right
-        textureBuffer[5] = 0.0f;//bottom
-        textureBuffer[6] = 0.0f;//left
-        textureBuffer[7] = 0.0f;//bottom
-        
-        float vertexBuffer[8];
-        const float var = size / 2;
-        const float leftX = -var;
-        const float bottomY = -var;
-        const float rightX = var;
-        const float topY = var;
-        
-        vertexBuffer[0] = leftX;
-        vertexBuffer[1] = bottomY;
-        vertexBuffer[2] = rightX;
-        vertexBuffer[3] = bottomY;
-        vertexBuffer[4] = rightX;
-        vertexBuffer[5] = topY;
-        vertexBuffer[6] = leftX;
-        vertexBuffer[7] = topY;
-        TEVec3 vec;
-        vec.x = 0;
-        vec.y = -160;
-        //addTexture(getScreenTarget(), getTextureFrameBufferHandle(), vertexBuffer, textureBuffer, vec);        
-    }
-
     rt = getScreenTarget();
     rp = mShaderPrograms["basic"];
     rp->activate(rt);
