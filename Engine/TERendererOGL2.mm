@@ -110,7 +110,7 @@ void TERendererOGL2::render() {
         /************************
          RENDER TO TEXTURE
          *************************/
-        float textureBuffer[8]; 
+        float textureBuffer[8];
         textureBuffer[0] = 0.0f;//left
         textureBuffer[1] = 1.0f;//top
         textureBuffer[2] = 1.0f;//right
@@ -138,7 +138,7 @@ void TERendererOGL2::render() {
         TEVec3 vec;
         vec.x = 0;
         vec.y = -160;
-        addTexture(getScreenTarget(), getTextureFrameBufferHandle(), vertexBuffer, textureBuffer, vec);        
+        //addTexture(getScreenTarget(), getTextureFrameBufferHandle(), vertexBuffer, textureBuffer, vec);        
     }
 
     rt = getScreenTarget();

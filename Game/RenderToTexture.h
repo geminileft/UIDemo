@@ -12,7 +12,9 @@ private:
     TERenderTarget* mTarget;
     uint mTextureHandle;
     uint mSize;
-    
+    float mVertexBuffer[8];
+    float mTextureBuffer[8];
+
 public:
     RenderToTexture(uint size);
     virtual void update();
