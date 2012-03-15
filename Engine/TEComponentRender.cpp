@@ -4,8 +4,7 @@
 static TERenderer* mSharedRenderer = NULL;
 
 TEComponentRender::TEComponentRender() {
-    uint screenFrameBuffer = mSharedRenderer->getScreenFrameBuffer();
-    mTarget = sharedRenderer()->getTarget(screenFrameBuffer);
+    mTarget = sharedRenderer()->getScreenTarget();
 }
 
 TERenderer* TEComponentRender::sharedRenderer() {

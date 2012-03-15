@@ -14,6 +14,7 @@ private:
     uint mPolygonTop;
     TERenderPolygonPrimative mPolygonPrimatives[MAX_RENDER_PRIMATIVES];
     std::map<uint, TERenderTarget*> mTargets;
+    TERenderTarget* mScreenTarget;
     uint mScreenFrameBuffer;
 
 public:
@@ -29,6 +30,8 @@ public:
     uint getScreenFrameBuffer() const;
     void setScreenFrameBuffer(uint screenFrameBuffer);
     std::map<uint, TERenderTarget*> getTargets() const;
+    void setScreenTarget(TERenderTarget* target);
+    TERenderTarget* getScreenTarget() const;
 };
 
 #endif

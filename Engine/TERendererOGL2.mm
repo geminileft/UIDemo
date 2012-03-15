@@ -71,7 +71,8 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     
     target = new TERenderTarget(screenFrameBuffer);
     target->setSize(TESizeMake(screenWidth, screenHeight));
-    setTarget(screenFrameBuffer, target);
+    setScreenTarget(target);
+    //setTarget(screenFrameBuffer, target);
     //setScreenAdjustment(screenWidth, screenHeight);
     
     [EAGLContext setCurrentContext:mContext];
@@ -156,10 +157,10 @@ void TERendererOGL2::render() {
     TEVec3 vec;
     vec.x = 0;
     vec.y = -160;
-    rt = getTarget(screenFrameBuffer);
+    //    rt = getTarget(screenFrameBuffer);
+    rt = getScreenTarget();
     addTexture(rt, mTextureFrameBufferHandle, vertexBuffer, textureBuffer, vec);
 
-    rt = getTarget(screenFrameBuffer);
     rp = mShaderPrograms["kernel"];
     uint primativeCount;
     TERenderTexturePrimative* rtp = rt->getTexturePrimatives(primativeCount);
