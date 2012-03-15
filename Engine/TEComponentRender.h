@@ -9,6 +9,7 @@ class TERenderTarget;
 class TEComponentRender : public TEComponent {
 private:
     TERenderTarget* mTarget;
+    float* mKernel;
     
 public:
     TEComponentRender();
@@ -17,6 +18,7 @@ public:
     static void setSharedRenderer(TERenderer* renderer);
     void setRenderTarget(TERenderTarget* target);
     TERenderTarget* getRenderTarget();
+    void setKernel(float* kernel);
 };
 
 #endif

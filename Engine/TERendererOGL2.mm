@@ -50,7 +50,6 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     
     createPrograms();
 }
@@ -87,8 +86,6 @@ void TERendererOGL2::render() {
     uint count;
     TERenderPolygonPrimative* primatives;
     
-    rp = mShaderPrograms["basic"];
-
     std::map<uint, TERenderTarget*> targets = getTargets();
     uint targetCount = targets.size();
 
@@ -98,7 +95,20 @@ void TERendererOGL2::render() {
             rt = (*iterator).second;
             primatives = rt->getPolygonPrimatives(count);
             if (count > 0) {
+                rp = mShaderPrograms["basic"];
+                rp->activate(rt);
+                glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+                glClear(GL_COLOR_BUFFER_BIT);
                 rp->run(rt, primatives, count);
+            }
+            
+            rtp = rt->getTexturePrimatives(count);
+            if (count > 0) {
+                rp = mShaderPrograms["texture"];
+                rp->activate(rt);
+                glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+                glClear(GL_COLOR_BUFFER_BIT);
+                rp->run(rt, rtp, count);
             }
         }
     }

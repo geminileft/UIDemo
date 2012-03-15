@@ -112,6 +112,7 @@ struct TERenderTexturePrimative {
     TEVec3 position;
     float* vertexBuffer;
     float* textureBuffer;
+    float* kernel;
 };
 
 typedef TERenderTexturePrimative TERenderTexturePrimative;

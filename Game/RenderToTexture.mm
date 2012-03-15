@@ -12,14 +12,15 @@ RenderToTexture::RenderToTexture(uint size) : TEComponentRender() {
     uint currentFrameBuffer = sharedRenderer()->getScreenFrameBuffer();
     glBindFramebuffer(GL_FRAMEBUFFER, currentFrameBuffer);
 
+    
     mTextureBuffer[0] = 0.0f;//left
-    mTextureBuffer[1] = 1.0f;//top
+    mTextureBuffer[1] = 0.0f;//top
     mTextureBuffer[2] = 1.0f;//right
-    mTextureBuffer[3] = 1.0f;//top
+    mTextureBuffer[3] = 0.0f;//top
     mTextureBuffer[4] = 1.0f;//right
-    mTextureBuffer[5] = 0.0f;//bottom
+    mTextureBuffer[5] = 1.0f;//bottom
     mTextureBuffer[6] = 0.0f;//left
-    mTextureBuffer[7] = 0.0f;//bottom
+    mTextureBuffer[7] = 1.0f;//bottom
     
     const float var = size / 2;
     const float leftX = -var;

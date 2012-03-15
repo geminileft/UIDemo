@@ -3,7 +3,7 @@
 
 static TERenderer* mSharedRenderer = NULL;
 
-TEComponentRender::TEComponentRender() {
+TEComponentRender::TEComponentRender() : mKernel(NULL) {
     mTarget = sharedRenderer()->getScreenTarget();
 }
 
@@ -21,4 +21,8 @@ void TEComponentRender::setRenderTarget(TERenderTarget* target) {
 
 TERenderTarget* TEComponentRender::getRenderTarget() {
     return mTarget;
+}
+
+void TEComponentRender::setKernel(float* kernel) {
+    int i = 0;
 }
