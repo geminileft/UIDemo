@@ -29,7 +29,6 @@ private:
     
     static void checkGlError(String op);
     void createPrograms();
-    void setScreenAdjustment(int width, int height);
     
 public:
     TERendererOGL2(CALayer* eaglLayer, uint width, uint height);

@@ -180,22 +180,3 @@ void TERendererOGL2::checkGlError(String op) {
         }
     }
 }
-
-void TERendererOGL2::setScreenAdjustment(int width, int height) {
-    mRotate = false;
-    if (mWidth > mHeight) {
-        //game in landscape
-        if (width > height) {
-            //device in landscape
-        } else {
-            mRotate = true;
-        }
-    } else {
-        //game in portrait
-        if (width > height) {
-            //device in landscape
-            mRotate = true;
-        }
-    }
-    NSLog(@"done");
-}
