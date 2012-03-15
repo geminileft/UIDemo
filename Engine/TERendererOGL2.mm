@@ -17,7 +17,6 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     TERenderTarget* target;
     
     mUseRenderToTexture = YES;
-    mTextureLength = 1024;
     mWidth = width;
     mHeight = height;
 
@@ -108,6 +107,7 @@ void TERendererOGL2::render() {
         }
     }
     
+    rt = getTextureTarget();
     /************************
      RENDER TO TEXTURE
     *************************/
@@ -122,7 +122,7 @@ void TERendererOGL2::render() {
     textureBuffer[7] = 0.0f;//bottom
     
     float vertexBuffer[8];
-    const float var = mTextureLength / 2;
+    const float var = rt->getFrameHeight() / 2;
     const float leftX = -var;
     const float bottomY = -var;
     const float rightX = var;
@@ -169,7 +169,7 @@ void TERendererOGL2::checkGlError(String op) {
 void TERendererOGL2::createRenderToTexture(uint currentFrameBuffer) {
     TERenderTarget* target;
     uint handle;
-    target = createRenderTarget(handle, mTextureLength);
+    target = createRenderTarget(handle, 1024);
     setTextureFrameBufferHandle(handle);
     setTextureTarget(target);
     setTarget(target->getFrameBuffer(), target);

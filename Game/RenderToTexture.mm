@@ -9,3 +9,11 @@ void RenderToTexture::update() {
 void RenderToTexture::draw() {
     //NSLog(@"RenderToTexture::draw");
 }
+
+TERenderTarget* RenderToTexture::getRenderTarget() {
+    return mTarget;
+}
+
+uint RenderToTexture::getTextureHandle() {
+    return mTextureHandle;
+}

@@ -18,7 +18,6 @@ private:
     uint mCoordsHandle;
     uint maPositionHandle;
     uint maTextureHandle;
-    float mTextureLength;
     int mWidth;
     int mHeight;
     std::map<String, TERendererProgram*> mShaderPrograms;
