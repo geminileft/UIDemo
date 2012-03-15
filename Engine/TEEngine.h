@@ -20,6 +20,7 @@ private:
     TERenderer* mRenderer;
     float mGameWidth;
     float mGameHeight;
+    double mPreviousFrameTime;
 
 public:
 

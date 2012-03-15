@@ -14,6 +14,7 @@
 #include "EAGLView.h"
 #include "TERenderer.h"
 #include "TERendererOGL2.h"
+#include "TEManagerTime.h"
     
 TEEngine::TEEngine(int width, int height) {
 	mGameWidth = width;
@@ -32,7 +33,13 @@ void TEEngine::run() {
     for (int count = 0;count < managerCount; ++count) {
         mManagers[count]->update();
     }
+    double renderStart = TEManagerTime::currentTime();
     mRenderer->render();
+    double currentFrameTime;
+    currentFrameTime = TEManagerTime::currentTime();
+    double diff = currentFrameTime - mPreviousFrameTime;
+    mPreviousFrameTime = currentFrameTime;
+    NSLog(@"FrameRate: %.1f Render: %.1f", diff, currentFrameTime - renderStart);
 }
 
 void TEEngine::addGameObject(TEGameObject* gameObject) {

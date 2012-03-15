@@ -41,9 +41,9 @@ void UIDemo::start() {
     go->addComponent(rp);
     addGameObject(go);
 
-
+    /*
     go = new TEGameObject();
-    
+    size = TESizeMake(160, 160);
     RenderImage* ri = new RenderImage(@"olympic.jpg", TEPointMake(0, 0), size);
     
     go->position.x = 80.0f;
@@ -51,7 +51,7 @@ void UIDemo::start() {
     
     go->addComponent(ri);
     addGameObject(go);
-
+    */
 /*
     go = new TEGameObject();
     
