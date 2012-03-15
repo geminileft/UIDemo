@@ -33,6 +33,8 @@ void TERenderer::reset() {
     for (iterator = mTargets.begin(); iterator != mTargets.end(); iterator++) {
         (*iterator).second->resetPrimatives();
     }
+    
+    mScreenTarget->resetPrimatives();
 }
 
 void TERenderer::setTarget(uint frameBuffer, TERenderTarget* target) {
