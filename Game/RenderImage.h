@@ -8,7 +8,6 @@ class TEUtilTexture;
 
 class RenderImage : public TEComponentRender {
 private:
-	TEUtilTexture* mTexture;
 	int mWidth;
 	int mHeight;
     uint mTextureName;

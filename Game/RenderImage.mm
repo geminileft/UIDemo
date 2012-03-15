@@ -9,7 +9,6 @@ RenderImage::RenderImage(NSString* resourceName, TEPoint position, TESize size)
 : TEComponentRender() {
     UIImage* image = [UIImage imageNamed:resourceName];
     mTextureName = TEManagerTexture::GLUtexImage2D([image CGImage]);
-    mTexture = new TEUtilTexture(resourceName, position, size);
     
     const float leftX = -(float)size.width / 2;
 	const float rightX = leftX + size.width;

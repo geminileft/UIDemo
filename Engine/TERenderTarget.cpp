@@ -51,5 +51,19 @@ TERenderTexturePrimative* TERenderTarget::getTexturePrimatives(uint &count) {
 }
 
 TERenderPolygonPrimative* TERenderTarget::getPolygonPrimatives(uint &count) {
-    return NULL;
+    count = mPolygonPrimatives.size();
+    if (mPolygonCount > 0) {
+        free(mFramePolygonPrimatives);
+    }
+    mPolygonCount = count;
+    if (count > 0) {
+        mFramePolygonPrimatives = (TERenderPolygonPrimative*)malloc(count * sizeof(TERenderPolygonPrimative));
+        std::vector<TERenderPolygonPrimative>::iterator iterator;
+        uint c = 0;
+        for(iterator = mPolygonPrimatives.begin(); iterator != mPolygonPrimatives.end(); iterator++) {
+            mFramePolygonPrimatives[c] = (*iterator);
+            ++c;
+        }
+    }
+    return mFramePolygonPrimatives;
 }

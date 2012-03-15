@@ -15,6 +15,7 @@ private:
     TERenderPolygonPrimative mPolygonPrimatives[MAX_RENDER_PRIMATIVES];
     std::map<uint, TERenderTarget*> mTargets;
     TERenderTarget* mScreenTarget;
+    TERenderTarget* mTextureTarget;
     uint mScreenFrameBuffer;
 
 public:
@@ -33,6 +34,8 @@ public:
     void setScreenTarget(TERenderTarget* target);
     TERenderTarget* getScreenTarget() const;
     static TERenderTarget* createRenderTarget(uint &textureHandle, uint size);
+    void setTextureTarget(TERenderTarget* target);
+    TERenderTarget* getTextureTarget() const;
 };
 
 #endif

@@ -100,3 +100,11 @@ TERenderTarget* TERenderer::createRenderTarget(uint &textureHandle, uint size) {
     return target;
 
 }
+
+void TERenderer::setTextureTarget(TERenderTarget* target) {
+    mTextureTarget = target;
+}
+
+TERenderTarget* TERenderer::getTextureTarget() const {
+    return mTextureTarget;
+}

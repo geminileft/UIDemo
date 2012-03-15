@@ -34,6 +34,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     NEEDED FOR RENDER TO TEXTURE
     *******************************/
     target = createRenderTarget(mTextureFrameBufferHandle, mTextureLength);
+    setTextureTarget(target);
     mTextureFrameBuffer = target->getFrameBuffer();
     setTarget(mTextureFrameBuffer, target);
     /******************************
@@ -109,6 +110,20 @@ void TERendererOGL2::render() {
     rp = mShaderPrograms["basic"];
     rp->run(rt, primatives, count);
 
+    std::map<uint, TERenderTarget*> targets = getTargets();
+    uint targetCount = targets.size();
+
+    if (targetCount > 0) {
+        std::map<uint, TERenderTarget*>::iterator iterator;
+        for (iterator = targets.begin(); iterator != targets.end(); iterator++) {
+            rt = (*iterator).second;
+            primatives = rt->getPolygonPrimatives(count);
+            if (count > 0) {
+                NSLog(@"We have something!");
+            }
+        }
+    }
+    
     /************************
      RENDER TO TEXTURE
     *************************/
@@ -140,21 +155,10 @@ void TERendererOGL2::render() {
     TEVec3 vec;
     vec.x = 0;
     vec.y = -160;
-    
-    
+        
     rt = getScreenTarget();
-    addTexture(rt, mTextureFrameBufferHandle, vertexBuffer, textureBuffer, vec);
-
-    std::map<uint, TERenderTarget*> targets = getTargets();
-    uint targetCount = targets.size();
-    
-    if (targetCount > 0) {
-        std::map<uint, TERenderTarget*>::iterator iterator;
-        for (iterator = targets.begin(); iterator != targets.end(); iterator++) {
-            uint dCount;
-            rtp = (*iterator).second->getTexturePrimatives(dCount);
-        }
-    }
+    if (mUseRenderToTexture)
+        addTexture(rt, mTextureFrameBufferHandle, vertexBuffer, textureBuffer, vec);
 
     rp = mShaderPrograms["kernel"];
     uint primativeCount;
