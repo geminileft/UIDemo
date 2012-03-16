@@ -16,17 +16,18 @@ void UIDemo::start() {
     RenderPolygon* rp;
     TESize size;
     float radius;
-    
+    RenderToTexture* rtt;
+    RenderToTexture* rtt2;
 
     go = new TEGameObject();
     go->position.x = 0.0f;
     go->position.y = 0.0f;
     
-    RenderToTexture* rtt  = new RenderToTexture(256);
+    rtt  = new RenderToTexture(256);
     
     go->addComponent(rtt);
     addGameObject(go);
-    
+
     go = new TEGameObject();
     color = TEColor4Make(1.0, 0.0, 0.0, 1.0);
     size = TESizeMake(160, 160);
@@ -52,6 +53,20 @@ void UIDemo::start() {
     
     addGameObject(go);
 
+    /*
+    go = new TEGameObject();
+    go->position.x = 0.0f;
+    go->position.y = -160.0f;
+    
+    rtt2  = new RenderToTexture(256);
+    
+    go->addComponent(rtt);
+    addGameObject(go);
+    
+    rtt->setRenderTarget(rtt2->getRenderTarget());
+    */
+    
+    
     /*
     go = new TEGameObject();
     size = TESizeMake(160, 160);
