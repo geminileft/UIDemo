@@ -19,9 +19,6 @@ private:
     uint mFrameBuffer;
     float mFrameWidth;
     float mFrameHeight;
-    std::vector<TERenderTexturePrimative> mTexturePrimatives;
-    TERenderTexturePrimative* mFrameTexturePrimatives;
-    uint mTextureCount;
     float mProjMatrix[16];
     float mViewMatrix[16];
     std::map<TEShaderType, std::vector<TERenderPrimative> > mShaders;
@@ -35,9 +32,7 @@ public:
     float getFrameWidth() const;
     float getFrameHeight() const;
     void addPrimative(TERenderPrimative primative);
-    void addTexturePrimative(TERenderTexturePrimative primative);
     void resetPrimatives();
-    TERenderTexturePrimative* getTexturePrimatives(uint &count);
     void activate();
     float* getProjMatrix();
     float* getViewMatrix();

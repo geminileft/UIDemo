@@ -3,7 +3,7 @@
 #include <OpenGLES/ES2/glext.h>
 #include "TEUtilMatrix.h"
 
-TERenderTarget::TERenderTarget(uint frameBuffer) : mFrameBuffer(frameBuffer), mTextureCount(0), mShaderData(NULL) {}
+TERenderTarget::TERenderTarget(uint frameBuffer) : mFrameBuffer(frameBuffer), mShaderData(NULL) {}
 
 void TERenderTarget::setSize(TESize size) {
     mFrameWidth = size.width;
@@ -39,31 +39,8 @@ float TERenderTarget::getFrameHeight() const {
     return mFrameHeight;
 }
 
-void TERenderTarget::addTexturePrimative(TERenderTexturePrimative primative) {
-    mTexturePrimatives.push_back(primative);
-}
-
 void TERenderTarget::resetPrimatives() {
-    mTexturePrimatives.clear();
     mShaders.clear();
-}
-
-TERenderTexturePrimative* TERenderTarget::getTexturePrimatives(uint &count) {
-    count = mTexturePrimatives.size();
-    if (mTextureCount > 0) {
-        free(mFrameTexturePrimatives);
-    }
-    mTextureCount = count;
-    if (count > 0) {
-        mFrameTexturePrimatives = (TERenderTexturePrimative*)malloc(count * sizeof(TERenderTexturePrimative));
-        std::vector<TERenderTexturePrimative>::iterator iterator;
-        uint c = 0;
-        for(iterator = mTexturePrimatives.begin(); iterator != mTexturePrimatives.end(); iterator++) {
-            mFrameTexturePrimatives[c] = (*iterator);
-            ++c;
-        }
-    }
-    return mFrameTexturePrimatives;
 }
 
 void TERenderTarget::activate() {
