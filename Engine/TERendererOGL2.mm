@@ -119,16 +119,6 @@ void TERendererOGL2::runTargetShaders(TERenderTarget* target) {
             NSLog(@"Hrm.");
         }
     }
-    
-    
-    rtp = target->getTexturePrimatives(count);
-    if (count > 0) {
-        rp = mShaderPrograms[ShaderTexture];
-        rp->activate(target);
-        //rp->run(target, rtp, count);
-    }
-    
-
 }
 
 

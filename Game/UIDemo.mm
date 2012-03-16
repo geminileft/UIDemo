@@ -45,25 +45,27 @@ void UIDemo::exampleRenderToTexture() {
     RenderPolygon* rp;
     TESize size;
     float radius;
-    RenderToTexture* rtt;
+    //RenderToTexture* rtt;
     //RenderToTexture* rtt2;
 
+    /*
     go = new TEGameObject();
     go->position.x = 0.0f;
-    go->position.y = 0.0f;
+    go->position.y = -160.0f;
     
     rtt  = new RenderToTexture(256);
 
     go->addComponent(rtt);
     addGameObject(go);
-
+    */
+    
     go = new TEGameObject();
     color = TEColor4Make(1.0, 0.0, 0.0, 1.0);
     size = TESizeMake(160, 160);
     radius = 5.0;
     
     rp = RenderPolygonFactory::roundedRect(size, color, radius, (uint)radius);
-    rp->setRenderTarget(rtt->getTargetFrameBuffer());
+    //rp->setRenderTarget(rtt->getTargetFrameBuffer());
     go->addComponent(rp);
     
     size.width += 4;
@@ -73,7 +75,7 @@ void UIDemo::exampleRenderToTexture() {
     color.b = 0.0;
     color.a = 1.0;
     rp = RenderPolygonFactory::roundedRect(size, color, radius, (uint)radius);
-    rp->setRenderTarget(rtt->getTargetFrameBuffer());
+    //rp->setRenderTarget(rtt->getTargetFrameBuffer());
     go->addComponent(rp);
     
     
