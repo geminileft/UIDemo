@@ -81,9 +81,6 @@ void TERendererOGL2::createPrograms() {
 
 void TERendererOGL2::render() {
     TERenderTarget* rt;
-    TERendererProgram* rp;
-    TERenderTexturePrimative* rtp;
-    uint count;
     
     std::map<uint, TERenderTarget*> targets = getTargets();
     uint targetCount = targets.size();
