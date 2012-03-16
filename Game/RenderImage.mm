@@ -35,13 +35,7 @@ RenderImage::RenderImage(NSString* resourceName, TEPoint position, TESize size)
 	mTextureBuffer[7] = 0.0f;//bottom
 }
 
-void RenderImage::update() {
-    TEVec3 vec3;
-    vec3.x = mParent->position.x;
-    vec3.y = mParent->position.y;
-    vec3.z = 0;
-    sharedRenderer()->addTexture(getRenderTarget(), mTextureName, mVertexBuffer, mTextureBuffer, vec3);
-}
+void RenderImage::update() {}
 
 void RenderImage::draw() {
     mRenderPrimative.textureName = mTextureName;

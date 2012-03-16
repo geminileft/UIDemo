@@ -8,23 +8,6 @@
 
 TERenderer::TERenderer() {}
 
-void TERenderer::addTexture(TERenderTarget* target, uint textureName, float* vertexBuffer, float* textureBuffer, TEVec3 position) {
-    TERenderTexturePrimative rp;
-    rp.textureName = textureName;
-    rp.position = position;
-    rp.vertexBuffer = vertexBuffer;
-    rp.textureBuffer = textureBuffer;
-    target->addTexturePrimative(rp);
-}
-
-void TERenderer::addPolygon(TERenderTarget* target, float* vertexBuffer, int count, TEVec3 position, TEColor4 color) {
-    TERenderPolygonPrimative pp;
-    pp.vertexBuffer = vertexBuffer;
-    pp.vertexCount = count;
-    pp.position = position;
-    pp.color = color;
-}
-
 void TERenderer::reset() {
     std::map<uint, TERenderTarget*>::iterator iterator;
 

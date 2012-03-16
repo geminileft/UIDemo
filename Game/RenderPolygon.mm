@@ -27,7 +27,6 @@ void RenderPolygon::update() {
     mRenderPrimative.position.x = mParent->position.x;
     mRenderPrimative.position.y = mParent->position.y;
 
-    sharedRenderer()->addPolygon(getRenderTarget(), mVertices, mVertexCount, position, color);
     getRenderTarget()->addPrimative(mRenderPrimative);
 }
 

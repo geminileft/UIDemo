@@ -38,14 +38,7 @@ RenderToTexture::RenderToTexture(uint size) : TEComponentRender() {
     mVertexBuffer[7] = topY;
 }
 
-void RenderToTexture::update() {
-    TEVec3 vec;
-    vec.x = mParent->position.x;
-    vec.y = mParent->position.y;
-    vec.z = 0;
-    TERenderTarget* target = getRenderTarget();
-    sharedRenderer()->addTexture(target, mTextureHandle, mVertexBuffer, mTextureBuffer, vec);
-}
+void RenderToTexture::update() {}
 
 void RenderToTexture::draw() {
     mRenderPrimative.textureName = mTextureHandle;

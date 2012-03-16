@@ -104,7 +104,6 @@ void TERendererOGL2::runTargetShaders(TERenderTarget* target) {
     TEShaderData shader;
     uint count;
     TERendererProgram* rp;
-    TERenderTexturePrimative* rtp;
     
     target->activate();
     glClear(GL_COLOR_BUFFER_BIT);
