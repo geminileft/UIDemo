@@ -65,38 +65,11 @@ uint TERendererProgram::activate(TERenderTarget* target) {
         }
     }
     
-    const float width = target->getFrameWidth();
-    const float height = target->getFrameHeight();
-    glViewport(0, 0, width, height);
-    glBindFramebuffer(GL_FRAMEBUFFER, target->getFrameBuffer());
-    
-    float proj[16];
-    float trans[16];
-    float view[16];
-    float rotate[16];
-    float angle;
-    float zDepth;
-    float ratio;
-    
-    zDepth = (float)height / 2;
-    ratio = (float)width/(float)height;
-    
-    if (false) {
-        angle = -90.0f;
-        TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -1, 1, -ratio, ratio, 1.0f, 1000.0f);
-    } else {
-        angle = 0.0f;
-        TEUtilMatrix::setFrustum(&proj[0], ColumnMajor, -ratio, ratio, -1, 1, 1.0f, 1000.0f);
-    }
-    
-    TEUtilMatrix::setTranslate(&trans[0], ColumnMajor, 0.0f, 0.0f, -zDepth);
-    TEUtilMatrix::setRotateZ(&rotate[0], ColumnMajor, deg2rad(angle));
-    TEUtilMatrix::multiply(&view[0], ColumnMajor, rotate, trans);
-    
+    target->activate();    
     uint mProjHandle  = glGetUniformLocation(mProgramId, "uProjectionMatrix");
     uint mViewHandle = glGetUniformLocation(mProgramId, "uViewMatrix");
-    glUniformMatrix4fv(mProjHandle, 1, GL_FALSE, &proj[0]);
-    glUniformMatrix4fv(mViewHandle, 1, GL_FALSE, &view[0]);
+    glUniformMatrix4fv(mProjHandle, 1, GL_FALSE, target->getProjMatrix());
+    glUniformMatrix4fv(mViewHandle, 1, GL_FALSE, target->getViewMatrix());
     return mProgramId;
 }
 

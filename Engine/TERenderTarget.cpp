@@ -1,10 +1,30 @@
 #include "TERenderTarget.h"
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
+#include "TEUtilMatrix.h"
 
 TERenderTarget::TERenderTarget(uint frameBuffer) : mFrameBuffer(frameBuffer), mTextureCount(0), mPolygonCount(0) {}
 
 void TERenderTarget::setSize(TESize size) {
     mFrameWidth = size.width;
     mFrameHeight = size.height;
+    
+    float angle;
+    float zDepth;
+    float ratio;
+    
+    zDepth = (float)mFrameHeight / 2;
+    ratio = (float)mFrameWidth/(float)mFrameHeight;
+    
+    if (false) {
+        angle = -90.0f;
+        TEUtilMatrix::setFrustum(&mProjMatrix[0], ColumnMajor, -1, 1, -ratio, ratio, 1.0f, 1000.0f);
+    } else {
+        angle = 0.0f;
+        TEUtilMatrix::setFrustum(&mProjMatrix[0], ColumnMajor, -ratio, ratio, -1, 1, 1.0f, 1000.0f);
+    }
+    
+    TEUtilMatrix::setTranslate(&mViewMatrix[0], ColumnMajor, 0.0f, 0.0f, -zDepth);
 }
 
 uint TERenderTarget::getFrameBuffer() const {
@@ -66,4 +86,17 @@ TERenderPolygonPrimative* TERenderTarget::getPolygonPrimatives(uint &count) {
         }
     }
     return mFramePolygonPrimatives;
+}
+
+void TERenderTarget::activate() {
+    glViewport(0, 0, mFrameWidth, mFrameHeight);
+    glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
+}
+
+float* TERenderTarget::getProjMatrix() {
+    return mProjMatrix;
+}
+
+float* TERenderTarget::getViewMatrix() {
+    return mViewMatrix;
 }

@@ -17,7 +17,7 @@ void UIDemo::start() {
     TESize size;
     float radius;
     RenderToTexture* rtt;
-    RenderToTexture* rtt2;
+    //RenderToTexture* rtt2;
 
     go = new TEGameObject();
     go->position.x = 0.0f;
