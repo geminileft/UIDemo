@@ -27,7 +27,7 @@ void UIDemo::start() {
     
     go->addComponent(rtt);
     addGameObject(go);
-
+    
     go = new TEGameObject();
     color = TEColor4Make(1.0, 0.0, 0.0, 1.0);
     size = TESizeMake(160, 160);

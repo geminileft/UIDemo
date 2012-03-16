@@ -87,53 +87,54 @@ void TERendererOGL2::render() {
     
     std::map<uint, TERenderTarget*> targets = getTargets();
     uint targetCount = targets.size();
-    TEShaderData* shaderData;
-    TEShaderData shader;
     
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     if (targetCount > 0) {
         std::map<uint, TERenderTarget*>::iterator iterator;
         for (iterator = targets.begin(); iterator != targets.end(); iterator++) {
             rt = (*iterator).second;
-            shaderData = rt->getShaderData(count);
-            for (uint i = 0; i < count; ++i) {
-                shader = shaderData[i];
-                rp = mShaderPrograms[shader.type];
-                if (rp != NULL) {
-                    rp->activate(rt);
-                    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-                    glClear(GL_COLOR_BUFFER_BIT);
-                    rp->run(rt, shader.primatives, shader.primativeCount);
-
-                    //NSLog(@"We got a live one!");
-                } else {
-                    NSLog(@"Hrm.");
-                }
-            }
-            
-            rtp = rt->getTexturePrimatives(count);
-            if (count > 0) {
-                rp = mShaderPrograms[ShaderTexture];
-                rp->activate(rt);
-                glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-                glClear(GL_COLOR_BUFFER_BIT);
-                rp->run(rt, rtp, count);
-            }
+            runTargetShaders(rt);
         }
     }
     
     rt = getScreenTarget();
-    rp = mShaderPrograms[ShaderPolygon];
-    rp->activate(rt);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
     
-    rtp = rt->getTexturePrimatives(count);
-    rp = mShaderPrograms[ShaderTexture];
-    rp->run(rt, rtp, count);
+    runTargetShaders(rt);
     
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
 }
+
+void TERendererOGL2::runTargetShaders(TERenderTarget* target) {
+    TEShaderData* shaderData;
+    TEShaderData shader;
+    uint count;
+    TERendererProgram* rp;
+    TERenderTexturePrimative* rtp;
+    
+    target->activate();
+    glClear(GL_COLOR_BUFFER_BIT);
+    shaderData = target->getShaderData(count);
+    for (uint i = 0; i < count; ++i) {
+        shader = shaderData[i];
+        rp = mShaderPrograms[shader.type];
+        if (rp != NULL) {
+            rp->activate(target);
+            rp->run(target, shader.primatives, shader.primativeCount);
+        } else {
+            NSLog(@"Hrm.");
+        }
+    }
+    
+    rtp = target->getTexturePrimatives(count);
+    if (count > 0) {
+        rp = mShaderPrograms[ShaderTexture];
+        rp->activate(target);
+        rp->run(target, rtp, count);
+    }
+
+}
+
 
 void TERendererOGL2::checkGlError(String op) {
     uint error;

@@ -23,6 +23,7 @@ private:
     
     static void checkGlError(String op);
     void createPrograms();
+    void runTargetShaders(TERenderTarget* target);
 
 public:
     TERendererOGL2(CALayer* eaglLayer, uint width, uint height);
