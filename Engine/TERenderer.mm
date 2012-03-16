@@ -23,8 +23,6 @@ void TERenderer::addPolygon(TERenderTarget* target, float* vertexBuffer, int cou
     pp.vertexCount = count;
     pp.position = position;
     pp.color = color;
-    target->addPolygonPrimative(pp);
-
 }
 
 void TERenderer::reset() {

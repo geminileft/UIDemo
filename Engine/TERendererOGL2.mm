@@ -84,25 +84,30 @@ void TERendererOGL2::render() {
     TERendererProgram* rp;
     TERenderTexturePrimative* rtp;
     uint count;
-    TERenderPolygonPrimative* primatives;
     
     std::map<uint, TERenderTarget*> targets = getTargets();
     uint targetCount = targets.size();
     TEShaderData* shaderData;
+    TEShaderData shader;
     
     if (targetCount > 0) {
         std::map<uint, TERenderTarget*>::iterator iterator;
         for (iterator = targets.begin(); iterator != targets.end(); iterator++) {
             rt = (*iterator).second;
             shaderData = rt->getShaderData(count);
-            
-            primatives = rt->getPolygonPrimatives(count);
-            if (count > 0) {
-                rp = mShaderPrograms[ShaderPolygon];
-                rp->activate(rt);
-                glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-                glClear(GL_COLOR_BUFFER_BIT);
-                rp->run(rt, primatives, count);
+            for (uint i = 0; i < count; ++i) {
+                shader = shaderData[i];
+                rp = mShaderPrograms[shader.type];
+                if (rp != NULL) {
+                    rp->activate(rt);
+                    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+                    glClear(GL_COLOR_BUFFER_BIT);
+                    rp->run(rt, shader.primatives, shader.primativeCount);
+
+                    //NSLog(@"We got a live one!");
+                } else {
+                    NSLog(@"Hrm.");
+                }
             }
             
             rtp = rt->getTexturePrimatives(count);
@@ -122,9 +127,6 @@ void TERendererOGL2::render() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    
-    primatives = rt->getPolygonPrimatives(count);
-    rp->run(rt, primatives, count);
     
     rtp = rt->getTexturePrimatives(count);
     rp = mShaderPrograms[ShaderTexture];

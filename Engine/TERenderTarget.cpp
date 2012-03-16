@@ -3,7 +3,7 @@
 #include <OpenGLES/ES2/glext.h>
 #include "TEUtilMatrix.h"
 
-TERenderTarget::TERenderTarget(uint frameBuffer) : mFrameBuffer(frameBuffer), mTextureCount(0), mPolygonCount(0), mShaderData(NULL) {}
+TERenderTarget::TERenderTarget(uint frameBuffer) : mFrameBuffer(frameBuffer), mTextureCount(0), mShaderData(NULL) {}
 
 void TERenderTarget::setSize(TESize size) {
     mFrameWidth = size.width;
@@ -43,13 +43,8 @@ void TERenderTarget::addTexturePrimative(TERenderTexturePrimative primative) {
     mTexturePrimatives.push_back(primative);
 }
 
-void TERenderTarget::addPolygonPrimative(TERenderPolygonPrimative primative) {
-    mPolygonPrimatives.push_back(primative);
-}
-
 void TERenderTarget::resetPrimatives() {
     mTexturePrimatives.clear();
-    mPolygonPrimatives.clear();
     mShaders.clear();
 }
 
@@ -71,24 +66,6 @@ TERenderTexturePrimative* TERenderTarget::getTexturePrimatives(uint &count) {
     return mFrameTexturePrimatives;
 }
 
-TERenderPolygonPrimative* TERenderTarget::getPolygonPrimatives(uint &count) {
-    count = mPolygonPrimatives.size();
-    if (mPolygonCount > 0) {
-        free(mFramePolygonPrimatives);
-    }
-    mPolygonCount = count;
-    if (count > 0) {
-        mFramePolygonPrimatives = (TERenderPolygonPrimative*)malloc(count * sizeof(TERenderPolygonPrimative));
-        std::vector<TERenderPolygonPrimative>::iterator iterator;
-        uint c = 0;
-        for(iterator = mPolygonPrimatives.begin(); iterator != mPolygonPrimatives.end(); iterator++) {
-            mFramePolygonPrimatives[c] = (*iterator);
-            ++c;
-        }
-    }
-    return mFramePolygonPrimatives;
-}
-
 void TERenderTarget::activate() {
     glViewport(0, 0, mFrameWidth, mFrameHeight);
     glBindFramebuffer(GL_FRAMEBUFFER, mFrameBuffer);
@@ -108,16 +85,15 @@ void TERenderTarget::addPrimative(TERenderPrimative primative) {
     
     if (primative.textureBuffer == NULL) {
         type = ShaderPolygon;
-        if (mShaders.count(type) > 0) {
+        if (mShaders.count(type) > 0)
             primatives = mShaders[type];
-            primatives.push_back(primative);
-        } else {
-            primatives.push_back(primative);
-            mShaders[type] = primatives;
-        }
+        primatives.push_back(primative);
+        mShaders[type] = primatives;
     } else {
         int i = 0;
     }
+    
+    primatives = mShaders[ShaderPolygon];
 }
 
 TEShaderData* TERenderTarget::getShaderData(uint &count) {
@@ -129,6 +105,7 @@ TEShaderData* TERenderTarget::getShaderData(uint &count) {
         free(mShaderData);
     count = mShaders.size();
     
+    uint shaderCount = 0;
     uint renderables = 0;
     if (count > 0) {
         mShaderData = (TEShaderData*)malloc(sizeof(TEShaderData) * count);
@@ -143,10 +120,8 @@ TEShaderData* TERenderTarget::getShaderData(uint &count) {
                 data.primatives[renderables] = (*primIterator);
                 ++renderables;
             }
-        }
-        mShaderData = (TEShaderData*)malloc(renderables * sizeof(TERenderPrimative));
-        for (iterator = mShaders.begin(); iterator != mShaders.end(); iterator++) {
-            renderables += (*iterator).second.size();
+            memcpy(&mShaderData[shaderCount], &data, sizeof(TEShaderData));
+            ++shaderCount;
         }
     }
     return mShaderData;

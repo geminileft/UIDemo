@@ -22,6 +22,7 @@ public:
     void deactivate();
     virtual void run(TERenderTarget* target, TERenderPolygonPrimative* primatives, uint primativeCount);
     virtual void run(TERenderTarget* target, TERenderTexturePrimative* primatives, uint primativeCount);
+    virtual void run(TERenderTarget* target, TERenderPrimative* primatives, uint primativeCount);
     uint getProgramId() const;
 
 };
