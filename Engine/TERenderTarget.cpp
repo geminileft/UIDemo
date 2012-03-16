@@ -100,3 +100,13 @@ float* TERenderTarget::getProjMatrix() {
 float* TERenderTarget::getViewMatrix() {
     return mViewMatrix;
 }
+
+void TERenderTarget::addPrimative(TERenderPrimative primative) {
+    TEShaderType type;
+    if (primative.textureBuffer == NULL) {
+        type = ShaderPolygon;
+        int j = 0;
+    } else {
+        int i = 0;
+    }
+}

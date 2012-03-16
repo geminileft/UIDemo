@@ -62,20 +62,20 @@ void TERendererOGL2::createPrograms() {
     vertexSource = TEManagerFile::readFileContents("texture.vs");
     fragmentSource = TEManagerFile::readFileContents("texture.fs");
     rp = new TERendererTexture(vertexSource, fragmentSource);
-    mShaderPrograms["texture"] = rp;
+    mShaderPrograms[ShaderTexture] = rp;
     rp->addAttribute("aVertices");
     rp->addAttribute("aTextureCoords");
     
     fragmentSource = TEManagerFile::readFileContents("blur.fs");
     rp = new TERendererKernel(vertexSource, fragmentSource);
-    mShaderPrograms["kernel"] = rp;
+    mShaderPrograms[ShaderKernel] = rp;
     rp->addAttribute("aVertices");
     rp->addAttribute("aTextureCoords");
     
     vertexSource = TEManagerFile::readFileContents("colorbox.vs");
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
     rp = new TERendererBasic(vertexSource, fragmentSource);
-    mShaderPrograms["basic"] = rp;
+    mShaderPrograms[ShaderPolygon] = rp;
     rp->addAttribute("aVertices");
 }
 
@@ -95,7 +95,7 @@ void TERendererOGL2::render() {
             rt = (*iterator).second;
             primatives = rt->getPolygonPrimatives(count);
             if (count > 0) {
-                rp = mShaderPrograms["basic"];
+                rp = mShaderPrograms[ShaderPolygon];
                 rp->activate(rt);
                 glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
                 glClear(GL_COLOR_BUFFER_BIT);
@@ -104,7 +104,7 @@ void TERendererOGL2::render() {
             
             rtp = rt->getTexturePrimatives(count);
             if (count > 0) {
-                rp = mShaderPrograms["texture"];
+                rp = mShaderPrograms[ShaderTexture];
                 rp->activate(rt);
                 glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
                 glClear(GL_COLOR_BUFFER_BIT);
@@ -114,7 +114,7 @@ void TERendererOGL2::render() {
     }
     
     rt = getScreenTarget();
-    rp = mShaderPrograms["basic"];
+    rp = mShaderPrograms[ShaderPolygon];
     rp->activate(rt);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -124,7 +124,7 @@ void TERendererOGL2::render() {
     rp->run(rt, primatives, count);
     
     rtp = rt->getTexturePrimatives(count);
-    rp = mShaderPrograms["texture"];
+    rp = mShaderPrograms[ShaderTexture];
     rp->run(rt, rtp, count);
     
     [mContext presentRenderbuffer:GL_RENDERBUFFER];

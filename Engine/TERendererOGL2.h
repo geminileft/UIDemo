@@ -19,7 +19,7 @@ private:
     uint maTextureHandle;
     int mWidth;
     int mHeight;
-    std::map<String, TERendererProgram*> mShaderPrograms;
+    std::map<TEShaderType, TERendererProgram*> mShaderPrograms;
     
     static void checkGlError(String op);
     void createPrograms();

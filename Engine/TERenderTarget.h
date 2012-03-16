@@ -4,6 +4,7 @@
 
 #include "TETypes.h"
 #include <vector>
+#include <map>
 
 class TERenderTarget {
 private:
@@ -18,6 +19,7 @@ private:
     uint mPolygonCount;
     float mProjMatrix[16];
     float mViewMatrix[16];
+    std::map<TEShaderType, std::vector<TERenderPolygonPrimative> > mShaders;
 
 public:
     TERenderTarget(uint frameBuffer);
