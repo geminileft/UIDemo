@@ -107,6 +107,27 @@ inline TEColor4 TEColor4Make(float r, float g, float b, float a) {
     return color;
 }
 
+enum TERenderPrimativeType {
+    Polygon
+    , Texture
+    , Kernel
+};
+
+typedef enum TERenderPrimativeType TERenderPrimativeType;
+
+struct TERenderPrimative {
+    uint textureName;
+    TEColor4 color;
+    TEVec3 position;
+    int vertexCount;
+    float* vertexBuffer;
+    float* textureBuffer;
+    float* kernel;
+    TERenderPrimativeType type;
+};
+
+typedef TERenderPrimative TERenderPrimative;
+
 struct TERenderTexturePrimative {
     uint textureName;
     TEVec3 position;

@@ -6,7 +6,9 @@
 #include "TERenderTarget.h"
 
 RenderPolygon::RenderPolygon() : TEComponentRender() {
-    
+    mRenderPrimative.textureBuffer = NULL;
+    mRenderPrimative.kernel = NULL;
+    mRenderPrimative.vertexCount = 0;
 }
 
 void RenderPolygon::update() {
@@ -21,7 +23,10 @@ void RenderPolygon::update() {
     position.x = mParent->position.x;
     position.y = mParent->position.y;
     position.z = 0.0f;
-    
+
+    mRenderPrimative.position.x = mParent->position.x;
+    mRenderPrimative.position.y = mParent->position.y;
+
     sharedRenderer()->addPolygon(getRenderTarget(), mVertices, mVertexCount, position, color);
 }
 
@@ -33,6 +38,11 @@ void RenderPolygon::moveToTopListener() {
 };
 
 void RenderPolygon::setColor(TEColor4 color) {
+    mRenderPrimative.color.r = color.r;
+    mRenderPrimative.color.g = color.g;
+    mRenderPrimative.color.b = color.b;
+    mRenderPrimative.color.a = color.a;
+    
     mR = color.r;
     mG = color.g;
     mB = color.b;
@@ -41,9 +51,15 @@ void RenderPolygon::setColor(TEColor4 color) {
 
 void RenderPolygon::setVertices(float* vertices, int vertexCount) {
     int memSize = vertexCount * 2 * sizeof(float);
-    mVertices = (float*)malloc(memSize);
-    memcpy(mVertices, vertices, memSize);
+    if (mRenderPrimative.vertexCount > 0) {
+        free(mRenderPrimative.vertexBuffer);
+    }
+    mRenderPrimative.vertexCount = vertexCount;
+    mRenderPrimative.vertexBuffer = (float*)malloc(memSize);
+    mVertices = mRenderPrimative.vertexBuffer;
+    memcpy(mRenderPrimative.vertexBuffer, vertices, memSize);
     mVertexCount = vertexCount;
+    mRenderPrimative.vertexCount = vertexCount;
 }
 
 

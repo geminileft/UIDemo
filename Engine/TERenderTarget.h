@@ -4,13 +4,6 @@
 
 #include "TETypes.h"
 #include <vector>
-#include <QuartzCore/QuartzCore.h>
-/*
-#include <OpenGLES/ES1/gl.h>
-#include <OpenGLES/ES1/glext.h>
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
-*/
 
 class TERenderTarget {
 private:
@@ -33,6 +26,7 @@ public:
     uint getFrameBuffer() const;
     float getFrameWidth() const;
     float getFrameHeight() const;
+    void addPrimative(TERenderPrimative primative);
     void addTexturePrimative(TERenderTexturePrimative primative);
     void addPolygonPrimative(TERenderPolygonPrimative primative);
     void resetPrimatives();

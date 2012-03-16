@@ -14,6 +14,7 @@ private:
     float mA;
     int mVertexCount;
     float *mVertices;
+    TERenderPrimative mRenderPrimative;
 
 public:
     RenderPolygon();

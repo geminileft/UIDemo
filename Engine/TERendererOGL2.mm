@@ -19,7 +19,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     
     mWidth = width;
     mHeight = height;
-
+    
     // Make sure this is the right version!
     mContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     if (!mContext || ![EAGLContext setCurrentContext:mContext]) {
@@ -28,7 +28,7 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glGenFramebuffers(1, &screenFrameBuffer);
     setScreenFrameBuffer(screenFrameBuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, screenFrameBuffer);
-        
+    
     glGenRenderbuffers(1, &mRenderBuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, mRenderBuffer);
     [mContext renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer*)eaglLayer];
