@@ -88,11 +88,14 @@ void TERendererOGL2::render() {
     
     std::map<uint, TERenderTarget*> targets = getTargets();
     uint targetCount = targets.size();
-
+    TEShaderData* shaderData;
+    
     if (targetCount > 0) {
         std::map<uint, TERenderTarget*>::iterator iterator;
         for (iterator = targets.begin(); iterator != targets.end(); iterator++) {
             rt = (*iterator).second;
+            shaderData = rt->getShaderData(count);
+            
             primatives = rt->getPolygonPrimatives(count);
             if (count > 0) {
                 rp = mShaderPrograms[ShaderPolygon];

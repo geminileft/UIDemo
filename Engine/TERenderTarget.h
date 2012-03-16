@@ -6,6 +6,14 @@
 #include <vector>
 #include <map>
 
+struct TEShaderData {
+    TEShaderType type;
+    TERenderPrimative* primatives;
+    uint primativeCount;
+};
+
+typedef struct TEShaderData TEShaderData;
+
 class TERenderTarget {
 private:
     uint mFrameBuffer;
@@ -19,7 +27,8 @@ private:
     uint mPolygonCount;
     float mProjMatrix[16];
     float mViewMatrix[16];
-    std::map<TEShaderType, std::vector<TERenderPolygonPrimative> > mShaders;
+    std::map<TEShaderType, std::vector<TERenderPrimative> > mShaders;
+    TEShaderData* mShaderData;
 
 public:
     TERenderTarget(uint frameBuffer);
@@ -37,6 +46,7 @@ public:
     void activate();
     float* getProjMatrix();
     float* getViewMatrix();
+    TEShaderData* getShaderData(uint &count);
 };
 
 #endif

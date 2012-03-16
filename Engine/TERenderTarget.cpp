@@ -3,7 +3,7 @@
 #include <OpenGLES/ES2/glext.h>
 #include "TEUtilMatrix.h"
 
-TERenderTarget::TERenderTarget(uint frameBuffer) : mFrameBuffer(frameBuffer), mTextureCount(0), mPolygonCount(0) {}
+TERenderTarget::TERenderTarget(uint frameBuffer) : mFrameBuffer(frameBuffer), mTextureCount(0), mPolygonCount(0), mShaderData(NULL) {}
 
 void TERenderTarget::setSize(TESize size) {
     mFrameWidth = size.width;
@@ -50,6 +50,7 @@ void TERenderTarget::addPolygonPrimative(TERenderPolygonPrimative primative) {
 void TERenderTarget::resetPrimatives() {
     mTexturePrimatives.clear();
     mPolygonPrimatives.clear();
+    mShaders.clear();
 }
 
 TERenderTexturePrimative* TERenderTarget::getTexturePrimatives(uint &count) {
@@ -103,10 +104,50 @@ float* TERenderTarget::getViewMatrix() {
 
 void TERenderTarget::addPrimative(TERenderPrimative primative) {
     TEShaderType type;
+    std::vector<TERenderPrimative> primatives;
+    
     if (primative.textureBuffer == NULL) {
         type = ShaderPolygon;
-        int j = 0;
+        if (mShaders.count(type) > 0) {
+            primatives = mShaders[type];
+            primatives.push_back(primative);
+        } else {
+            primatives.push_back(primative);
+            mShaders[type] = primatives;
+        }
     } else {
         int i = 0;
     }
+}
+
+TEShaderData* TERenderTarget::getShaderData(uint &count) {
+    TEShaderData data;
+    std::vector<TERenderPrimative> prims;
+    std::vector<TERenderPrimative>::iterator primIterator;
+    
+    if (mShaderData != NULL)
+        free(mShaderData);
+    count = mShaders.size();
+    
+    uint renderables = 0;
+    if (count > 0) {
+        mShaderData = (TEShaderData*)malloc(sizeof(TEShaderData) * count);
+        std::map<TEShaderType, std::vector<TERenderPrimative> >::iterator iterator;
+        for (iterator = mShaders.begin(); iterator != mShaders.end(); iterator++) {
+            data.type = (*iterator).first;
+            prims = (*iterator).second;
+            data.primativeCount = prims.size();
+            data.primatives = (TERenderPrimative*)malloc(data.primativeCount * sizeof(TERenderPrimative));
+            renderables = 0;
+            for (primIterator = prims.begin(); primIterator != prims.end(); primIterator++) {
+                data.primatives[renderables] = (*primIterator);
+                ++renderables;
+            }
+        }
+        mShaderData = (TEShaderData*)malloc(renderables * sizeof(TERenderPrimative));
+        for (iterator = mShaders.begin(); iterator != mShaders.end(); iterator++) {
+            renderables += (*iterator).second.size();
+        }
+    }
+    return mShaderData;
 }
