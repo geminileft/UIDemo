@@ -15,8 +15,6 @@
 #include "TEManagerTime.h"
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
-    TERenderTarget* target;
-    
     mWidth = width;
     mHeight = height;
     
@@ -41,9 +39,8 @@ TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &screenWidth);
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &screenHeight);
     
-    target = new TERenderTarget(screenFrameBuffer);
-    target->setSize(TESizeMake(screenWidth, screenHeight));
-    setScreenTarget(target);
+    mScreenTarget = new TERenderTarget(screenFrameBuffer);
+    mScreenTarget->setSize(TESizeMake(screenWidth, screenHeight));
     
     [EAGLContext setCurrentContext:mContext];
     
@@ -94,7 +91,7 @@ void TERendererOGL2::render() {
         }
     }
     
-    rt = getScreenTarget();
+    rt = mScreenTarget;
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     
     runTargetShaders(rt);
@@ -123,14 +120,14 @@ void TERendererOGL2::runTargetShaders(TERenderTarget* target) {
         }
     }
     
-    /*
+    
     rtp = target->getTexturePrimatives(count);
     if (count > 0) {
         rp = mShaderPrograms[ShaderTexture];
         rp->activate(target);
-        rp->run(target, rtp, count);
+        //rp->run(target, rtp, count);
     }
-    */
+    
 
 }
 

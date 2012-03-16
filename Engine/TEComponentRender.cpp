@@ -4,7 +4,8 @@
 static TERenderer* mSharedRenderer = NULL;
 
 TEComponentRender::TEComponentRender() : mKernel(NULL) {
-    mTarget = sharedRenderer()->getScreenTarget();
+    TERenderTarget* target = sharedRenderer()->mScreenTarget;
+    setRenderTarget(target);
 }
 
 TERenderer* TEComponentRender::sharedRenderer() {

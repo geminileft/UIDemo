@@ -54,14 +54,6 @@ std::map<uint, TERenderTarget*> TERenderer::getTargets() const {
     return mTargets;
 }
 
-void TERenderer::setScreenTarget(TERenderTarget* target) {
-    mScreenTarget = target;
-}
-
-TERenderTarget* TERenderer::getScreenTarget() const {
-    return mScreenTarget;
-}
-
 TERenderTarget* TERenderer::createRenderTarget(uint &textureHandle, uint size) {
     uint frameBuffer;;
     glGenTextures(1, &textureHandle);

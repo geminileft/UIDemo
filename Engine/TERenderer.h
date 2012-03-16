@@ -12,10 +12,11 @@ class TERenderTarget;
 class TERenderer {
 private:
     std::map<uint, TERenderTarget*> mTargets;
-    TERenderTarget* mScreenTarget;
     uint mScreenFrameBuffer;
 
 public:
+    TERenderTarget* mScreenTarget;
+
     TERenderer();
     virtual void render() = 0;
     void addTexture(TERenderTarget* target, uint textureName, float* vertexBuffer, float* textureBuffer, TEVec3 position);
@@ -26,8 +27,6 @@ public:
     uint getScreenFrameBuffer() const;
     void setScreenFrameBuffer(uint screenFrameBuffer);
     std::map<uint, TERenderTarget*> getTargets() const;
-    void setScreenTarget(TERenderTarget* target);
-    TERenderTarget* getScreenTarget() const;
     static TERenderTarget* createRenderTarget(uint &textureHandle, uint size);
 };
 

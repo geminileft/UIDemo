@@ -43,13 +43,23 @@ void RenderToTexture::update() {
     vec.x = mParent->position.x;
     vec.y = mParent->position.y;
     vec.z = 0;
-    sharedRenderer()->addTexture(sharedRenderer()->getScreenTarget(), mTextureHandle, mVertexBuffer, mTextureBuffer, vec);
+    TERenderTarget* target = getRenderTarget();
+    sharedRenderer()->addTexture(target, mTextureHandle, mVertexBuffer, mTextureBuffer, vec);
 }
 
 void RenderToTexture::draw() {
+    mRenderPrimative.textureName = mTextureHandle;
+    mRenderPrimative.position.x = mParent->position.x;
+    mRenderPrimative.position.y = mParent->position.y;
+    mRenderPrimative.position.z = 0;
+    mRenderPrimative.vertexCount = 4;
+    mRenderPrimative.vertexBuffer = mVertexBuffer;
+    mRenderPrimative.textureBuffer = mTextureBuffer;
+    mRenderPrimative.kernel = NULL;
+    getRenderTarget()->addPrimative(mRenderPrimative);
 }
 
-TERenderTarget* RenderToTexture::getRenderTarget() {
+TERenderTarget* RenderToTexture::getTargetFrameBuffer() {
     return mTarget;
 }
 

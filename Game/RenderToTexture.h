@@ -14,12 +14,13 @@ private:
     uint mSize;
     float mVertexBuffer[8];
     float mTextureBuffer[8];
+    TERenderPrimative mRenderPrimative;
 
 public:
     RenderToTexture(uint size);
     virtual void update();
     virtual void draw();
-    TERenderTarget* getRenderTarget();
+    TERenderTarget* getTargetFrameBuffer();
     uint getTextureHandle();
 };
 #endif
