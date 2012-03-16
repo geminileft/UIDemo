@@ -36,8 +36,8 @@ RenderToTexture::RenderToTexture(uint size) : TEComponentRender() {
     mVertexBuffer[5] = topY;
     mVertexBuffer[6] = leftX;
     mVertexBuffer[7] = topY;
-
 }
+
 void RenderToTexture::update() {
     TEVec3 vec;
     vec.x = mParent->position.x;
