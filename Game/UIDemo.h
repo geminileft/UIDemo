@@ -7,6 +7,8 @@ class UIDemo : public TEEngine {
 public:
     UIDemo(int width, int height);	
     virtual void start();
+    void exampleRenderToTexture();
+    void exampleDrawImage();
 };
 
 #endif
