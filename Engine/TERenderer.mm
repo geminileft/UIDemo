@@ -6,7 +6,7 @@
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
-TERenderer::TERenderer() {}
+TERenderer::TERenderer() : mKernel(NULL) {}
 
 void TERenderer::reset() {
     std::map<uint, TERenderTarget*>::iterator iterator;
@@ -57,5 +57,12 @@ TERenderTarget* TERenderer::createRenderTarget(uint &textureHandle, uint size) {
     TERenderTarget* target = new TERenderTarget(frameBuffer);
     target->setSize(TESizeMake(size, size));
     return target;
+}
 
+void TERenderer::setKernel(float* kernel) {
+    if (mKernel != NULL) {
+        free(mKernel);
+    }
+    mKernel = (float*)malloc(9 * sizeof(float));
+    memcpy(mKernel, kernel, 9 * sizeof(float));
 }
