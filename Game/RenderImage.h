@@ -13,6 +13,7 @@ private:
     uint mTextureName;
     float mVertexBuffer[8];
     float mTextureBuffer[8];
+    TERenderPrimative mRenderPrimative;
 
 public:
     RenderImage(NSString* resourceName, TEPoint position, TESize size);

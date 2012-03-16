@@ -85,15 +85,17 @@ void TERenderTarget::addPrimative(TERenderPrimative primative) {
     
     if (primative.textureBuffer == NULL) {
         type = ShaderPolygon;
-        if (mShaders.count(type) > 0)
-            primatives = mShaders[type];
-        primatives.push_back(primative);
-        mShaders[type] = primatives;
     } else {
-        int i = 0;
+        if (primative.kernel == NULL) {
+            type = ShaderTexture;
+        } else {
+            type = ShaderKernel;
+        }
     }
-    
-    primatives = mShaders[ShaderPolygon];
+    if (mShaders.count(type) > 0)
+        primatives = mShaders[type];
+    primatives.push_back(primative);
+    mShaders[type] = primatives;
 }
 
 TEShaderData* TERenderTarget::getShaderData(uint &count) {

@@ -4,6 +4,7 @@
 #include "TEGameObject.h"
 #include "TEEventListener.h"
 #include "TEManagerTexture.h"
+#include "TERenderTarget.h"
 
 RenderImage::RenderImage(NSString* resourceName, TEPoint position, TESize size)
 : TEComponentRender() {
@@ -39,11 +40,19 @@ void RenderImage::update() {
     vec3.x = mParent->position.x;
     vec3.y = mParent->position.y;
     vec3.z = 0;
-
     sharedRenderer()->addTexture(getRenderTarget(), mTextureName, mVertexBuffer, mTextureBuffer, vec3);
 }
 
 void RenderImage::draw() {
+    mRenderPrimative.textureName = mTextureName;
+    mRenderPrimative.position.x = mParent->position.x;
+    mRenderPrimative.position.y = mParent->position.y;
+    mRenderPrimative.position.z = 0;
+    mRenderPrimative.vertexCount = 4;
+    mRenderPrimative.vertexBuffer = mVertexBuffer;
+    mRenderPrimative.textureBuffer = mTextureBuffer;
+    mRenderPrimative.kernel = NULL;
+    getRenderTarget()->addPrimative(mRenderPrimative);
 }
 
 void RenderImage::moveToTopListener() {

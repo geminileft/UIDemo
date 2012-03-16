@@ -123,12 +123,14 @@ void TERendererOGL2::runTargetShaders(TERenderTarget* target) {
         }
     }
     
+    /*
     rtp = target->getTexturePrimatives(count);
     if (count > 0) {
         rp = mShaderPrograms[ShaderTexture];
         rp->activate(target);
         rp->run(target, rtp, count);
     }
+    */
 
 }
 
