@@ -11,7 +11,6 @@ public:
     TERendererTexture();
     TERendererTexture(String vertexSource, String fragmentSource);
     
-    virtual void run(TERenderTarget* target, TERenderTexturePrimative* primatives, uint primativeCount);
     virtual void run(TERenderTarget* target, TERenderPrimative* primatives, uint primativeCount);
 };
 

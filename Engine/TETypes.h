@@ -111,6 +111,7 @@ enum TEShaderType {
     ShaderPolygon
     , ShaderTexture
     , ShaderKernel
+    , ShaderTransparentBlack
 };
 
 typedef enum TEShaderType TEShaderType;
