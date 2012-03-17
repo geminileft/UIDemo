@@ -92,16 +92,20 @@ void UIDemo::exampleRenderToTexture() {
     
     addGameObject(go);
     
-     go = new TEGameObject();
-     go->position.x = 0.0f;
-     go->position.y = 0.0f;
-     
-     rtt2  = new RenderToTexture(256);
-     
-     go->addComponent(rtt2);
-     addGameObject(go);
-     
-     rtt->setRenderTarget(rtt2->getTargetFrameBuffer());
+    go = new TEGameObject();
+    go->position.x = 0.0f;
+    go->position.y = 0.0f;
+
+    rtt2  = new RenderToTexture(256);
+    color.r = 0;
+    color.g = 0;
+    color.b = 0;
+    rtt2->setTransparentColor(&color);
+
+    go->addComponent(rtt2);
+    addGameObject(go);
+
+    rtt->setRenderTarget(rtt2->getTargetFrameBuffer());
 
 }
 
