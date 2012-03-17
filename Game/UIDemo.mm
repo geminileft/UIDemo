@@ -63,7 +63,7 @@ void UIDemo::exampleRenderToTexture() {
     kernel[6] = 1.0/9.0;
     kernel[7] = 1.0/9.0;
     kernel[8] = 1.0/9.0;
-    //rtt->setKernel(kernel);
+    rtt->setKernel(kernel);
 
     go->addComponent(rtt);
     addGameObject(go);
