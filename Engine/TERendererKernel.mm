@@ -5,7 +5,7 @@ TERendererKernel::TERendererKernel() {}
 TERendererKernel::TERendererKernel(String vertexSource, String fragmentSource) :
 TERendererProgram(vertexSource, fragmentSource) {}
 
-void TERendererKernel::run(TERenderTarget* target, TERenderTexturePrimative* primatives, uint primativeCount) {
+void TERendererKernel::run(TERenderTarget* target, TERenderPrimative* primatives, uint primativeCount) {
     uint simpleProgram = activate(target);
     uint positionHandle = glGetAttribLocation(simpleProgram, "aVertices");
     uint textureHandle = glGetAttribLocation(simpleProgram, "aTextureCoords");

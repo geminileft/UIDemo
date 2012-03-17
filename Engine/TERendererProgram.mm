@@ -87,6 +87,3 @@ void TERendererProgram::deactivate() {
 uint TERendererProgram::getProgramId() const {
     return mProgramId;
 }
-
-void TERendererProgram::run(TERenderTarget* target, TERenderTexturePrimative* primatives, uint primativeCount) {}
-void TERendererProgram::run(TERenderTarget* target, TERenderPrimative* primatives, uint primativeCount) {}

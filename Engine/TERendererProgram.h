@@ -20,8 +20,7 @@ public:
     void addAttribute(String attribute);
     uint activate(TERenderTarget* target);
     void deactivate();
-    virtual void run(TERenderTarget* target, TERenderTexturePrimative* primatives, uint primativeCount);
-    virtual void run(TERenderTarget* target, TERenderPrimative* primatives, uint primativeCount);
+    virtual void run(TERenderTarget* target, TERenderPrimative* primatives, uint primativeCount) = 0;
     uint getProgramId() const;
 
 };
