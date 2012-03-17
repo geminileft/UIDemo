@@ -27,7 +27,6 @@ public:
     void setScreenFrameBuffer(uint screenFrameBuffer);
     std::map<uint, TERenderTarget*> getTargets() const;
     static TERenderTarget* createRenderTarget(uint &textureHandle, uint size);
-    void setKernel(float* kernel);
 };
 
 #endif

@@ -19,6 +19,7 @@ public:
     void setRenderTarget(TERenderTarget* target);
     TERenderTarget* getRenderTarget();
     void setKernel(float* kernel);
+    float* getKernel() const;
 };
 
 #endif

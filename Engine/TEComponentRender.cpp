@@ -25,4 +25,13 @@ TERenderTarget* TEComponentRender::getRenderTarget() {
 }
 
 void TEComponentRender::setKernel(float* kernel) {
+    if (mKernel != NULL) {
+        free(mKernel);
+    }
+    mKernel = (float*)malloc(9 * sizeof(float));
+    memcpy(mKernel, kernel, 9 * sizeof(float));
+}
+
+float* TEComponentRender::getKernel() const {
+    return mKernel;
 }

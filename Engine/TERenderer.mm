@@ -58,11 +58,3 @@ TERenderTarget* TERenderer::createRenderTarget(uint &textureHandle, uint size) {
     target->setSize(TESizeMake(size, size));
     return target;
 }
-
-void TERenderer::setKernel(float* kernel) {
-    if (mKernel != NULL) {
-        free(mKernel);
-    }
-    mKernel = (float*)malloc(9 * sizeof(float));
-    memcpy(mKernel, kernel, 9 * sizeof(float));
-}

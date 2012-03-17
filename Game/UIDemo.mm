@@ -46,11 +46,11 @@ void UIDemo::exampleRenderToTexture() {
     TESize size;
     float radius;
     RenderToTexture* rtt;
-    //RenderToTexture* rtt2;
+    RenderToTexture* rtt2;
 
     go = new TEGameObject();
     go->position.x = 0.0f;
-    go->position.y = -160.0f;
+    go->position.y = 0.0f;
     
     rtt  = new RenderToTexture(256);
     float kernel[9];
@@ -63,7 +63,7 @@ void UIDemo::exampleRenderToTexture() {
     kernel[6] = 1.0/9.0;
     kernel[7] = 1.0/9.0;
     kernel[8] = 1.0/9.0;
-    
+    //rtt->setKernel(kernel);
 
     go->addComponent(rtt);
     addGameObject(go);
@@ -93,18 +93,16 @@ void UIDemo::exampleRenderToTexture() {
     
     addGameObject(go);
     
-    /*
      go = new TEGameObject();
-     go->position.x = 0.0f;
-     go->position.y = -160.0f;
+     go->position.x = -80.0f;
+     go->position.y = 0.0f;
      
      rtt2  = new RenderToTexture(256);
      
-     go->addComponent(rtt);
+     go->addComponent(rtt2);
      addGameObject(go);
      
-     rtt->setRenderTarget(rtt2->getRenderTarget());
-     */
+     rtt->setRenderTarget(rtt2->getTargetFrameBuffer());
 
 }
 
