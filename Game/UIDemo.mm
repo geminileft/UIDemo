@@ -46,7 +46,7 @@ void UIDemo::exampleRenderToTexture() {
     TESize size;
     float radius;
     RenderToTexture* rtt;
-    //RenderToTexture* rtt2;
+    RenderToTexture* rtt2;
 
     go = new TEGameObject();
     go->position.x = 0.0f;
@@ -92,7 +92,6 @@ void UIDemo::exampleRenderToTexture() {
     
     addGameObject(go);
     
-    /*
      go = new TEGameObject();
      go->position.x = 0.0f;
      go->position.y = 0.0f;
@@ -103,7 +102,6 @@ void UIDemo::exampleRenderToTexture() {
      addGameObject(go);
      
      rtt->setRenderTarget(rtt2->getTargetFrameBuffer());
-    */
 
 }
 

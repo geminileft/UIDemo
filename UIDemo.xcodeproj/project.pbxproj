@@ -62,7 +62,7 @@
 		D77CDE7514FC84990069B977 /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = D77CDE7414FC84990069B977 /* characters.png */; };
 		D79780D114FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */; };
 		D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */; };
-		D7D9E9891514131400F3373D /* transparentblack.fs in Resources */ = {isa = PBXBuildFile; fileRef = D7D9E9881514131400F3373D /* transparentblack.fs */; };
+		D7D9E9891514131400F3373D /* transparentcolor.fs in Resources */ = {isa = PBXBuildFile; fileRef = D7D9E9881514131400F3373D /* transparentcolor.fs */; };
 		D7FB871F150B6597002AD692 /* mountain_resize.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D7FB871E150B6597002AD692 /* mountain_resize.jpg */; };
 /* End PBXBuildFile section */
 
@@ -162,7 +162,7 @@
 		D77CDE7414FC84990069B977 /* characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characters.png; sourceTree = "<group>"; };
 		D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bitmap_font_sample_inverted_alpha.png; sourceTree = "<group>"; };
 		D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEComponentRender.cpp; sourceTree = "<group>"; };
-		D7D9E9881514131400F3373D /* transparentblack.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = transparentblack.fs; sourceTree = "<group>"; };
+		D7D9E9881514131400F3373D /* transparentcolor.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = transparentcolor.fs; sourceTree = "<group>"; };
 		D7FB871E150B6597002AD692 /* mountain_resize.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountain_resize.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -335,7 +335,7 @@
 				D70D44A914AD90AA00FDBB5F /* texture.vs */,
 				D75555961506CFEE00354C0F /* blur.fs */,
 				D72C7211150BF5B5007E6449 /* toon.fs */,
-				D7D9E9881514131400F3373D /* transparentblack.fs */,
+				D7D9E9881514131400F3373D /* transparentcolor.fs */,
 			);
 			name = Shaders;
 			path = ../Shaders;
@@ -407,7 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7092DEA14ACF2CE00E1D6EE /* InfoPlist.strings in Resources */,
-				D7D9E9891514131400F3373D /* transparentblack.fs in Resources */,
+				D7D9E9891514131400F3373D /* transparentcolor.fs in Resources */,
 				D70D44AA14AD90AA00FDBB5F /* colorbox.fs in Resources */,
 				D72C7212150BF5B5007E6449 /* toon.fs in Resources */,
 				D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */,

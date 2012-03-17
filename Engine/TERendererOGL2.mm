@@ -69,9 +69,9 @@ void TERendererOGL2::createPrograms() {
     rp->addAttribute("aVertices");
     rp->addAttribute("aTextureCoords");
     
-    fragmentSource = TEManagerFile::readFileContents("transparentblack.fs");
+    fragmentSource = TEManagerFile::readFileContents("transparentcolor.fs");
     rp = new TERendererKernel(vertexSource, fragmentSource);
-    mShaderPrograms[ShaderTransparentBlack] = rp;
+    mShaderPrograms[ShaderTransparentColor] = rp;
     rp->addAttribute("aVertices");
     rp->addAttribute("aTextureCoords");
     
