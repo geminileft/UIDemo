@@ -123,7 +123,8 @@ struct TERenderPrimative {
     int vertexCount;
     float* vertexBuffer;
     float* textureBuffer;
-    float* kernel;
+    void* extraData;
+    TEShaderType extraType;
 };
 
 typedef TERenderPrimative TERenderPrimative;

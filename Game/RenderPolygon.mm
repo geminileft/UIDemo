@@ -7,7 +7,7 @@
 
 RenderPolygon::RenderPolygon() : TEComponentRender() {
     mRenderPrimative.textureBuffer = NULL;
-    mRenderPrimative.kernel = NULL;
+    mRenderPrimative.extraData = NULL;
     mRenderPrimative.vertexCount = 0;
 }
 

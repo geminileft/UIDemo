@@ -3,7 +3,7 @@
 
 static TERenderer* mSharedRenderer = NULL;
 
-TEComponentRender::TEComponentRender() : mKernel(NULL) {
+TEComponentRender::TEComponentRender() : mExtra(NULL) {
     TERenderTarget* target = sharedRenderer()->mScreenTarget;
     setRenderTarget(target);
 }
@@ -25,13 +25,13 @@ TERenderTarget* TEComponentRender::getRenderTarget() {
 }
 
 void TEComponentRender::setKernel(float* kernel) {
-    if (mKernel != NULL) {
-        free(mKernel);
+    if (mExtra != NULL) {
+        free(mExtra);
     }
-    mKernel = (float*)malloc(9 * sizeof(float));
-    memcpy(mKernel, kernel, 9 * sizeof(float));
+    mExtra = (float*)malloc(9 * sizeof(float));
+    memcpy(mExtra, kernel, 9 * sizeof(float));
 }
 
 float* TEComponentRender::getKernel() const {
-    return mKernel;
+    return (float*)mExtra;
 }

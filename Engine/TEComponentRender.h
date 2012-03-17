@@ -9,7 +9,8 @@ class TERenderTarget;
 class TEComponentRender : public TEComponent {
 private:
     TERenderTarget* mTarget;
-    float* mKernel;
+    void* mExtra;
+    TEShaderType mExtraType;
     
 public:
     TEComponentRender();

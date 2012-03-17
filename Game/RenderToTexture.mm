@@ -48,7 +48,7 @@ void RenderToTexture::draw() {
     mRenderPrimative.vertexCount = 4;
     mRenderPrimative.vertexBuffer = mVertexBuffer;
     mRenderPrimative.textureBuffer = mTextureBuffer;
-    mRenderPrimative.kernel = getKernel();
+    mRenderPrimative.extraData = getKernel();
     getRenderTarget()->addPrimative(mRenderPrimative);
 }
 
