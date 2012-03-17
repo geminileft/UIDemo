@@ -45,7 +45,8 @@ void RenderImage::draw() {
     mRenderPrimative.vertexCount = 4;
     mRenderPrimative.vertexBuffer = mVertexBuffer;
     mRenderPrimative.textureBuffer = mTextureBuffer;
-    mRenderPrimative.extraData = getKernel();
+    mRenderPrimative.extraData = getExtraData();
+    mRenderPrimative.extraType = getExtraType();
     getRenderTarget()->addPrimative(mRenderPrimative);
 }
 

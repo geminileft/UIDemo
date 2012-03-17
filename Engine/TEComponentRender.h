@@ -20,7 +20,9 @@ public:
     void setRenderTarget(TERenderTarget* target);
     TERenderTarget* getRenderTarget();
     void setKernel(float* kernel);
-    float* getKernel() const;
+    float* getExtraData() const;
+    void setExtraType(TEShaderType extraType);
+    TEShaderType getExtraType();
 };
 
 #endif

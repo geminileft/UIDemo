@@ -30,8 +30,17 @@ void TEComponentRender::setKernel(float* kernel) {
     }
     mExtra = (float*)malloc(9 * sizeof(float));
     memcpy(mExtra, kernel, 9 * sizeof(float));
+    mExtraType = ShaderKernel;
 }
 
-float* TEComponentRender::getKernel() const {
+float* TEComponentRender::getExtraData() const {
     return (float*)mExtra;
+}
+
+void TEComponentRender::setExtraType(TEShaderType extraType) {
+    mExtraType = extraType;
+}
+
+TEShaderType TEComponentRender::getExtraType() {
+    return mExtraType;
 }
