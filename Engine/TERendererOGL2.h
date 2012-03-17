@@ -6,6 +6,7 @@
 #include <map>
 #include <list>
 #import <QuartzCore/QuartzCore.h>
+#import "TERendererProgram.h"
 
 class TERendererProgram;
 class TERenderTarget;

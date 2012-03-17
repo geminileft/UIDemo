@@ -87,14 +87,13 @@ void UIDemo::exampleRenderToTexture() {
     rp->setRenderTarget(rtt->getTargetFrameBuffer());
     go->addComponent(rp);
     
-    
     go->position.x = 0.0f;
     go->position.y = 0.0f;
     
     addGameObject(go);
     
      go = new TEGameObject();
-     go->position.x = -80.0f;
+     go->position.x = 0.0f;
      go->position.y = 0.0f;
      
      rtt2  = new RenderToTexture(256);
