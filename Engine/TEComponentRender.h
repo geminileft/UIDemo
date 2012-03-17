@@ -12,6 +12,8 @@ private:
     void* mExtra;
     TEShaderType mExtraType;
     
+    void clearExtra();
+
 public:
     TEComponentRender();
 	virtual void draw() = 0;
@@ -20,6 +22,7 @@ public:
     void setRenderTarget(TERenderTarget* target);
     TERenderTarget* getRenderTarget();
     void setKernel(float* kernel);
+    void setTransparentColor(TEColor4* color);
     float* getExtraData() const;
     void setExtraType(TEShaderType extraType);
     TEShaderType getExtraType();
