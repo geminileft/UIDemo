@@ -69,6 +69,12 @@ void TERendererOGL2::createPrograms() {
     rp->addAttribute("aVertices");
     rp->addAttribute("aTextureCoords");
     
+    fragmentSource = TEManagerFile::readFileContents("transparentblack.fs");
+    rp = new TERendererKernel(vertexSource, fragmentSource);
+    mShaderPrograms[ShaderTransparentBlack] = rp;
+    rp->addAttribute("aVertices");
+    rp->addAttribute("aTextureCoords");
+    
     vertexSource = TEManagerFile::readFileContents("colorbox.vs");
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
     rp = new TERendererBasic(vertexSource, fragmentSource);
@@ -119,7 +125,6 @@ void TERendererOGL2::runTargetShaders(TERenderTarget* target) {
         }
     }
 }
-
 
 void TERendererOGL2::checkGlError(String op) {
     uint error;
