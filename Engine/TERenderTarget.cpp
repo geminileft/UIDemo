@@ -63,10 +63,10 @@ void TERenderTarget::addPrimative(TERenderPrimative primative) {
     if (primative.textureBuffer == NULL) {
         type = ShaderPolygon;
     } else {
-        if (primative.kernel == NULL) {
-            type = ShaderTexture;
-        } else {
+        if (primative.kernel != NULL) {
             type = ShaderKernel;
+        } else {
+            type = ShaderTexture;
         }
     }
     if (mShaders.count(type) > 0)
