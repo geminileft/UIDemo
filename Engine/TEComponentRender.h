@@ -24,6 +24,7 @@ public:
     void setKernel(float* kernel);
     void setTransparentColor(TEColor4* color);
     void setGrayscale();
+    void setSepia();
     float* getExtraData() const;
     TEShaderType getExtraType();
 };

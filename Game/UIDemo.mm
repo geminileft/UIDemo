@@ -13,7 +13,7 @@ UIDemo::UIDemo(int width, int height) : TEEngine(width, height){}
 void UIDemo::start() {
     //exampleRenderToTexture();
     //exampleDrawImage();
-    exampleDrawGrayscale();
+    exampleDrawFilters();
 }
 
 void UIDemo::exampleRenderToTexture() {
@@ -101,7 +101,7 @@ void UIDemo::exampleDrawImage() {
     addGameObject(go);
 }
 
-void UIDemo::exampleDrawGrayscale() {
+void UIDemo::exampleDrawFilters() {
     TEGameObject* go;
     TESize size;
     RenderImage* ri;
@@ -123,6 +123,16 @@ void UIDemo::exampleDrawGrayscale() {
     go->position.x = 0.0f;
     go->position.y = 0.0f;
     
+    go->addComponent(ri);
+    addGameObject(go);    
+
+    go = new TEGameObject();
+    size = TESizeMake(160, 160);
+    ri = new RenderImage(@"mountain_resize.jpg", TEPointMake(0, 0), size);
+    ri->setGrayscale();
+    go->position.x = 0.0f;
+    go->position.y = -160.0f;
+    ri->setSepia();
     go->addComponent(ri);
     addGameObject(go);    
 }

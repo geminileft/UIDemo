@@ -9,7 +9,7 @@ public:
     virtual void start();
     void exampleRenderToTexture();
     void exampleDrawImage();
-    void exampleDrawGrayscale();
+    void exampleDrawFilters();
 };
 
 #endif

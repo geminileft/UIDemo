@@ -44,6 +44,12 @@ void TEComponentRender::setGrayscale() {
     mExtraType = ShaderGrayscale;
 }
 
+void TEComponentRender::setSepia() {
+    clearExtra();
+    mExtra = malloc(sizeof(float));
+    mExtraType = ShaderSepia;    
+}
+
 float* TEComponentRender::getExtraData() const {
     return (float*)mExtra;
 }
