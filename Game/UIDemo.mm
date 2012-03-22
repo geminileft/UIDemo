@@ -11,32 +11,9 @@
 UIDemo::UIDemo(int width, int height) : TEEngine(width, height){}
 
 void UIDemo::start() {
-    exampleRenderToTexture();
+    //exampleRenderToTexture();
     //exampleDrawImage();
-/*
-    go = new TEGameObject();
-    
-    color = TEColor4Make(1.0, 0.0, 0.0, 1.0);
-    size = TESizeMake(160, 160);
-    radius = 20.0;
-    rp = RenderPolygonFactory::roundedRectPolygon(size, color, radius);
-
-    go->position.x = 0.0f;
-    go->position.y = 0.0f;
-    
-    go->addComponent(rp);
-    addGameObject(go);
-    
-    go = new TEGameObject();
-    
-    rp = RenderPolygonFactory::roundedRectCorner(color, radius, (uint)radius);
-    
-    go->position.x = (size.width / 2.0) - radius;
-    go->position.y = (size.height / 2.0) - radius;
-    
-    go->addComponent(rp);
-    addGameObject(go);
-*/
+    exampleDrawGrayscale();
 }
 
 void UIDemo::exampleRenderToTexture() {
@@ -116,12 +93,36 @@ void UIDemo::exampleDrawImage() {
     go = new TEGameObject();
     size = TESizeMake(160, 160);
     RenderImage* ri = new RenderImage(@"olympic.jpg", TEPointMake(0, 0), size);
-    //ri->setRenderTarget(rtt->getRenderTarget());
 
     go->position.x = 0.0f;
     go->position.y = 0.0f;
 
     go->addComponent(ri);
     addGameObject(go);
+}
 
+void UIDemo::exampleDrawGrayscale() {
+    TEGameObject* go;
+    TESize size;
+    RenderImage* ri;
+    
+    go = new TEGameObject();
+    size = TESizeMake(160, 160);
+    ri = new RenderImage(@"mountain_resize.jpg", TEPointMake(0, 0), size);
+    
+    go->position.x = 0.0f;
+    go->position.y = 160.0f;
+    
+    go->addComponent(ri);
+    addGameObject(go);    
+
+    go = new TEGameObject();
+    size = TESizeMake(160, 160);
+    ri = new RenderImage(@"mountain_resize.jpg", TEPointMake(0, 0), size);
+    ri->setGrayscale();
+    go->position.x = 0.0f;
+    go->position.y = 0.0f;
+    
+    go->addComponent(ri);
+    addGameObject(go);    
 }

@@ -38,12 +38,14 @@ void TEComponentRender::setTransparentColor(TEColor4* color) {
     mExtraType = ShaderTransparentColor;
 }
 
-float* TEComponentRender::getExtraData() const {
-    return (float*)mExtra;
+void TEComponentRender::setGrayscale() {
+    clearExtra();
+    mExtra = malloc(sizeof(float));
+    mExtraType = ShaderGrayscale;
 }
 
-void TEComponentRender::setExtraType(TEShaderType extraType) {
-    mExtraType = extraType;
+float* TEComponentRender::getExtraData() const {
+    return (float*)mExtra;
 }
 
 TEShaderType TEComponentRender::getExtraType() {

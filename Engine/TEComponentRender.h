@@ -23,8 +23,8 @@ public:
     TERenderTarget* getRenderTarget();
     void setKernel(float* kernel);
     void setTransparentColor(TEColor4* color);
+    void setGrayscale();
     float* getExtraData() const;
-    void setExtraType(TEShaderType extraType);
     TEShaderType getExtraType();
 };
 

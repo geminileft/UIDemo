@@ -42,6 +42,7 @@
 		D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A714AD90AA00FDBB5F /* colorbox.vs */; };
 		D70D44AC14AD90AA00FDBB5F /* texture.fs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A814AD90AA00FDBB5F /* texture.fs */; };
 		D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */ = {isa = PBXBuildFile; fileRef = D70D44A914AD90AA00FDBB5F /* texture.vs */; };
+		D714E5B2151AE38F00B42063 /* grayscale.fs in Resources */ = {isa = PBXBuildFile; fileRef = D714E5B1151AE38F00B42063 /* grayscale.fs */; };
 		D71AE5FB150DB05F00772199 /* RenderPolygon.mm in Sources */ = {isa = PBXBuildFile; fileRef = D71AE5FA150DB05F00772199 /* RenderPolygon.mm */; };
 		D71D8B871510FCF900FB6A52 /* TERendererProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = D71D8B861510FCF800FB6A52 /* TERendererProgram.mm */; };
 		D71D8B8A15110A5C00FB6A52 /* TERendererBasic.mm in Sources */ = {isa = PBXBuildFile; fileRef = D71D8B8915110A5900FB6A52 /* TERendererBasic.mm */; };
@@ -131,6 +132,7 @@
 		D70D44A714AD90AA00FDBB5F /* colorbox.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = colorbox.vs; sourceTree = "<group>"; };
 		D70D44A814AD90AA00FDBB5F /* texture.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.fs; sourceTree = "<group>"; };
 		D70D44A914AD90AA00FDBB5F /* texture.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
+		D714E5B1151AE38F00B42063 /* grayscale.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = grayscale.fs; sourceTree = "<group>"; };
 		D71AE5F8150DB05000772199 /* RenderPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderPolygon.h; sourceTree = "<group>"; };
 		D71AE5FA150DB05F00772199 /* RenderPolygon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderPolygon.mm; sourceTree = "<group>"; };
 		D71D8B841510FCCD00FB6A52 /* TERendererProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TERendererProgram.h; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				D75555961506CFEE00354C0F /* blur.fs */,
 				D72C7211150BF5B5007E6449 /* toon.fs */,
 				D7D9E9881514131400F3373D /* transparentcolor.fs */,
+				D714E5B1151AE38F00B42063 /* grayscale.fs */,
 			);
 			name = Shaders;
 			path = ../Shaders;
@@ -415,6 +418,7 @@
 				D70090D91509D8DB00436161 /* grow.fs in Resources */,
 				D75555971506CFEE00354C0F /* blur.fs in Resources */,
 				D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */,
+				D714E5B2151AE38F00B42063 /* grayscale.fs in Resources */,
 				D74F3C0E14D07C2300871B6D /* table_background.png in Resources */,
 				D74F3C1014D0828D00871B6D /* spade_ace.png in Resources */,
 				D77CDE7514FC84990069B977 /* characters.png in Resources */,
