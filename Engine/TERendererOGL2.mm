@@ -87,6 +87,12 @@ void TERendererOGL2::createPrograms() {
     rp->addAttribute("aVertices");
     rp->addAttribute("aTextureCoords");
     
+    fragmentSource = TEManagerFile::readFileContents("negative.fs");
+    rp = new TERendererKernel(vertexSource, fragmentSource);
+    mShaderPrograms[ShaderNegative] = rp;
+    rp->addAttribute("aVertices");
+    rp->addAttribute("aTextureCoords");
+    
     vertexSource = TEManagerFile::readFileContents("colorbox.vs");
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
     rp = new TERendererBasic(vertexSource, fragmentSource);

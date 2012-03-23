@@ -50,6 +50,12 @@ void TEComponentRender::setSepia() {
     mExtraType = ShaderSepia;    
 }
 
+void TEComponentRender::setNegative() {
+    clearExtra();
+    mExtra = malloc(sizeof(float));
+    mExtraType = ShaderNegative;    
+}
+
 float* TEComponentRender::getExtraData() const {
     return (float*)mExtra;
 }

@@ -25,6 +25,7 @@ public:
     void setTransparentColor(TEColor4* color);
     void setGrayscale();
     void setSepia();
+    void setNegative();
     float* getExtraData() const;
     TEShaderType getExtraType();
 };

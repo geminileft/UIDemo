@@ -114,6 +114,7 @@ enum TEShaderType {
     , ShaderTransparentColor
     , ShaderGrayscale
     , ShaderSepia
+    , ShaderNegative
 };
 
 typedef enum TEShaderType TEShaderType;

@@ -109,10 +109,8 @@ void UIDemo::exampleDrawFilters() {
     go = new TEGameObject();
     size = TESizeMake(160, 160);
     ri = new RenderImage(@"mountain_resize.jpg", TEPointMake(0, 0), size);
-    
-    go->position.x = 0.0f;
+    go->position.x = -80.0f;
     go->position.y = 160.0f;
-    
     go->addComponent(ri);
     addGameObject(go);    
 
@@ -120,19 +118,34 @@ void UIDemo::exampleDrawFilters() {
     size = TESizeMake(160, 160);
     ri = new RenderImage(@"mountain_resize.jpg", TEPointMake(0, 0), size);
     ri->setGrayscale();
-    go->position.x = 0.0f;
+    go->position.x = -80.0f;
     go->position.y = 0.0f;
-    
     go->addComponent(ri);
     addGameObject(go);    
-
+    
     go = new TEGameObject();
     size = TESizeMake(160, 160);
     ri = new RenderImage(@"mountain_resize.jpg", TEPointMake(0, 0), size);
-    ri->setGrayscale();
-    go->position.x = 0.0f;
-    go->position.y = -160.0f;
     ri->setSepia();
+    go->position.x = -80.0f;
+    go->position.y = -160.0f;
+    go->addComponent(ri);
+    addGameObject(go);
+    
+    go = new TEGameObject();
+    size = TESizeMake(160, 160);
+    ri = new RenderImage(@"flower_pow2.jpg", TEPointMake(0, 0), size);
+    go->position.x = 80.0f;
+    go->position.y = 160.0f;
+    go->addComponent(ri);
+    addGameObject(go);    
+    
+    go = new TEGameObject();
+    size = TESizeMake(160, 160);
+    ri = new RenderImage(@"flower_pow2.jpg", TEPointMake(0, 0), size);
+    ri->setNegative();
+    go->position.x = 80.0f;
+    go->position.y = 0.0f;
     go->addComponent(ri);
     addGameObject(go);    
 }

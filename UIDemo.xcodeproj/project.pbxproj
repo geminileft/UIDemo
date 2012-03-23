@@ -55,6 +55,8 @@
 		D72C7212150BF5B5007E6449 /* toon.fs in Resources */ = {isa = PBXBuildFile; fileRef = D72C7211150BF5B5007E6449 /* toon.fs */; };
 		D72D7BC514D0B60300C020A1 /* TEManagerTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC314D0B60200C020A1 /* TEManagerTime.cpp */; };
 		D72D7BC814D0B82100C020A1 /* TouchSingle.mm in Sources */ = {isa = PBXBuildFile; fileRef = D72D7BC714D0B82100C020A1 /* TouchSingle.mm */; };
+		D72F632D151BEFD1009342BB /* negative.fs in Resources */ = {isa = PBXBuildFile; fileRef = D72F632C151BEFD1009342BB /* negative.fs */; };
+		D72F6330151C1B6A009342BB /* flower_pow2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D72F632F151C1B6A009342BB /* flower_pow2.jpg */; };
 		D740F36C1505AA160061B2FC /* RenderToTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = D740F36B1505AA160061B2FC /* RenderToTexture.mm */; };
 		D74F3C0B14D079E500871B6D /* RenderImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = D74F3C0A14D079E500871B6D /* RenderImage.mm */; };
 		D74F3C0E14D07C2300871B6D /* table_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0D14D07C2300871B6D /* table_background.png */; };
@@ -154,6 +156,8 @@
 		D72D7BC414D0B60300C020A1 /* TEManagerTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEManagerTime.h; sourceTree = "<group>"; };
 		D72D7BC614D0B80900C020A1 /* TouchSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchSingle.h; sourceTree = "<group>"; };
 		D72D7BC714D0B82100C020A1 /* TouchSingle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchSingle.mm; sourceTree = "<group>"; };
+		D72F632C151BEFD1009342BB /* negative.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = negative.fs; sourceTree = "<group>"; };
+		D72F632F151C1B6A009342BB /* flower_pow2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flower_pow2.jpg; sourceTree = "<group>"; };
 		D740F36A1505AA160061B2FC /* RenderToTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderToTexture.h; sourceTree = "<group>"; };
 		D740F36B1505AA160061B2FC /* RenderToTexture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderToTexture.mm; sourceTree = "<group>"; };
 		D74F3C0914D079E500871B6D /* RenderImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderImage.h; sourceTree = "<group>"; };
@@ -342,6 +346,7 @@
 				D7D9E9881514131400F3373D /* transparentcolor.fs */,
 				D714E5B1151AE38F00B42063 /* grayscale.fs */,
 				D714E5B4151AEAB700B42063 /* sepia.fs */,
+				D72F632C151BEFD1009342BB /* negative.fs */,
 			);
 			name = Shaders;
 			path = ../Shaders;
@@ -350,6 +355,7 @@
 		D74F3C0C14D07B3200871B6D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D72F632F151C1B6A009342BB /* flower_pow2.jpg */,
 				D7FB871E150B6597002AD692 /* mountain_resize.jpg */,
 				D7231CB5150817F100D3E2C1 /* manroc.png */,
 				D7231CB015080C9B00D3E2C1 /* olympic.jpg */,
@@ -415,6 +421,7 @@
 				D7092DEA14ACF2CE00E1D6EE /* InfoPlist.strings in Resources */,
 				D7D9E9891514131400F3373D /* transparentcolor.fs in Resources */,
 				D70D44AA14AD90AA00FDBB5F /* colorbox.fs in Resources */,
+				D72F632D151BEFD1009342BB /* negative.fs in Resources */,
 				D72C7212150BF5B5007E6449 /* toon.fs in Resources */,
 				D70D44AB14AD90AA00FDBB5F /* colorbox.vs in Resources */,
 				D714E5B5151AEAB700B42063 /* sepia.fs in Resources */,
@@ -430,6 +437,7 @@
 				D7231CB115080C9B00D3E2C1 /* olympic.jpg in Resources */,
 				D7231CB6150817F100D3E2C1 /* manroc.png in Resources */,
 				D7FB871F150B6597002AD692 /* mountain_resize.jpg in Resources */,
+				D72F6330151C1B6A009342BB /* flower_pow2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

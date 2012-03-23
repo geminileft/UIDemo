@@ -156,14 +156,16 @@ void TERendererKernel::run(TERenderTarget* target, TERenderPrimative* primatives
      */
 
     TEVec3 vec;
+    TERenderPrimative primative;
     for (int i = 0;i < primativeCount;++i) {
-        vec = primatives[i].position;
-        glBindTexture(GL_TEXTURE_2D, primatives[i].textureName);
+        primative = primatives[i];
+        vec = primative.position;
+        glBindTexture(GL_TEXTURE_2D, primative.textureName);
         glVertexAttrib2f(coordsHandle, vec.x, vec.y);
-        glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primatives[i].textureBuffer);
-        glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primatives[i].vertexBuffer);
+        glVertexAttribPointer(textureHandle, 2, GL_FLOAT, false, 0, primative.textureBuffer);
+        glVertexAttribPointer(positionHandle, 2, GL_FLOAT, false, 0, primative.vertexBuffer);
         glUniform2fv(offsetHandle, OFFSET_COUNT, &offsets[0]);
-        glUniform1fv(kernelHandle, OFFSET_COUNT, &kernel[0]);
+        glUniform1fv(kernelHandle, OFFSET_COUNT, (float*)primative.extraData);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
     deactivate();
