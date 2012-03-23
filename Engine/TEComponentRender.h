@@ -26,6 +26,7 @@ public:
     void setGrayscale();
     void setSepia();
     void setNegative();
+    void setYellow();
     float* getExtraData() const;
     TEShaderType getExtraType();
 };

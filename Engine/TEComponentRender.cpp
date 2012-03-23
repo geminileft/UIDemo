@@ -56,6 +56,13 @@ void TEComponentRender::setNegative() {
     mExtraType = ShaderNegative;    
 }
 
+void TEComponentRender::setYellow() {
+    clearExtra();
+    mExtra = malloc(sizeof(float));
+    mExtraType = ShaderYellow;    
+    
+}
+
 float* TEComponentRender::getExtraData() const {
     return (float*)mExtra;
 }
