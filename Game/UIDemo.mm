@@ -105,6 +105,7 @@ void UIDemo::exampleDrawFilters() {
     TEGameObject* go;
     TESize size;
     RenderImage* ri;
+    RenderToTexture* rtt;
     
     go = new TEGameObject();
     size = TESizeMake(160, 160);
@@ -150,11 +151,32 @@ void UIDemo::exampleDrawFilters() {
     addGameObject(go);    
     
     go = new TEGameObject();
-    size = TESizeMake(160, 160);
-    ri = new RenderImage(@"flower_pow2.jpg", TEPointMake(0, 0), size);
-    ri->setYellow();
     go->position.x = 80.0f;
     go->position.y = -160.0f;
+    
+    rtt  = new RenderToTexture(256);
+    float kernel[9];
+    kernel[0] = -1.0;
+    kernel[1] = -1.0;
+    kernel[2] = -1.0;
+    kernel[3] = -1.0;
+    kernel[4] = 8.0;
+    kernel[5] = -1.0;
+    kernel[6] = -1.0;
+    kernel[7] = -1.0;
+    kernel[8] = -1.0;
+    rtt->setKernel(kernel);
+    
+    go->addComponent(rtt);
+    addGameObject(go);
+    
+    go = new TEGameObject();
+    size = TESizeMake(160, 160);
+    ri = new RenderImage(@"flower_pow2.jpg", TEPointMake(0, 0), size);
+    ri->setRenderTarget(rtt->getTargetFrameBuffer());
+    ri->setGrayscale();
+    go->position.x = 0.0f;
+    go->position.y = 0.0f;
     go->addComponent(ri);
     addGameObject(go);    
 }
