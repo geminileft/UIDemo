@@ -108,13 +108,11 @@ void TERendererOGL2::createPrograms() {
 }
 
 void TERendererOGL2::render() {
-    TEManagerProfiler::startShort();
     TERenderTarget* rt;
-    
     std::map<uint, TERenderTarget*> targets = getTargets();
-    uint targetCount = targets.size();
-    
+    uint targetCount = targets.size();        
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
     if (targetCount > 0) {
         std::map<uint, TERenderTarget*>::iterator iterator;
         for (iterator = targets.begin(); iterator != targets.end(); iterator++) {
@@ -128,9 +126,10 @@ void TERendererOGL2::render() {
     
     runTargetShaders(rt);
     
+    TEManagerProfiler::startShort();    
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
-    double diff = TEManagerProfiler::shortTimeDiff();
-    NSLog(@"TERendererOGL2::render: %.1f", diff);
+    double screenTime = TEManagerProfiler::shortTimeDiff();
+    NSLog(@"presentRenderbuffer: %.3f", /*getTargetsTime, targetsTime,*/ screenTime);
 }
 
 void TERendererOGL2::runTargetShaders(TERenderTarget* target) {
