@@ -4,6 +4,7 @@
 #include "TEManagerRender.h"
 #include "TEManagerTouch.h"
 #include "TEManagerSound.h"
+#include "TEManagerProfiler.h"
 #include "TEComponentRender.h"
 #include "TEComponentTouch.h"
 #include "TEComponentSound.h"
@@ -33,13 +34,11 @@ void TEEngine::run() {
     for (int count = 0;count < managerCount; ++count) {
         mManagers[count]->update();
     }
-    double renderStart = TEManagerTime::currentTime();
     mRenderer->render();
-    double currentFrameTime;
-    currentFrameTime = TEManagerTime::currentTime();
+    double currentFrameTime = TEManagerTime::currentTime();
     double diff = currentFrameTime - mPreviousFrameTime;
     mPreviousFrameTime = currentFrameTime;
-    NSLog(@"FrameRate: %.1f Render: %.1f", diff, currentFrameTime - renderStart);
+    NSLog(@"Run Rate: %.1f", diff);
 }
 
 void TEEngine::addGameObject(TEGameObject* gameObject) {

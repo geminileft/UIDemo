@@ -13,6 +13,7 @@
 #include "TERendererTexture.h"
 #include "TERendererKernel.h"
 #include "TEManagerTime.h"
+#include "TEManagerProfiler.h"
 
 TERendererOGL2::TERendererOGL2(CALayer* eaglLayer, uint width, uint height) {
     mWidth = width;
@@ -107,6 +108,7 @@ void TERendererOGL2::createPrograms() {
 }
 
 void TERendererOGL2::render() {
+    TEManagerProfiler::startShort();
     TERenderTarget* rt;
     
     std::map<uint, TERenderTarget*> targets = getTargets();
@@ -127,6 +129,8 @@ void TERendererOGL2::render() {
     runTargetShaders(rt);
     
     [mContext presentRenderbuffer:GL_RENDERBUFFER];
+    double diff = TEManagerProfiler::shortTimeDiff();
+    NSLog(@"TERendererOGL2::render: %.1f", diff);
 }
 
 void TERendererOGL2::runTargetShaders(TERenderTarget* target) {
