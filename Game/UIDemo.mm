@@ -109,7 +109,7 @@ void UIDemo::exampleDrawFilters() {
     
     go = new TEGameObject();
     size = TESizeMake(160, 160);
-    ri = new RenderImage(@"mountain_resize.jpg", TEPointMake(0, 0), size);
+    ri = new RenderImage(@"flower.png", TEPointMake(0, 0), size);
     go->position.x = -80.0f;
     go->position.y = 160.0f;
     go->addComponent(ri);
@@ -117,7 +117,7 @@ void UIDemo::exampleDrawFilters() {
 
     go = new TEGameObject();
     size = TESizeMake(160, 160);
-    ri = new RenderImage(@"mountain_resize.jpg", TEPointMake(0, 0), size);
+    ri = new RenderImage(@"flower.png", TEPointMake(0, 0), size);
     ri->setGrayscale();
     go->position.x = -80.0f;
     go->position.y = 0.0f;
@@ -126,7 +126,7 @@ void UIDemo::exampleDrawFilters() {
     
     go = new TEGameObject();
     size = TESizeMake(160, 160);
-    ri = new RenderImage(@"mountain_resize.jpg", TEPointMake(0, 0), size);
+    ri = new RenderImage(@"flower.png", TEPointMake(0, 0), size);
     ri->setSepia();
     go->position.x = -80.0f;
     go->position.y = -160.0f;

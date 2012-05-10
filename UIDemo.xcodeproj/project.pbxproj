@@ -65,6 +65,7 @@
 		D75555971506CFEE00354C0F /* blur.fs in Resources */ = {isa = PBXBuildFile; fileRef = D75555961506CFEE00354C0F /* blur.fs */; };
 		D7566F58150F0D0C00C102CF /* RenderPolygonFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7566F57150F0D0C00C102CF /* RenderPolygonFactory.mm */; };
 		D76EFAEB151C5060007A1947 /* yellow.fs in Resources */ = {isa = PBXBuildFile; fileRef = D76EFAEA151C5060007A1947 /* yellow.fs */; };
+		D7735E45155B587200B5CF55 /* flower.png in Resources */ = {isa = PBXBuildFile; fileRef = D7735E44155B587200B5CF55 /* flower.png */; };
 		D77CDE7514FC84990069B977 /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = D77CDE7414FC84990069B977 /* characters.png */; };
 		D79780D114FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */; };
 		D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */; };
@@ -172,6 +173,7 @@
 		D7566F56150F0CFB00C102CF /* RenderPolygonFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderPolygonFactory.h; sourceTree = "<group>"; };
 		D7566F57150F0D0C00C102CF /* RenderPolygonFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderPolygonFactory.mm; sourceTree = "<group>"; };
 		D76EFAEA151C5060007A1947 /* yellow.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = yellow.fs; sourceTree = "<group>"; };
+		D7735E44155B587200B5CF55 /* flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flower.png; sourceTree = "<group>"; };
 		D77CDE7414FC84990069B977 /* characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characters.png; sourceTree = "<group>"; };
 		D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bitmap_font_sample_inverted_alpha.png; sourceTree = "<group>"; };
 		D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEComponentRender.cpp; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 		D74F3C0C14D07B3200871B6D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D7735E44155B587200B5CF55 /* flower.png */,
 				D72F632F151C1B6A009342BB /* flower_pow2.jpg */,
 				D7FB871E150B6597002AD692 /* mountain_resize.jpg */,
 				D7231CB5150817F100D3E2C1 /* manroc.png */,
@@ -447,6 +450,7 @@
 				D7231CB6150817F100D3E2C1 /* manroc.png in Resources */,
 				D7FB871F150B6597002AD692 /* mountain_resize.jpg in Resources */,
 				D72F6330151C1B6A009342BB /* flower_pow2.jpg in Resources */,
+				D7735E45155B587200B5CF55 /* flower.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
