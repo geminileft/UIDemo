@@ -31,14 +31,19 @@ RenderText::RenderText(NSString* resourceName, TESize size, std::map<const char*
 	mVertexBuffer[6] = leftX;
 	mVertexBuffer[7] = topY;
     
-    mTextureBuffer[0] = 0.0f;//left
-	mTextureBuffer[1] = 1.0f;//top
-	mTextureBuffer[2] = 1.0f;//right
-	mTextureBuffer[3] = 1.0f;//top
-	mTextureBuffer[4] = 1.0f;//right
-	mTextureBuffer[5] = 0.0f;//bottom
-	mTextureBuffer[6] = 0.0f;//left
-	mTextureBuffer[7] = 0.0f;//bottom
+    float left = 0.0f;
+    float right = 0.5f;
+    float top = 0.5f;
+    float bottom = 0.0f;
+    
+    mTextureBuffer[0] = left;//left
+	mTextureBuffer[1] = top;//top
+	mTextureBuffer[2] = right;//right
+	mTextureBuffer[3] = top;//top
+	mTextureBuffer[4] = right;//right
+	mTextureBuffer[5] = bottom;//bottom
+	mTextureBuffer[6] = left;//left
+	mTextureBuffer[7] = bottom;//bottom
 }
 
 void RenderText::update() {}
