@@ -20,12 +20,14 @@ private:
     uint mTextureName;
     float mVertexBuffer[8];
     float mTextureBuffer[8];
-    TERenderPrimative mRenderPrimative;
+    TERenderPrimative* mRenderPrimatives;
+    int mPrimativeCount;
     char* mText;
     int mTextLength;
     
 public:
     RenderText(NSString* resourceName, TESize size, std::map<const char*, TETextMap> charMap);
+    ~RenderText();
     virtual void update();
     virtual void draw();
 	void moveToTopListener();

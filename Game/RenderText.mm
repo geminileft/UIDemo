@@ -12,12 +12,14 @@
 #include "TERenderTarget.h"
 
 RenderText::RenderText(NSString* resourceName, TESize size, std::map<const char*, TETextMap> charMap)
-: TEComponentRender(), mText(NULL) {
+: TEComponentRender(), mText(NULL), mPrimativeCount(0) {
     
     UIImage* image = [UIImage imageNamed:resourceName];
     float width = image.size.width;
     float height = image.size.height;
     mTextureName = TEManagerTexture::GLUtexImage2D([image CGImage]);
+    
+    mRenderPrimatives = (TERenderPrimative*)malloc(sizeof(TERenderPrimative));
     
     const float leftX = -(float)size.width / 2;
 	const float rightX = leftX + size.width;
@@ -48,20 +50,29 @@ RenderText::RenderText(NSString* resourceName, TESize size, std::map<const char*
 	mTextureBuffer[7] = bottom;//bottom
 }
 
-void RenderText::update() {}
-
-void RenderText::draw() {
-    mRenderPrimative.textureName = mTextureName;
-    mRenderPrimative.position.x = mParent->position.x;
-    mRenderPrimative.position.y = mParent->position.y;
-    mRenderPrimative.position.z = 0;
-    mRenderPrimative.vertexCount = 4;
-    mRenderPrimative.vertexBuffer = mVertexBuffer;
-    mRenderPrimative.textureBuffer = mTextureBuffer;
-    mRenderPrimative.extraData = getExtraData();
-    mRenderPrimative.extraType = getExtraType();
-    getRenderTarget()->addPrimative(mRenderPrimative);
+RenderText::~RenderText() {
+    delete (mRenderPrimatives);
 }
+
+void RenderText::update() {
+    TERenderPrimative primative;
+    primative.textureName = mTextureName;
+    primative.position.x = mParent->position.x;
+    primative.position.y = mParent->position.y;
+    primative.position.z = 0;
+    primative.vertexCount = 4;
+    primative.vertexBuffer = mVertexBuffer;
+    primative.textureBuffer = mTextureBuffer;
+    primative.extraData = getExtraData();
+    primative.extraType = getExtraType();
+    mRenderPrimatives[0] = primative;
+    mPrimativeCount = 1;
+    for (int i = 0;i < mPrimativeCount;++i) {
+        getRenderTarget()->addPrimative(mRenderPrimatives[i]);        
+    }
+}
+
+void RenderText::draw() {}
 
 void RenderText::moveToTopListener() {
 	getManager()->moveComponentToTop(this);
