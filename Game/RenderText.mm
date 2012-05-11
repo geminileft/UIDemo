@@ -33,10 +33,10 @@ RenderText::RenderText(NSString* resourceName, TESize size, std::map<const char*
 	mVertexBuffer[6] = leftX;
 	mVertexBuffer[7] = topY;
     
-    float left = 0.0f;
-    float right = 1.0f;
-    float top = 1.0f;
-    float bottom = 0.0f;
+    float left = 22.0f / width;
+    float right = 78.0f / width;
+    float bottom = 19.0f / height;
+    float top = 78.0f / height;
     
     mTextureBuffer[0] = left;//left
 	mTextureBuffer[1] = top;//top
