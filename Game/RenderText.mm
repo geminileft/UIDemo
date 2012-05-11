@@ -15,6 +15,8 @@ RenderText::RenderText(NSString* resourceName, TESize size, std::map<const char*
 : TEComponentRender(), mText(NULL) {
     
     UIImage* image = [UIImage imageNamed:resourceName];
+    float width = image.size.width;
+    float height = image.size.height;
     mTextureName = TEManagerTexture::GLUtexImage2D([image CGImage]);
     
     const float leftX = -(float)size.width / 2;
@@ -32,8 +34,8 @@ RenderText::RenderText(NSString* resourceName, TESize size, std::map<const char*
 	mVertexBuffer[7] = topY;
     
     float left = 0.0f;
-    float right = 0.5f;
-    float top = 0.5f;
+    float right = 1.0f;
+    float top = 1.0f;
     float bottom = 0.0f;
     
     mTextureBuffer[0] = left;//left
