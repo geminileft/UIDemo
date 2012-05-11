@@ -64,6 +64,8 @@
 		D74F3C1014D0828D00871B6D /* spade_ace.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0F14D0828D00871B6D /* spade_ace.png */; };
 		D75555971506CFEE00354C0F /* blur.fs in Resources */ = {isa = PBXBuildFile; fileRef = D75555961506CFEE00354C0F /* blur.fs */; };
 		D7566F58150F0D0C00C102CF /* RenderPolygonFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7566F57150F0D0C00C102CF /* RenderPolygonFactory.mm */; };
+		D759C4BD155C8AB2000B46B9 /* text_atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = D759C4BC155C8AB2000B46B9 /* text_atlas.png */; };
+		D759C4C0155C8EC7000B46B9 /* RenderText.mm in Sources */ = {isa = PBXBuildFile; fileRef = D759C4BF155C8EC6000B46B9 /* RenderText.mm */; };
 		D76EFAEB151C5060007A1947 /* yellow.fs in Resources */ = {isa = PBXBuildFile; fileRef = D76EFAEA151C5060007A1947 /* yellow.fs */; };
 		D7735E45155B587200B5CF55 /* flower.png in Resources */ = {isa = PBXBuildFile; fileRef = D7735E44155B587200B5CF55 /* flower.png */; };
 		D77CDE7514FC84990069B977 /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = D77CDE7414FC84990069B977 /* characters.png */; };
@@ -172,6 +174,9 @@
 		D75555961506CFEE00354C0F /* blur.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = blur.fs; sourceTree = "<group>"; };
 		D7566F56150F0CFB00C102CF /* RenderPolygonFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderPolygonFactory.h; sourceTree = "<group>"; };
 		D7566F57150F0D0C00C102CF /* RenderPolygonFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderPolygonFactory.mm; sourceTree = "<group>"; };
+		D759C4BC155C8AB2000B46B9 /* text_atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_atlas.png; sourceTree = "<group>"; };
+		D759C4BE155C8EBB000B46B9 /* RenderText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderText.h; sourceTree = "<group>"; };
+		D759C4BF155C8EC6000B46B9 /* RenderText.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderText.mm; sourceTree = "<group>"; };
 		D76EFAEA151C5060007A1947 /* yellow.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = yellow.fs; sourceTree = "<group>"; };
 		D7735E44155B587200B5CF55 /* flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flower.png; sourceTree = "<group>"; };
 		D77CDE7414FC84990069B977 /* characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characters.png; sourceTree = "<group>"; };
@@ -331,6 +336,8 @@
 				D71AE5FA150DB05F00772199 /* RenderPolygon.mm */,
 				D7566F56150F0CFB00C102CF /* RenderPolygonFactory.h */,
 				D7566F57150F0D0C00C102CF /* RenderPolygonFactory.mm */,
+				D759C4BE155C8EBB000B46B9 /* RenderText.h */,
+				D759C4BF155C8EC6000B46B9 /* RenderText.mm */,
 				D740F36A1505AA160061B2FC /* RenderToTexture.h */,
 				D740F36B1505AA160061B2FC /* RenderToTexture.mm */,
 				D72D7BC614D0B80900C020A1 /* TouchSingle.h */,
@@ -365,6 +372,7 @@
 		D74F3C0C14D07B3200871B6D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D759C4BC155C8AB2000B46B9 /* text_atlas.png */,
 				D7735E44155B587200B5CF55 /* flower.png */,
 				D72F632F151C1B6A009342BB /* flower_pow2.jpg */,
 				D7FB871E150B6597002AD692 /* mountain_resize.jpg */,
@@ -405,7 +413,7 @@
 		D7092DD214ACF2CE00E1D6EE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = D7092DD514ACF2CE00E1D6EE /* Build configuration list for PBXProject "UIDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -451,6 +459,7 @@
 				D7FB871F150B6597002AD692 /* mountain_resize.jpg in Resources */,
 				D72F6330151C1B6A009342BB /* flower_pow2.jpg in Resources */,
 				D7735E45155B587200B5CF55 /* flower.png in Resources */,
+				D759C4BD155C8AB2000B46B9 /* text_atlas.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +505,7 @@
 				D71D8B901511382C00FB6A52 /* TERendererTexture.mm in Sources */,
 				D71D8B93151144FC00FB6A52 /* TERendererKernel.mm in Sources */,
 				D74E14A8155A4BD900A9B2A0 /* TEManagerProfiler.mm in Sources */,
+				D759C4C0155C8EC7000B46B9 /* RenderText.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +573,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIDemo/UIDemo-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UIDemo/UIDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -575,6 +586,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIDemo/UIDemo-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UIDemo/UIDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";

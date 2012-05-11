@@ -164,4 +164,13 @@ struct TEFBOTarget {
 
 typedef struct TEFBOTarget TEFBOTarget;
 
+struct TETextMap {
+    float left;
+    float right;
+    float top;
+    float bottom;
+};
+
+typedef struct TETextMap TETextMap;
+
 #endif

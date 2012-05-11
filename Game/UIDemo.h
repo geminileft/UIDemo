@@ -10,6 +10,7 @@ public:
     void exampleRenderToTexture();
     void exampleDrawImage();
     void exampleDrawFilters();
+    void exampleText();
 };
 
 #endif

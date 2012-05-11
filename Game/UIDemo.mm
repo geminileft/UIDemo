@@ -4,6 +4,7 @@
 #include "RenderPolygonFactory.h"
 #include "RenderImage.h"
 #include "RenderToTexture.h"
+#include "RenderText.h"
 #include "TEEventListener.h"
 #include "TouchSingle.h"
 #include "TERenderer.h"
@@ -13,7 +14,8 @@ UIDemo::UIDemo(int width, int height) : TEEngine(width, height){}
 void UIDemo::start() {
     //exampleRenderToTexture();
     //exampleDrawImage();
-    exampleDrawFilters();
+    //exampleDrawFilters();
+    exampleText();
 }
 
 void UIDemo::exampleRenderToTexture() {
@@ -179,4 +181,27 @@ void UIDemo::exampleDrawFilters() {
     go->position.y = 0.0f;
     go->addComponent(ri);
     addGameObject(go);    
+}
+
+void UIDemo::exampleText() {
+    TEGameObject* go;
+    TESize size;
+    
+    go = new TEGameObject();
+    size = TESizeMake(320, 80);
+    std::map<const char*, TETextMap> charMap;
+    TETextMap map;
+    map.left = 20;
+    map.top = 28;
+    map.right = 71;
+    map.bottom = 77;
+    charMap["A"] = map;
+    RenderText* rt = new RenderText(@"text_atlas.png", size, charMap);
+    rt->setText("A");
+    go->position.x = 0.0f;
+    go->position.y = 0.0f;
+    
+    go->addComponent(rt);
+    addGameObject(go);
+
 }
