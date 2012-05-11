@@ -23,7 +23,6 @@ private:
     TERenderPrimative mRenderPrimative;
     char* mText;
     int mTextLength;
-    float test[];
     
 public:
     RenderText(NSString* resourceName, TESize size, std::map<const char*, TETextMap> charMap);

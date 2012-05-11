@@ -196,8 +196,13 @@ void UIDemo::exampleText() {
     map.right = 71;
     map.bottom = 77;
     charMap["A"] = map;
+    map.left = 78;
+    map.top = 25;
+    map.right = 120;
+    map.bottom = 73;
+    charMap["B"] = map;
     RenderText* rt = new RenderText(@"text_atlas.png", size, charMap);
-    rt->setText("A");
+    rt->setText("B");
     go->position.x = 0.0f;
     go->position.y = 0.0f;
     
