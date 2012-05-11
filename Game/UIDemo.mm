@@ -188,7 +188,7 @@ void UIDemo::exampleText() {
     TESize size;
     
     go = new TEGameObject();
-    size = TESizeMake(160, 40);
+    size = TESizeMake(66, 67);
     std::map<const char*, TETextMap> charMap;
     TETextMap map;
     map.left = 20;
