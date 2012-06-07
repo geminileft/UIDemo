@@ -69,6 +69,9 @@
 		D76EFAEB151C5060007A1947 /* yellow.fs in Resources */ = {isa = PBXBuildFile; fileRef = D76EFAEA151C5060007A1947 /* yellow.fs */; };
 		D7735E45155B587200B5CF55 /* flower.png in Resources */ = {isa = PBXBuildFile; fileRef = D7735E44155B587200B5CF55 /* flower.png */; };
 		D77CDE7514FC84990069B977 /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = D77CDE7414FC84990069B977 /* characters.png */; };
+		D7957A3D15808CBE00FDF06C /* polygon.fs in Resources */ = {isa = PBXBuildFile; fileRef = D7957A3C15808CBE00FDF06C /* polygon.fs */; };
+		D7957A4015808CC800FDF06C /* polygon.vs in Resources */ = {isa = PBXBuildFile; fileRef = D7957A3F15808CC800FDF06C /* polygon.vs */; };
+		D7957A431580908600FDF06C /* TEProgramPolygon.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7957A421580908600FDF06C /* TEProgramPolygon.mm */; };
 		D79780D114FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png in Resources */ = {isa = PBXBuildFile; fileRef = D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */; };
 		D7C5BA0E14CF9B3F0012DF62 /* TEComponentRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */; };
 		D7D9E9891514131400F3373D /* transparentcolor.fs in Resources */ = {isa = PBXBuildFile; fileRef = D7D9E9881514131400F3373D /* transparentcolor.fs */; };
@@ -180,6 +183,10 @@
 		D76EFAEA151C5060007A1947 /* yellow.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = yellow.fs; sourceTree = "<group>"; };
 		D7735E44155B587200B5CF55 /* flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flower.png; sourceTree = "<group>"; };
 		D77CDE7414FC84990069B977 /* characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characters.png; sourceTree = "<group>"; };
+		D7957A3C15808CBE00FDF06C /* polygon.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = polygon.fs; sourceTree = "<group>"; };
+		D7957A3F15808CC800FDF06C /* polygon.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = polygon.vs; sourceTree = "<group>"; };
+		D7957A411580907800FDF06C /* TEProgramPolygon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TEProgramPolygon.h; sourceTree = "<group>"; };
+		D7957A421580908600FDF06C /* TEProgramPolygon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TEProgramPolygon.mm; sourceTree = "<group>"; };
 		D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bitmap_font_sample_inverted_alpha.png; sourceTree = "<group>"; };
 		D7C5BA0D14CF9B3F0012DF62 /* TEComponentRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEComponentRender.cpp; sourceTree = "<group>"; };
 		D7D9E9881514131400F3373D /* transparentcolor.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = transparentcolor.fs; sourceTree = "<group>"; };
@@ -289,18 +296,20 @@
 				D7092E4014ACFF5300E1D6EE /* TEManagerFile.mm */,
 				D7092E1B14ACFE0400E1D6EE /* TEManagerInput.cpp */,
 				D7092E1C14ACFE0400E1D6EE /* TEManagerInput.h */,
-				D74E14A7155A4BD900A9B2A0 /* TEManagerProfiler.mm */,
 				D74E14A5155A483F00A9B2A0 /* TEManagerProfiler.h */,
+				D74E14A7155A4BD900A9B2A0 /* TEManagerProfiler.mm */,
 				D7092E0E14ACFD7C00E1D6EE /* TEManagerRender.h */,
 				D7092E0F14ACFD7C00E1D6EE /* TEManagerRender.mm */,
 				D7092E2414ACFE6500E1D6EE /* TEManagerSound.h */,
 				D7092E2514ACFE6500E1D6EE /* TEManagerSound.mm */,
 				D7092E3C14ACFF4000E1D6EE /* TEManagerTexture.h */,
 				D7092E3D14ACFF4000E1D6EE /* TEManagerTexture.mm */,
-				D72D7BC314D0B60200C020A1 /* TEManagerTime.mm */,
 				D72D7BC414D0B60300C020A1 /* TEManagerTime.h */,
+				D72D7BC314D0B60200C020A1 /* TEManagerTime.mm */,
 				D7092E1514ACFDC800E1D6EE /* TEManagerTouch.cpp */,
 				D7092E1614ACFDC800E1D6EE /* TEManagerTouch.h */,
+				D7957A421580908600FDF06C /* TEProgramPolygon.mm */,
+				D7957A411580907800FDF06C /* TEProgramPolygon.h */,
 				D7092E2A14ACFE9500E1D6EE /* TERenderer.h */,
 				D7092E2B14ACFE9500E1D6EE /* TERenderer.mm */,
 				D71D8B8815110A4800FB6A52 /* TERendererBasic.h */,
@@ -313,8 +322,8 @@
 				D71D8B861510FCF800FB6A52 /* TERendererProgram.mm */,
 				D71D8B8E1511381400FB6A52 /* TERendererTexture.h */,
 				D71D8B8F1511382900FB6A52 /* TERendererTexture.mm */,
-				D71D8B8C1511163400FB6A52 /* TERenderTarget.mm */,
 				D71D8B8B1511162500FB6A52 /* TERenderTarget.h */,
+				D71D8B8C1511163400FB6A52 /* TERenderTarget.mm */,
 				D7092E0B14ACFD6100E1D6EE /* TERunnable.h */,
 				D7092E0C14ACFD6100E1D6EE /* TERunnable.mm */,
 				D7092E0114ACFC4C00E1D6EE /* TETypes.h */,
@@ -352,17 +361,19 @@
 		D70D44A514AD905C00FDBB5F /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				D70090D81509D8DB00436161 /* grow.fs */,
+				D75555961506CFEE00354C0F /* blur.fs */,
 				D70D44A614AD90AA00FDBB5F /* colorbox.fs */,
 				D70D44A714AD90AA00FDBB5F /* colorbox.vs */,
+				D714E5B1151AE38F00B42063 /* grayscale.fs */,
+				D70090D81509D8DB00436161 /* grow.fs */,
+				D72F632C151BEFD1009342BB /* negative.fs */,
+				D7957A3C15808CBE00FDF06C /* polygon.fs */,
+				D7957A3F15808CC800FDF06C /* polygon.vs */,
+				D714E5B4151AEAB700B42063 /* sepia.fs */,
 				D70D44A814AD90AA00FDBB5F /* texture.fs */,
 				D70D44A914AD90AA00FDBB5F /* texture.vs */,
-				D75555961506CFEE00354C0F /* blur.fs */,
 				D72C7211150BF5B5007E6449 /* toon.fs */,
 				D7D9E9881514131400F3373D /* transparentcolor.fs */,
-				D714E5B1151AE38F00B42063 /* grayscale.fs */,
-				D714E5B4151AEAB700B42063 /* sepia.fs */,
-				D72F632C151BEFD1009342BB /* negative.fs */,
 				D76EFAEA151C5060007A1947 /* yellow.fs */,
 			);
 			name = Shaders;
@@ -438,6 +449,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D76EFAEB151C5060007A1947 /* yellow.fs in Resources */,
+				D7957A3D15808CBE00FDF06C /* polygon.fs in Resources */,
+				D7957A4015808CC800FDF06C /* polygon.vs in Resources */,
 				D7092DEA14ACF2CE00E1D6EE /* InfoPlist.strings in Resources */,
 				D7D9E9891514131400F3373D /* transparentcolor.fs in Resources */,
 				D70D44AA14AD90AA00FDBB5F /* colorbox.fs in Resources */,
@@ -506,6 +519,7 @@
 				D71D8B93151144FC00FB6A52 /* TERendererKernel.mm in Sources */,
 				D74E14A8155A4BD900A9B2A0 /* TEManagerProfiler.mm in Sources */,
 				D759C4C0155C8EC7000B46B9 /* RenderText.mm in Sources */,
+				D7957A431580908600FDF06C /* TEProgramPolygon.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

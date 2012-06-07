@@ -8,6 +8,7 @@
 RenderPolygon::RenderPolygon() : TEComponentRender() {
     mRenderPrimative.textureBuffer = NULL;
     mRenderPrimative.extraData = NULL;
+    mRenderPrimative.colorData = NULL;
     mRenderPrimative.vertexCount = 0;
 }
 
@@ -47,6 +48,15 @@ void RenderPolygon::setColor(TEColor4 color) {
     mG = color.g;
     mB = color.b;
     mA = color.a;
+}
+
+void RenderPolygon::setColorData(TEColor4* data, size_t count) {
+    if (mRenderPrimative.colorData)
+        free(mRenderPrimative.colorData);
+    size_t size = count * sizeof(TEColor4);
+    mRenderPrimative.colorData = (TEColor4*)malloc(size);
+    memcpy(mRenderPrimative.colorData, data, size);
+    NSLog(@"Stopping");
 }
 
 void RenderPolygon::setVertices(float* vertices, int vertexCount) {

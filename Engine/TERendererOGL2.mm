@@ -12,6 +12,7 @@
 #include "TERenderTarget.h"
 #include "TERendererTexture.h"
 #include "TERendererKernel.h"
+#include "TEProgramPolygon.h"
 #include "TEManagerTime.h"
 #include "TEManagerProfiler.h"
 
@@ -103,8 +104,15 @@ void TERendererOGL2::createPrograms() {
     vertexSource = TEManagerFile::readFileContents("colorbox.vs");
     fragmentSource = TEManagerFile::readFileContents("colorbox.fs");
     rp = new TERendererBasic(vertexSource, fragmentSource);
+    mShaderPrograms[ShaderBasic] = rp;
+    rp->addAttribute("aVertices");
+
+    vertexSource = TEManagerFile::readFileContents("polygon.vs");
+    fragmentSource = TEManagerFile::readFileContents("polygon.fs");
+    rp = new TEProgramPolygon(vertexSource, fragmentSource);
     mShaderPrograms[ShaderPolygon] = rp;
     rp->addAttribute("aVertices");
+    rp->addAttribute("aColor");
 }
 
 void TERendererOGL2::render() {

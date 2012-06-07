@@ -108,7 +108,8 @@ inline TEColor4 TEColor4Make(float r, float g, float b, float a) {
 }
 
 enum TEShaderType {
-    ShaderPolygon
+    ShaderBasic
+    , ShaderPolygon
     , ShaderTexture
     , ShaderKernel
     , ShaderTransparentColor
@@ -123,6 +124,8 @@ typedef enum TEShaderType TEShaderType;
 struct TERenderPrimative {
     uint textureName;
     TEColor4 color;
+    TEColor4* colorData;
+    size_t colorCount;
     TEVec3 position;
     int vertexCount;
     float* vertexBuffer;
@@ -132,25 +135,6 @@ struct TERenderPrimative {
 };
 
 typedef TERenderPrimative TERenderPrimative;
-
-struct TERenderTexturePrimative {
-    uint textureName;
-    TEVec3 position;
-    float* vertexBuffer;
-    float* textureBuffer;
-    float* kernel;
-};
-
-typedef TERenderTexturePrimative TERenderTexturePrimative;
-
-struct TERenderPolygonPrimative {
-    float* vertexBuffer;
-    int vertexCount;
-    TEVec3 position;
-    TEColor4 color;
-};
-
-typedef TERenderPolygonPrimative TERenderPolygonPrimative;
 
 inline double deg2rad(double deg) {
     return (deg * 3.14159265358979323846f / 180.0f);

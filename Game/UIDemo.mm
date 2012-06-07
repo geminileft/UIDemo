@@ -12,10 +12,11 @@
 UIDemo::UIDemo(int width, int height) : TEEngine(width, height){}
 
 void UIDemo::start() {
+    exampleGradientBox();
     //exampleRenderToTexture();
     //exampleDrawImage();
     //exampleDrawFilters();
-    exampleText();
+    //exampleText();
 }
 
 void UIDemo::exampleRenderToTexture() {
@@ -209,4 +210,34 @@ void UIDemo::exampleText() {
     go->addComponent(rt);
     addGameObject(go);
 
+}
+
+void UIDemo::exampleGradientBox() {
+    TEGameObject* go;
+    RenderPolygon* rp;
+    
+    go = new TEGameObject();
+    go->position.x = 0;
+    go->position.y = 0;
+    
+    rp = new RenderPolygon();
+    float vertices[] = {
+        -50.0f, 50.0f
+        , 50.0f, 50.0f
+        , 50.0f, -50.0f
+        , -50.0f, -50.0f
+    };
+    TEColor4 colors[] = {
+        TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f)
+        ,TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f)
+//        ,TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f)
+//        ,TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f)
+        ,TEColor4Make(0.0f, 0.0f, 0.0f, 1.0f)
+        ,TEColor4Make(0.0f, 0.0f, 0.0f, 1.0f)
+    };
+    
+    rp->setColorData(&colors[0], 4);
+    rp->setVertices(vertices, 4);
+    go->addComponent(rp);
+    addGameObject(go);
 }

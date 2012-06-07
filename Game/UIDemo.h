@@ -11,6 +11,7 @@ public:
     void exampleDrawImage();
     void exampleDrawFilters();
     void exampleText();
+    void exampleGradientBox();
 };
 
 #endif
