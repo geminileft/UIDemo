@@ -227,13 +227,17 @@ void UIDemo::exampleGradientBox() {
         , 50.0f, -50.0f
         , -50.0f, -50.0f
     };
+    
+    TEColor4 topColor = TEColor4Make(83.0f / 255.0f, 155.0f / 255.0f, 160.0f / 255.0f, 1.0f);
+    TEColor4 bottomColor = TEColor4Make(132.0f / 255.0f, 248.0f / 255.0f, 255.0f / 255.0f, 1.0f);
+    
     TEColor4 colors[] = {
-        TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f)
-        ,TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f)
+        topColor
+        , topColor
 //        ,TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f)
 //        ,TEColor4Make(1.0f, 1.0f, 1.0f, 1.0f)
-        ,TEColor4Make(0.0f, 0.0f, 0.0f, 1.0f)
-        ,TEColor4Make(0.0f, 0.0f, 0.0f, 1.0f)
+        , bottomColor
+        , bottomColor
     };
     
     rp->setColorData(&colors[0], 4);
