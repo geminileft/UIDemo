@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38EC28E01598331E00D07D66 /* table_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 38EC28DF1598331E00D07D66 /* table_background.png */; };
 		D70090D91509D8DB00436161 /* grow.fs in Resources */ = {isa = PBXBuildFile; fileRef = D70090D81509D8DB00436161 /* grow.fs */; };
 		D7092DE014ACF2CE00E1D6EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7092DDF14ACF2CE00E1D6EE /* UIKit.framework */; };
 		D7092DE214ACF2CE00E1D6EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7092DE114ACF2CE00E1D6EE /* Foundation.framework */; };
@@ -60,7 +61,6 @@
 		D740F36C1505AA160061B2FC /* RenderToTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = D740F36B1505AA160061B2FC /* RenderToTexture.mm */; };
 		D74E14A8155A4BD900A9B2A0 /* TEManagerProfiler.mm in Sources */ = {isa = PBXBuildFile; fileRef = D74E14A7155A4BD900A9B2A0 /* TEManagerProfiler.mm */; };
 		D74F3C0B14D079E500871B6D /* RenderImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = D74F3C0A14D079E500871B6D /* RenderImage.mm */; };
-		D74F3C0E14D07C2300871B6D /* table_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0D14D07C2300871B6D /* table_background.png */; };
 		D74F3C1014D0828D00871B6D /* spade_ace.png in Resources */ = {isa = PBXBuildFile; fileRef = D74F3C0F14D0828D00871B6D /* spade_ace.png */; };
 		D75555971506CFEE00354C0F /* blur.fs in Resources */ = {isa = PBXBuildFile; fileRef = D75555961506CFEE00354C0F /* blur.fs */; };
 		D7566F58150F0D0C00C102CF /* RenderPolygonFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7566F57150F0D0C00C102CF /* RenderPolygonFactory.mm */; };
@@ -79,6 +79,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		38EC28DF1598331E00D07D66 /* table_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = table_background.png; path = ../../../../../gldev/Projects/iTouchEngine/TouchEngine/table_background.png; sourceTree = "<group>"; };
 		D70090D81509D8DB00436161 /* grow.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = grow.fs; sourceTree = "<group>"; };
 		D7092DDB14ACF2CE00E1D6EE /* UIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7092DDF14ACF2CE00E1D6EE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -172,7 +173,6 @@
 		D74E14A7155A4BD900A9B2A0 /* TEManagerProfiler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TEManagerProfiler.mm; sourceTree = "<group>"; };
 		D74F3C0914D079E500871B6D /* RenderImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderImage.h; sourceTree = "<group>"; };
 		D74F3C0A14D079E500871B6D /* RenderImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderImage.mm; sourceTree = "<group>"; };
-		D74F3C0D14D07C2300871B6D /* table_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_background.png; sourceTree = "<group>"; };
 		D74F3C0F14D0828D00871B6D /* spade_ace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spade_ace.png; sourceTree = "<group>"; };
 		D75555961506CFEE00354C0F /* blur.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = blur.fs; sourceTree = "<group>"; };
 		D7566F56150F0CFB00C102CF /* RenderPolygonFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderPolygonFactory.h; sourceTree = "<group>"; };
@@ -383,6 +383,7 @@
 		D74F3C0C14D07B3200871B6D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				38EC28DF1598331E00D07D66 /* table_background.png */,
 				D759C4BC155C8AB2000B46B9 /* text_atlas.png */,
 				D7735E44155B587200B5CF55 /* flower.png */,
 				D72F632F151C1B6A009342BB /* flower_pow2.jpg */,
@@ -392,11 +393,10 @@
 				D79780D014FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png */,
 				D77CDE7414FC84990069B977 /* characters.png */,
 				D74F3C0F14D0828D00871B6D /* spade_ace.png */,
-				D74F3C0D14D07C2300871B6D /* table_background.png */,
 			);
 			name = Images;
-			path = /Users/dev/Projects/UIDemo/UIDemo/Images;
-			sourceTree = "<absolute>";
+			path = UIDemo/Images;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -463,7 +463,6 @@
 				D75555971506CFEE00354C0F /* blur.fs in Resources */,
 				D70D44AD14AD90AA00FDBB5F /* texture.vs in Resources */,
 				D714E5B2151AE38F00B42063 /* grayscale.fs in Resources */,
-				D74F3C0E14D07C2300871B6D /* table_background.png in Resources */,
 				D74F3C1014D0828D00871B6D /* spade_ace.png in Resources */,
 				D77CDE7514FC84990069B977 /* characters.png in Resources */,
 				D79780D114FC8C24004EFE67 /* bitmap_font_sample_inverted_alpha.png in Resources */,
@@ -473,6 +472,7 @@
 				D72F6330151C1B6A009342BB /* flower_pow2.jpg in Resources */,
 				D7735E45155B587200B5CF55 /* flower.png in Resources */,
 				D759C4BD155C8AB2000B46B9 /* text_atlas.png in Resources */,
+				38EC28E01598331E00D07D66 /* table_background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

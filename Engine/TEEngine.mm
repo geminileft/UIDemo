@@ -70,14 +70,10 @@ TESize TEEngine::getScreenSize() const {
 
 void TEEngine::initialize() {
     CGRect frame = [[UIScreen mainScreen] bounds];
-    
-    UIView* newView = [[UIView alloc] initWithFrame:frame];
-    newView.backgroundColor = [UIColor greenColor];
-    EAGLView* view = [[EAGLView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
-    [newView addSubview:view];
+    EAGLView* view = [[EAGLView alloc] initWithFrame:frame];
     mWindow = [[UIWindow alloc] initWithFrame:frame];
     UIViewController* vc = [[UIViewController alloc] init];
-    vc.view = newView;
+    vc.view = view;
     mWindow.rootViewController = vc;
     //mRenderer = new TERendererOGL1(layer);
     mRenderer = new TERendererOGL2(view.layer, mGameWidth, mGameHeight);
