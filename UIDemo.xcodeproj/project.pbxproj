@@ -79,7 +79,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		38EC28DF1598331E00D07D66 /* table_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = table_background.png; path = ../../../../../gldev/Projects/iTouchEngine/TouchEngine/table_background.png; sourceTree = "<group>"; };
+		38EC28DF1598331E00D07D66 /* table_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_background.png; sourceTree = "<group>"; };
 		D70090D81509D8DB00436161 /* grow.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = grow.fs; sourceTree = "<group>"; };
 		D7092DDB14ACF2CE00E1D6EE /* UIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7092DDF14ACF2CE00E1D6EE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
